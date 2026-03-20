@@ -15,6 +15,9 @@ import Reviews from "./pages/Reviews";
 import Specials from "./pages/Specials";
 import Contact from "./pages/Contact";
 import WriteReview from "./pages/WriteReview";
+import Discount from "./pages/Discount";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +40,9 @@ const App = () => (
             <Route path="/specials" element={<Specials />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/write-a-review" element={<WriteReview />} />
+            <Route path="/discount" element={<Discount />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
