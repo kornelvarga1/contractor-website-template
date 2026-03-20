@@ -7,8 +7,14 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import ScrollToTop from "@/components/layout/ScrollToTop";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Index from "./pages/Index";
+import About from "./pages/About";
+import ServicePage from "./pages/ServicePage";
+import LocationPage from "./pages/LocationPage";
+import Reviews from "./pages/Reviews";
+import Specials from "./pages/Specials";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +29,12 @@ const App = () => (
         <main>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services/:slug" element={<ServicePage />} />
+            <Route path="/areas/:city" element={<LocationPage />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/specials" element={<Specials />} />
+            <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
