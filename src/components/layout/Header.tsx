@@ -77,6 +77,9 @@ const Header = () => {
               </div>
             </div>
 
+            <Link to="/gallery" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+              Gallery
+            </Link>
             <Link to="/reviews" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
               Reviews
             </Link>
@@ -170,6 +173,9 @@ const Header = () => {
                 </div>
               )}
 
+              <Link to="/gallery" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                Gallery
+              </Link>
               <Link to="/reviews" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
                 Reviews
               </Link>
