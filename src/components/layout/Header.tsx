@@ -173,6 +173,9 @@ const Header = () => {
                 </div>
               )}
 
+              <Link to="/gallery" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                Gallery
+              </Link>
               <Link to="/reviews" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
                 Reviews
               </Link>
