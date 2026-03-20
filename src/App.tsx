@@ -16,6 +16,7 @@ import Specials from "./pages/Specials";
 import Contact from "./pages/Contact";
 import WriteReview from "./pages/WriteReview";
 import Discount from "./pages/Discount";
+import Quote from "./pages/Quote";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
