@@ -60,6 +60,9 @@ const Reviews = () => {
             <Link to="/contact" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get Your Free Estimate
             </Link>
+            <Link to="/write-a-review" className="inline-flex h-11 items-center rounded-sm border border-accent px-8 text-base font-bold text-accent shadow hover:bg-accent hover:text-accent-foreground transition-colors">
+              Write a Review
+            </Link>
             <a href="tel:6024970154" className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
               <Phone className="h-4 w-4" /> (602) 497-0154
             </a>
