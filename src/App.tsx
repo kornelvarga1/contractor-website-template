@@ -16,6 +16,7 @@ import Specials from "./pages/Specials";
 import Contact from "./pages/Contact";
 import WriteReview from "./pages/WriteReview";
 import Discount from "./pages/Discount";
+import Quote from "./pages/Quote";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/write-a-review" element={<WriteReview />} />
             <Route path="/discount" element={<Discount />} />
+            <Route path="/quote" element={<Quote />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
