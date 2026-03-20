@@ -80,7 +80,12 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} Phoenix Roofing and Repair. All rights reserved. Licensed, Bonded & Insured.
+          <p>© {new Date().getFullYear()} Phoenix Roofing and Repair. All rights reserved. Licensed, Bonded &amp; Insured.</p>
+          <div className="mt-3 flex items-center justify-center gap-4">
+            <Link to="/terms" className="hover:text-accent transition-colors">Terms &amp; Conditions</Link>
+            <span className="text-primary-foreground/20">|</span>
+            <Link to="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
+          </div>
         </div>
       </div>
     </footer>
