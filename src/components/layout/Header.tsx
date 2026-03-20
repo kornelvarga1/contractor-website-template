@@ -1,0 +1,205 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
+
+const services = [
+  { name: "Roof Replacement", slug: "roof-replacement" },
+  { name: "Roof Repair", slug: "roof-repair" },
+  { name: "Storm Damage Repair", slug: "storm-damage-repair" },
+  { name: "Metal Roofing", slug: "metal-roofing" },
+  { name: "Flat Roof Systems", slug: "flat-roof-systems" },
+  { name: "Roof Inspection", slug: "roof-inspection" },
+  { name: "Commercial Roofing", slug: "commercial-roofing" },
+];
+
+const areas = [
+  "Phoenix", "Scottsdale", "Tempe", "Mesa", "Chandler", "Glendale", "Peoria",
+];
+
+const Header = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [areasOpen, setAreasOpen] = useState(false);
+
+  return (
+    <>
+      <header className="sticky top-0 z-50 w-full bg-primary border-b border-primary/80">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-lg font-bold tracking-tight text-primary-foreground">
+              Phoenix Roofing <span className="text-accent">&</span> Repair
+            </span>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden items-center gap-1 lg:flex">
+            <Link to="/" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+              Home
+            </Link>
+            <Link to="/about" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+              About
+            </Link>
+
+            {/* Services Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+                Services <ChevronDown className="h-3.5 w-3.5" />
+              </button>
+              <div className="invisible absolute left-0 top-full w-56 rounded-sm bg-primary border border-primary-foreground/10 py-1 shadow-xl opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                {services.map((s) => (
+                  <Link
+                    key={s.slug}
+                    to={`/services/${s.slug}`}
+                    className="block px-4 py-2 text-sm text-primary-foreground/80 hover:bg-accent hover:text-accent-foreground transition-colors"
+                  >
+                    {s.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Areas Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+                Service Areas <ChevronDown className="h-3.5 w-3.5" />
+              </button>
+              <div className="invisible absolute left-0 top-full w-48 rounded-sm bg-primary border border-primary-foreground/10 py-1 shadow-xl opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                {areas.map((area) => (
+                  <Link
+                    key={area}
+                    to={`/areas/${area.toLowerCase()}`}
+                    className="block px-4 py-2 text-sm text-primary-foreground/80 hover:bg-accent hover:text-accent-foreground transition-colors"
+                  >
+                    {area}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <Link to="/reviews" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+              Reviews
+            </Link>
+            <Link to="/specials" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+              Specials
+            </Link>
+            <Link to="/contact" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+              Contact
+            </Link>
+          </nav>
+
+          {/* Right side: phone + CTA */}
+          <div className="hidden items-center gap-4 lg:flex">
+            <a
+              href="tel:6024970154"
+              className="flex items-center gap-1.5 text-base font-bold text-primary-foreground tracking-wide"
+            >
+              <Phone className="h-4 w-4 text-accent" />
+              (602) 497-0154
+            </a>
+            <Link
+              to="/contact"
+              className="inline-flex h-9 items-center rounded-sm bg-accent px-5 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
+            >
+              Get Free Estimate
+            </Link>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden text-primary-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* Mobile overlay nav */}
+        {mobileOpen && (
+          <div className="fixed inset-0 top-16 z-40 bg-primary overflow-y-auto lg:hidden">
+            <nav className="flex flex-col px-6 py-6 gap-1">
+              <Link to="/" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                Home
+              </Link>
+              <Link to="/about" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                About
+              </Link>
+
+              {/* Mobile Services */}
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="flex items-center justify-between py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10"
+              >
+                Services <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+              </button>
+              {servicesOpen && (
+                <div className="pl-4 flex flex-col gap-1">
+                  {services.map((s) => (
+                    <Link
+                      key={s.slug}
+                      to={`/services/${s.slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="py-2 text-sm text-primary-foreground/80"
+                    >
+                      {s.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* Mobile Areas */}
+              <button
+                onClick={() => setAreasOpen(!areasOpen)}
+                className="flex items-center justify-between py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10"
+              >
+                Service Areas <ChevronDown className={`h-4 w-4 transition-transform ${areasOpen ? "rotate-180" : ""}`} />
+              </button>
+              {areasOpen && (
+                <div className="pl-4 flex flex-col gap-1">
+                  {areas.map((area) => (
+                    <Link
+                      key={area}
+                      to={`/areas/${area.toLowerCase()}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="py-2 text-sm text-primary-foreground/80"
+                    >
+                      {area}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              <Link to="/reviews" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                Reviews
+              </Link>
+              <Link to="/specials" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                Specials
+              </Link>
+              <Link to="/contact" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
+                Contact
+              </Link>
+
+              <a
+                href="tel:6024970154"
+                className="mt-4 flex items-center justify-center gap-2 rounded-sm bg-accent py-3 text-base font-bold text-accent-foreground"
+              >
+                <Phone className="h-5 w-5" />
+                (602) 497-0154
+              </a>
+              <Link
+                to="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 flex items-center justify-center rounded-sm border border-accent py-3 text-base font-semibold text-accent"
+              >
+                Get Free Estimate
+              </Link>
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
+  );
+};
+
+export default Header;
