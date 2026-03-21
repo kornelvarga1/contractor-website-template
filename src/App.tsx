@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import ScrollToTop from "@/components/layout/ScrollToTop";
+import ChatWidget from "@/components/ChatWidget";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import ServicePage from "./pages/ServicePage";
@@ -53,6 +54,7 @@ const App = () => (
         </main>
         <Footer />
         <MobileActionBar />
+        <ChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

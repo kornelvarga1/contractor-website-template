@@ -1,13 +1,42 @@
 import { useState, type FormEvent } from "react";
 import { Phone, Shield, Clock, CheckCircle } from "lucide-react";
 
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
+
 const ContactFormSection = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Placeholder — will wire to Supabase edge function later
-    setSubmitted(true);
+    const form = e.currentTarget;
+    const body = {
+      business_id: BUSINESS_ID,
+      contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
+      contact_email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
+    };
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/form-submission-confirmation`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -121,11 +150,15 @@ const ContactFormSection = () => {
                     placeholder="Tell us about your project…"
                   />
                 </div>
+                {error && (
+                  <p className="text-sm text-red-500">{error}</p>
+                )}
                 <button
                   type="submit"
-                  className="inline-flex h-11 w-full items-center justify-center rounded-sm bg-accent text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors"
+                  disabled={loading}
+                  className="inline-flex h-11 w-full items-center justify-center rounded-sm bg-accent text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Request
+                  {loading ? "Submitting…" : "Submit Request"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   No spam. No obligation. We respect your privacy.

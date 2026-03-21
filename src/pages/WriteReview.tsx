@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
-const GMB_REVIEW_LINK = "https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID_HERE";
-const BUSINESS_ID = "1443661b-1d3e-4d0a-afd9-70610dc846f8";
-const FEEDBACK_ENDPOINT = "https://zfmchywjmgykmlhjihls.supabase.co/functions/v1/negative-feedback-received";
+const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const FEEDBACK_ENDPOINT = `${SUPABASE_URL}/functions/v1/negative-feedback-received`;
+const REVIEW_URL = `${SUPABASE_URL}/functions/v1/review-link-clicked?contact_id=direct&business_id=${BUSINESS_ID}`;
 
 type Phase = "rate" | "positive" | "negative" | "submitted";
 
@@ -20,7 +21,7 @@ const WriteReview = () => {
     if (stars >= 4) {
       setPhase("positive");
       setTimeout(() => {
-        window.location.href = GMB_REVIEW_LINK;
+        window.location.href = REVIEW_URL;
       }, 1500);
     } else {
       setPhase("negative");

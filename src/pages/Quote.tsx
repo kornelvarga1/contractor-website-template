@@ -1,13 +1,15 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Send } from "lucide-react";
 
-const BUSINESS_ID = "1443661b-1d3e-4d0a-afd9-70610dc846f8";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
 const COMPANY_NAME = "Phoenix Roofing & Repair";
 const COMPANY_PHONE = "(602) 497-0154";
 
 const Quote = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [serviceConsent, setServiceConsent] = useState(false);
 
@@ -16,24 +18,29 @@ const Quote = () => {
     if (!marketingConsent && !serviceConsent) return;
 
     const form = e.currentTarget;
-    const data = {
+    const body = {
       business_id: BUSINESS_ID,
-      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
+      contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
+      contact_email: "",
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
-      marketing_consent: marketingConsent,
-      service_consent: serviceConsent,
-      source: "quote-page",
     };
 
     setLoading(true);
+    setError("");
     try {
-      // Placeholder — wire to your endpoint
-      void data;
-      await new Promise((r) => setTimeout(r, 800));
-      setSubmitted(true);
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/form-submission-confirmation`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } catch {
-      // handle error
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -141,6 +148,9 @@ const Quote = () => {
                 </span>
               </label>
 
+              {error && (
+                <p className="text-sm text-red-500">{error}</p>
+              )}
               <button
                 type="submit"
                 disabled={!anyConsent || loading}

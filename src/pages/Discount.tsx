@@ -1,13 +1,15 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Send } from "lucide-react";
 
-const BUSINESS_ID = "1443661b-1d3e-4d0a-afd9-70610dc846f8";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
 const COMPANY_NAME = "Phoenix Roofing & Repair";
 const DISCOUNT_OFFER = "10% Off Your First Service";
 
 const Discount = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [agreed, setAgreed] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -15,21 +17,28 @@ const Discount = () => {
     if (!agreed) return;
 
     const form = e.currentTarget;
-    const data = {
+    const body = {
       business_id: BUSINESS_ID,
-      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
+      contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
-      source: "discount-page",
     };
 
     setLoading(true);
+    setError("");
     try {
-      // Placeholder — wire to your endpoint
-      await new Promise((r) => setTimeout(r, 800));
-      setSubmitted(true);
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/discount-form-submission`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } catch {
-      // handle error
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -121,6 +130,9 @@ const Discount = () => {
                 </span>
               </label>
 
+              {error && (
+                <p className="text-sm text-red-500">{error}</p>
+              )}
               <button
                 type="submit"
                 disabled={!agreed || loading}
