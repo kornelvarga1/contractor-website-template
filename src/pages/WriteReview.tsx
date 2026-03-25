@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import { client } from "@/config/client";
 
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const FEEDBACK_ENDPOINT = `${SUPABASE_URL}/functions/v1/negative-feedback-received`;
-const REVIEW_URL = `${SUPABASE_URL}/functions/v1/review-link-clicked?contact_id=direct&business_id=${BUSINESS_ID}`;
+const REVIEW_URL = `${SUPABASE_URL}/functions/v1/review-link-clicked?business_id=${BUSINESS_ID}`;
 
 type Phase = "rate" | "positive" | "negative" | "submitted";
 
@@ -28,26 +30,31 @@ const WriteReview = () => {
     }
   };
 
+  const [feedbackError, setFeedbackError] = useState("");
+
   const handleSubmitFeedback = async () => {
     if (!feedback.trim()) return;
     setSubmitting(true);
+    setFeedbackError("");
     try {
-      await fetch(FEEDBACK_ENDPOINT, {
+      const res = await fetch(FEEDBACK_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
         body: JSON.stringify({
           business_id: BUSINESS_ID,
-          contact_id: "anonymous",
+          contact_id: null,
           contact_first_name: "Anonymous",
           star_rating: rating,
           feedback_text: feedback,
         }),
       });
+      if (!res.ok) throw new Error("failed");
+      setPhase("submitted");
     } catch {
-      // silently handle
+      setFeedbackError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
-    setPhase("submitted");
-    setSubmitting(false);
   };
 
   const displayStars = hoveredStar || rating;
@@ -58,7 +65,7 @@ const WriteReview = () => {
         {phase === "rate" && (
           <div className="animate-in fade-in duration-500">
             <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl" style={{ lineHeight: 1.2 }}>
-              How was your experience with Phoenix&nbsp;Roofing&nbsp;&amp;&nbsp;Repair?
+              How was your experience with {client.companyName}?
             </h1>
             <p className="mt-3 text-muted-foreground">Your feedback means the world to us</p>
             <div className="mt-8 flex justify-center gap-2">
@@ -116,6 +123,9 @@ const WriteReview = () => {
               className="mt-6 min-h-[120px]"
               required
             />
+            {feedbackError && (
+              <p className="mt-3 text-sm text-red-500">{feedbackError}</p>
+            )}
             <button
               onClick={handleSubmitFeedback}
               disabled={!feedback.trim() || submitting}

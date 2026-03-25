@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Shield, Users, Award, Clock, Phone, CheckCircle } from "lucide-react";
+import { client } from "@/config/client";
 
 const values = [
   { icon: Shield, title: "Licensed & Insured", desc: "Fully licensed (ROC #123456), bonded, and insured for your complete protection." },
@@ -19,7 +20,7 @@ const About = () => {
             Since 2012
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-primary-foreground/70">
-            Phoenix Roofing and Repair is a family-owned roofing contractor serving the greater Phoenix area with integrity, craftsmanship, and zero shortcuts.
+            {client.companyNameFull} is a family-owned roofing contractor serving the greater Phoenix area with integrity, craftsmanship, and zero shortcuts.
           </p>
         </div>
       </section>
@@ -32,7 +33,7 @@ const About = () => {
               <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Our Story</h2>
               <div className="mt-4 space-y-4 text-muted-foreground">
                 <p>
-                  Mike Johnson founded Phoenix Roofing and Repair with one goal: give homeowners the same quality roofing work he'd want on his own home. No upsells, no pressure tactics, no mystery pricing.
+                  Mike Johnson founded {client.companyNameFull} with one goal: give homeowners the same quality roofing work he'd want on his own home. No upsells, no pressure tactics, no mystery pricing.
                 </p>
                 <p>
                   Over 12 years later, that commitment hasn't changed. We've completed thousands of projects — from emergency leak repairs to complete roof replacements — for families and businesses across Phoenix, Scottsdale, Tempe, Mesa, Chandler, Glendale, and Peoria.
@@ -73,8 +74,8 @@ const About = () => {
             <Link to="/contact" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get Your Free Estimate
             </Link>
-            <a href="tel:6024970154" className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </div>

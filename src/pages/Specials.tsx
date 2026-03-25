@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, CheckCircle } from "lucide-react";
+import { client } from "@/config/client";
 
 const Specials = () => {
   return (
@@ -68,8 +69,8 @@ const Specials = () => {
             Questions About Our Specials?
           </h2>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <a href="tel:6024970154" className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> Call (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> Call {client.phone}
             </a>
           </div>
         </div>

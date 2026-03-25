@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Phone, CheckCircle, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { client } from "@/config/client";
 
 interface ServiceData {
   title: string;
@@ -46,7 +47,7 @@ const serviceData: Record<string, ServiceData> = {
       { step: "Quality Check", desc: "We verify the fix and provide photo documentation." },
     ],
     faqs: [
-      { q: "How quickly can you respond to a roof leak?", a: "We offer same-day service for emergency leaks. Call (602) 497-0154 and we'll prioritize your repair." },
+      { q: "How quickly can you respond to a roof leak?", a: "We offer same-day service for emergency leaks. Call {client.phone} and we'll prioritize your repair." },
       { q: "Is it worth repairing an old roof?", a: "It depends on the extent of the damage. We'll give you an honest assessment — if repairs can extend your roof's life by several years, we'll tell you. If replacement makes more sense, we'll explain why." },
       { q: "Do you repair all roof types?", a: "Yes — shingle, tile, metal, and flat roofs. We've seen and fixed it all." },
     ],
@@ -160,6 +161,13 @@ const ServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = slug ? serviceData[slug] : undefined;
 
+  useEffect(() => {
+    if (!data) return;
+    document.title = data.metaTitle;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", data.description);
+  }, [data]);
+
   if (!data) return <Navigate to="/404" replace />;
 
   return (
@@ -175,8 +183,8 @@ const ServicePage = () => {
             <Link to="/contact" className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get Your Free Estimate
             </Link>
-            <a href="tel:6024970154" className="inline-flex items-center justify-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center justify-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </div>
@@ -238,8 +246,8 @@ const ServicePage = () => {
             <Link to="/contact" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get Your Free Estimate
             </Link>
-            <a href="tel:6024970154" className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </div>

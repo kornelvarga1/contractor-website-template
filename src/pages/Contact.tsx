@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Phone, Mail, MapPin, Clock, Shield, CheckCircle } from "lucide-react";
+import { client } from "@/config/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
 
 const Contact = () => {
@@ -17,6 +19,7 @@ const Contact = () => {
       contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
       contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
       contact_email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
+      service: (form.elements.namedItem("service") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
     };
     setLoading(true);
@@ -24,7 +27,7 @@ const Contact = () => {
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/form-submission-confirmation`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
         body: JSON.stringify(body),
       });
       if (res.ok) {
@@ -59,25 +62,25 @@ const Contact = () => {
             <div>
               <h2 className="text-2xl font-bold text-foreground">Contact Information</h2>
               <div className="mt-6 space-y-5">
-                <a href="tel:6024970154" className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
+                <a href={`tel:${client.phoneTel}`} className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
                   <Phone className="h-5 w-5 text-accent" />
                   <div>
-                    <p className="font-bold">(602) 497-0154</p>
+                    <p className="font-bold">{client.phone}</p>
                     <p className="text-sm text-muted-foreground">Call or text anytime</p>
                   </div>
                 </a>
-                <a href="mailto:mike@phoenixroofingandrepair.com" className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
+                <a href={`mailto:${client.email}`} className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
                   <Mail className="h-5 w-5 text-accent" />
                   <div>
-                    <p className="font-bold">mike@phoenixroofingandrepair.com</p>
+                    <p className="font-bold">{client.email}</p>
                     <p className="text-sm text-muted-foreground">We reply within 2 hours</p>
                   </div>
                 </a>
                 <div className="flex items-center gap-3 text-foreground">
                   <MapPin className="h-5 w-5 text-accent" />
                   <div>
-                    <p className="font-bold">301 E Bethany Home Rd A-121</p>
-                    <p className="text-sm text-muted-foreground">Phoenix, AZ 85012</p>
+                    <p className="font-bold">{client.address.street}</p>
+                    <p className="text-sm text-muted-foreground">{client.address.city}, {client.address.state} {client.address.zip}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-foreground">
@@ -89,9 +92,18 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="mt-8 flex h-48 items-center justify-center rounded-sm border border-border bg-muted">
-                <p className="text-sm text-muted-foreground">Google Maps embed placeholder</p>
+              {/* Map */}
+              <div className="mt-8 overflow-hidden rounded-sm border border-border">
+                <iframe
+                  title="Office location"
+                  src={client.mapsEmbed}
+                  width="100%"
+                  height="192"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
 

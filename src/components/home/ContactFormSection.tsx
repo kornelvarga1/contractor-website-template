@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Phone, Shield, Clock, CheckCircle } from "lucide-react";
+import { client } from "@/config/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
 
 const ContactFormSection = () => {
@@ -17,6 +19,7 @@ const ContactFormSection = () => {
       contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
       contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
       contact_email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
+      service: (form.elements.namedItem("service") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
     };
     setLoading(true);
@@ -24,7 +27,7 @@ const ContactFormSection = () => {
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/form-submission-confirmation`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
         body: JSON.stringify(body),
       });
       if (res.ok) {
@@ -55,9 +58,9 @@ const ContactFormSection = () => {
             <div className="mt-8 space-y-5">
               {[
                 { icon: Clock, text: "Average response time under 2 hours" },
-                { icon: Shield, text: "Licensed, bonded & insured — ROC #123456" },
+                { icon: Shield, text: `Licensed, bonded & insured — ROC ${client.rocLicense}` },
                 { icon: CheckCircle, text: "No-pressure, no-obligation estimates" },
-                { icon: Phone, text: "Prefer to call? (602) 497-0154" },
+                { icon: Phone, text: `Prefer to call? ${client.phone}` },
               ].map((item) => (
                 <div key={item.text} className="flex items-center gap-3">
                   <item.icon className="h-5 w-5 shrink-0 text-accent" />

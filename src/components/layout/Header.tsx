@@ -1,20 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { client } from "@/config/client";
 
-const services = [
-  { name: "Roof Replacement", slug: "roof-replacement" },
-  { name: "Roof Repair", slug: "roof-repair" },
-  { name: "Storm Damage Repair", slug: "storm-damage-repair" },
-  { name: "Metal Roofing", slug: "metal-roofing" },
-  { name: "Flat Roof Systems", slug: "flat-roof-systems" },
-  { name: "Roof Inspection", slug: "roof-inspection" },
-  { name: "Commercial Roofing", slug: "commercial-roofing" },
-];
-
-const areas = [
-  "Phoenix", "Scottsdale", "Tempe", "Mesa", "Chandler", "Glendale", "Peoria",
-];
+const { services, areas } = client;
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,7 +17,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <span className="text-lg font-bold tracking-tight text-primary-foreground">
-              Phoenix Roofing <span className="text-accent">&</span> Repair
+              {client.companyName.split(" & ")[0]} <span className="text-accent">&</span> {client.companyName.split(" & ")[1]}
             </span>
           </Link>
 
@@ -94,11 +83,11 @@ const Header = () => {
           {/* Right side: phone + CTA */}
           <div className="hidden items-center gap-4 lg:flex">
             <a
-              href="tel:6024970154"
+              href={`tel:${client.phoneTel}`}
               className="flex items-center gap-1.5 text-base font-bold text-primary-foreground tracking-wide"
             >
               <Phone className="h-4 w-4 text-accent" />
-              (602) 497-0154
+              {client.phone}
             </a>
             <Link
               to="/contact"
@@ -187,11 +176,11 @@ const Header = () => {
               </Link>
 
               <a
-                href="tel:6024970154"
+                href={`tel:${client.phoneTel}`}
                 className="mt-4 flex items-center justify-center gap-2 rounded-sm bg-accent py-3 text-base font-bold text-accent-foreground"
               >
                 <Phone className="h-5 w-5" />
-                (602) 497-0154
+                {client.phone}
               </a>
               <Link
                 to="/contact"

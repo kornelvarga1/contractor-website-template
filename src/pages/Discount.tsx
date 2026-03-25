@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Send } from "lucide-react";
+import { client } from "@/config/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
-const COMPANY_NAME = "Phoenix Roofing & Repair";
-const DISCOUNT_OFFER = "10% Off Your First Service";
 
 const Discount = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -29,7 +29,7 @@ const Discount = () => {
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/discount-form-submission`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
         body: JSON.stringify(body),
       });
       if (res.ok) {
@@ -54,17 +54,17 @@ const Discount = () => {
               You're All Set!
             </h2>
             <p className="mt-3 text-primary-foreground/70">
-              We'll reach out shortly with your discount details. Thank you for choosing {COMPANY_NAME}!
+              We'll reach out shortly with your discount details. Thank you for choosing {client.companyName}!
             </p>
           </div>
         ) : (
           <div className="rounded-md bg-primary-foreground/5 border border-primary-foreground/10 p-8">
             <div className="text-center mb-8">
               <h1 className="text-2xl font-bold text-primary-foreground">
-                {COMPANY_NAME}
+                {client.companyName}
               </h1>
               <p className="mt-2 text-lg font-semibold text-accent">
-                GET {DISCOUNT_OFFER}
+                GET {client.discountOffer}
               </p>
             </div>
 

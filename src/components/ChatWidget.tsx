@@ -2,6 +2,7 @@ import { useState, useEffect, type FormEvent } from "react";
 import { MessageCircle, X } from "lucide-react";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
 
 const ChatWidget = () => {
@@ -36,7 +37,7 @@ const ChatWidget = () => {
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/chat-widget-lead`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
         body: JSON.stringify(body),
       });
       if (res.ok) {

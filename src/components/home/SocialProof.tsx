@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { client } from "@/config/client";
 
 const reviews = [
   {
@@ -17,7 +18,7 @@ const reviews = [
     name: "Linda K.",
     location: "Tempe, AZ",
     rating: 5,
-    text: "We called three roofers for estimates. Phoenix Roofing was the most thorough, the most honest, and the most affordable. They earned a customer for life.",
+    text: `We called three roofers for estimates. ${client.companyName} was the most thorough, the most honest, and the most affordable. They earned a customer for life.`,
   },
 ];
 

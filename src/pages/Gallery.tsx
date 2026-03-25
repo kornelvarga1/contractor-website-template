@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { X, ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { client } from "@/config/client";
 
 // ── Gallery Data ─────────────────────────────────────────────
 // Replace these with real project photos. Each entry = one completed job.
@@ -186,11 +187,11 @@ const Gallery = () => {
               Get Free Estimate
             </Link>
             <a
-              href="tel:6024970154"
+              href={`tel:${client.phoneTel}`}
               className="inline-flex h-11 items-center gap-2 rounded-sm border border-primary-foreground/20 px-6 text-sm font-semibold text-primary-foreground hover:bg-primary-foreground/5 transition-colors active:scale-[0.97]"
             >
               <Phone className="h-4 w-4 text-accent" />
-              (602) 497-0154
+              {client.phone}
             </a>
           </div>
         </div>

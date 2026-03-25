@@ -1,4 +1,4 @@
-const COMPANY_NAME = "Phoenix Roofing & Repair";
+import { client } from "@/config/client";
 
 const Privacy = () => (
   <>
@@ -18,7 +18,7 @@ const Privacy = () => (
         <p>We use the information you provide solely to respond to your inquiry, provide estimates, schedule services, and communicate with you about your project. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
 
         <h2>3. Text Messaging</h2>
-        <p>By providing your phone number, you consent to receiving text messages from {COMPANY_NAME}. These messages may include appointment confirmations, follow-ups, and service updates. Message frequency varies. Reply STOP to opt out. Message and data rates may apply.</p>
+        <p>By providing your phone number, you consent to receiving text messages from {client.companyName}. These messages may include appointment confirmations, follow-ups, and service updates. Message frequency varies. Reply STOP to opt out. Message and data rates may apply.</p>
 
         <h2>4. Data Security</h2>
         <p>We implement reasonable security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.</p>
@@ -33,7 +33,7 @@ const Privacy = () => (
         <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us.</p>
 
         <h2>8. Contact</h2>
-        <p>For privacy-related questions, contact us at <a href="mailto:mike@phoenixroofingandrepair.com" className="text-accent">mike@phoenixroofingandrepair.com</a> or call <a href="tel:6024970154" className="text-accent">(602) 497-0154</a>.</p>
+        <p>For privacy-related questions, contact us at <a href={`mailto:${client.email}`} className="text-accent">{client.email}</a> or call <a href={`tel:${client.phoneTel}`} className="text-accent">{client.phone}</a>.</p>
       </div>
     </section>
   </>

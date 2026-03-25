@@ -1,5 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Phone, CheckCircle, Star, Shield, Clock, Award } from "lucide-react";
+import { client } from "@/config/client";
 
 interface LocationData {
   city: string;
@@ -91,6 +93,13 @@ const LocationPage = () => {
   const { city } = useParams<{ city: string }>();
   const data = city ? locationData[city] : undefined;
 
+  useEffect(() => {
+    if (!data) return;
+    document.title = data.metaTitle;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", data.description);
+  }, [data]);
+
   if (!data) return <Navigate to="/404" replace />;
 
   return (
@@ -107,8 +116,8 @@ const LocationPage = () => {
             <Link to="/contact" className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get Your Free Estimate
             </Link>
-            <a href="tel:6024970154" className="inline-flex items-center justify-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center justify-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </div>
@@ -176,8 +185,8 @@ const LocationPage = () => {
             <Link to="/contact" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get Your Free Estimate
             </Link>
-            <a href="tel:6024970154" className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </div>

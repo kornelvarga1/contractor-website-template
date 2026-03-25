@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Send } from "lucide-react";
+import { client } from "@/config/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
-const COMPANY_NAME = "Phoenix Roofing & Repair";
-const COMPANY_PHONE = "(602) 497-0154";
 
 const Quote = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -22,7 +22,7 @@ const Quote = () => {
       business_id: BUSINESS_ID,
       contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
       contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
-      contact_email: "",
+      contact_email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
     };
 
@@ -31,7 +31,7 @@ const Quote = () => {
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/form-submission-confirmation`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
         body: JSON.stringify(body),
       });
       if (res.ok) {
@@ -58,7 +58,7 @@ const Quote = () => {
               We Got Your Request!
             </h2>
             <p className="mt-3 text-muted-foreground">
-              We'll reach out shortly with your free quote. Thank you for choosing {COMPANY_NAME}!
+              We'll reach out shortly with your free quote. Thank you for choosing {client.companyName}!
             </p>
           </div>
         ) : (
@@ -102,6 +102,20 @@ const Quote = () => {
               </div>
 
               <div>
+                <label htmlFor="q-email" className="mb-1.5 block text-sm font-bold text-card-foreground">
+                  Email
+                </label>
+                <input
+                  id="q-email"
+                  name="email"
+                  type="email"
+                  maxLength={100}
+                  className="flex h-12 w-full rounded-md border border-input bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  placeholder="john@email.com"
+                />
+              </div>
+
+              <div>
                 <label htmlFor="q-message" className="mb-1.5 block text-sm font-bold text-card-foreground">
                   Short message about your needs <span className="text-accent">*</span>
                 </label>
@@ -126,8 +140,8 @@ const Quote = () => {
                 />
                 <span className="text-xs text-muted-foreground leading-relaxed">
                   I consent to receive marketing text messages from{" "}
-                  <strong className="text-foreground">{COMPANY_NAME}</strong> at{" "}
-                  <strong className="text-foreground">{COMPANY_PHONE}</strong>. Frequency may vary.
+                  <strong className="text-foreground">{client.companyName}</strong> at{" "}
+                  <strong className="text-foreground">{client.phone}</strong>. Frequency may vary.
                   Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
                 </span>
               </label>
@@ -142,7 +156,7 @@ const Quote = () => {
                 />
                 <span className="text-xs text-muted-foreground leading-relaxed">
                   I consent to receive non-marketing text messages from{" "}
-                  <strong className="text-foreground">{COMPANY_NAME}</strong> regarding appointment
+                  <strong className="text-foreground">{client.companyName}</strong> regarding appointment
                   confirmations and reminders, customer support updates, and service-related follow-ups.
                   Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.
                 </span>

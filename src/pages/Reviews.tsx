@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Star, Phone } from "lucide-react";
+import { client } from "@/config/client";
 
 const reviews = [
   { name: "David R.", location: "Phoenix, AZ", service: "Roof Replacement", rating: 5, text: "Mike and his crew replaced our entire tile roof in three days. They showed up on time, kept the yard clean, and the price was exactly what they quoted. No surprises. Best roofing experience I've had." },
   { name: "Sarah M.", location: "Scottsdale, AZ", service: "Roof Repair", rating: 5, text: "Had a leak after a monsoon storm and Mike came out the same day. Fixed it quickly and didn't try to upsell me on a full replacement I didn't need. Honest and fair." },
-  { name: "James T.", location: "Tempe, AZ", service: "Storm Damage Repair", rating: 5, text: "Our roof took a beating during a hailstorm. Phoenix Roofing handled the insurance paperwork and got the repairs done within a week. Couldn't ask for better service." },
+  { name: "James T.", location: "Tempe, AZ", service: "Storm Damage Repair", rating: 5, text: `Our roof took a beating during a hailstorm. ${client.companyName} handled the insurance paperwork and got the repairs done within a week. Couldn't ask for better service.` },
   { name: "Linda K.", location: "Mesa, AZ", service: "Metal Roofing", rating: 5, text: "We switched to a metal roof and couldn't be happier. The team was professional, the install was flawless, and our energy bills dropped noticeably. Highly recommend." },
   { name: "Robert P.", location: "Chandler, AZ", service: "Flat Roof Systems", rating: 5, text: "Had a commercial flat roof that needed serious attention. Mike gave us honest options and completed the work on schedule. The crew was respectful and thorough." },
   { name: "Maria G.", location: "Glendale, AZ", service: "Roof Inspection", rating: 5, text: "Called for a free inspection before selling our home. Mike found a couple minor issues, fixed them affordably, and gave us a clean bill of health for the buyer. Great integrity." },
@@ -63,8 +64,8 @@ const Reviews = () => {
             <Link to="/write-a-review" className="inline-flex h-11 items-center rounded-sm border border-accent px-8 text-base font-bold text-accent shadow hover:bg-accent hover:text-accent-foreground transition-colors">
               Write a Review
             </Link>
-            <a href="tel:6024970154" className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> (602) 497-0154
+            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </div>
