@@ -16,6 +16,8 @@ const WriteReview = () => {
   const [rating, setRating] = useState(0);
   const [hoveredStar, setHoveredStar] = useState(0);
   const [feedback, setFeedback] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleRate = (stars: number) => {
@@ -39,11 +41,12 @@ const WriteReview = () => {
     try {
       const res = await fetch(FEEDBACK_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
         body: JSON.stringify({
           business_id: BUSINESS_ID,
           contact_id: null,
-          contact_first_name: "Anonymous",
+          contact_first_name: name.trim() || "Anonymous",
+          contact_phone: phone.trim() || null,
           star_rating: rating,
           feedback_text: feedback,
         }),
@@ -116,11 +119,27 @@ const WriteReview = () => {
             <p className="mt-1 text-muted-foreground">
               Please tell us what went wrong so we can make it right.
             </p>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                className="h-11 rounded-sm border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone number"
+                className="h-11 rounded-sm border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
             <Textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
               placeholder="What could we have done better?"
-              className="mt-6 min-h-[120px]"
+              className="mt-3 min-h-[120px]"
               required
             />
             {feedbackError && (

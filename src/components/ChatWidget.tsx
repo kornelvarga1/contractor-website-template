@@ -37,7 +37,7 @@ const ChatWidget = () => {
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/chat-widget-lead`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
         body: JSON.stringify(body),
       });
       if (res.ok) {
