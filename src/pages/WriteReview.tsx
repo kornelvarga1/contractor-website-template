@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { client } from "@/config/client";
@@ -19,14 +19,28 @@ const WriteReview = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+
+  useEffect(() => {
+    if (phase !== "positive") return;
+    setCountdown(3);
+    const interval = setInterval(() => {
+      setCountdown((c) => {
+        if (c <= 1) {
+          clearInterval(interval);
+          window.location.href = REVIEW_URL;
+          return 0;
+        }
+        return c - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [phase]);
 
   const handleRate = (stars: number) => {
     setRating(stars);
     if (stars >= 4) {
       setPhase("positive");
-      setTimeout(() => {
-        window.location.href = REVIEW_URL;
-      }, 1500);
     } else {
       setPhase("negative");
     }
@@ -95,11 +109,35 @@ const WriteReview = () => {
         )}
 
         {phase === "positive" && (
-          <div className="animate-in fade-in duration-500">
-            <p className="text-2xl font-bold text-foreground sm:text-3xl" style={{ lineHeight: 1.2 }}>
-              Thank you! We really appreciate it 🙏
+          <div className="animate-in fade-in duration-500 flex flex-col items-center gap-4">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl" style={{ lineHeight: 1.2 }}>
+              One more step!
+            </h2>
+            <p className="text-muted-foreground max-w-sm">
+              We'd love it if you left us a quick Google review — it really helps us out. Taking you there now...
             </p>
-            <p className="mt-4 text-sm text-muted-foreground">Redirecting you to leave a Google review…</p>
+            {/* Countdown */}
+            <div className="relative mt-2 flex h-20 w-20 items-center justify-center">
+              <svg className="absolute inset-0 -rotate-90" viewBox="0 0 80 80">
+                <circle
+                  cx="40" cy="40" r="34"
+                  fill="none"
+                  stroke="hsl(var(--accent) / 0.2)"
+                  strokeWidth="6"
+                />
+                <circle
+                  cx="40" cy="40" r="34"
+                  fill="none"
+                  stroke="hsl(var(--accent))"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray={`${2 * Math.PI * 34}`}
+                  strokeDashoffset={`${2 * Math.PI * 34 * (1 - countdown / 3)}`}
+                  className="transition-all duration-1000 ease-linear"
+                />
+              </svg>
+              <span className="text-2xl font-bold text-accent">{countdown}</span>
+            </div>
           </div>
         )}
 
