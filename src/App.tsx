@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import MobileActionBar from "@/components/layout/MobileActionBar";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import ChatWidget from "@/components/ChatWidget";
 import Index from "./pages/Index";
@@ -53,7 +52,6 @@ const App = () => (
           </Routes>
         </main>
         <Footer />
-        <MobileActionBar />
         <ChatWidget />
       </BrowserRouter>
     </TooltipProvider>

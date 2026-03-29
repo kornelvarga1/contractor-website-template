@@ -84,12 +84,12 @@ const ChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 mb-16 lg:mb-0">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
 
       {/* Teaser popup */}
       {teaserVisible && !open && (
-        <div className="relative flex items-start max-w-[260px] rounded-2xl rounded-br-sm bg-card border border-accent/40 shadow-lg px-4 py-3 animate-in slide-in-from-bottom-2 fade-in duration-300">
-          <p className="text-sm text-card-foreground leading-snug pr-5">
+        <div className="relative flex items-start max-w-[220px] rounded-2xl rounded-br-sm bg-card border border-accent/40 shadow-lg px-3 py-2.5 sm:px-4 sm:py-3 animate-in slide-in-from-bottom-2 fade-in duration-300">
+          <p className="text-xs sm:text-sm text-card-foreground leading-snug pr-5">
             Shoot me any questions and I'll get back to you as soon as I'm free! (I promise)
           </p>
           <button
