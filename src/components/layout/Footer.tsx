@@ -62,16 +62,29 @@ const Footer = () => {
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-accent">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">About Us</Link></li>
-              <li><Link to="/reviews" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Reviews</Link></li>
-              <li><Link to="/specials" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Specials</Link></li>
+              <li><Link to="/" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Home</Link></li>
+              <li><Link to="/gallery" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Gallery</Link></li>
+              <li><Link to="/blog" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Contact</Link></li>
+              <li><Link to="/write-a-review" className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">Review Us</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/50">
-          <p>© {new Date().getFullYear()} {client.companyNameFull}. All rights reserved. Licensed, Bonded &amp; Insured.</p>
+        {/* Operating Hours */}
+        <div className="mt-10 border-t border-primary-foreground/10 pt-8">
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-accent">Operating Hours</h4>
+          <div className="flex flex-wrap gap-x-8 gap-y-2">
+            {client.operatingHours.map((h) => (
+              <div key={h.day} className="text-sm text-primary-foreground/70">
+                <span className="font-medium text-primary-foreground">{h.day}:</span> {h.hours}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/50">
+          <p>© {new Date().getFullYear()} {client.companyNameFull}. All rights reserved. {client.tagline}.</p>
           <div className="mt-3 flex items-center justify-center gap-4">
             <Link to="/terms" className="hover:text-accent transition-colors">Terms &amp; Conditions</Link>
             <span className="text-primary-foreground/20">|</span>

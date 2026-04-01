@@ -13,10 +13,10 @@ const MobileActionBar = () => {
         Call Now
       </a>
       <Link
-        to="/contact"
+        to="/quote"
         className="flex flex-1 items-center justify-center bg-accent py-3.5 text-sm font-bold text-accent-foreground"
       >
-        Free Estimate
+        Get Free Quote
       </Link>
     </div>
   );

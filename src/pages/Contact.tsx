@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Phone, Mail, MapPin, Clock, Shield, CheckCircle } from "lucide-react";
+import { Phone, Mail, CheckCircle } from "lucide-react";
 import { client } from "@/config/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -18,8 +18,6 @@ const Contact = () => {
       business_id: BUSINESS_ID,
       contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
       contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
-      contact_email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
-      service: (form.elements.namedItem("service") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
     };
     setLoading(true);
@@ -50,7 +48,7 @@ const Contact = () => {
             Get in Touch
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-primary-foreground/70">
-            Ready for your free estimate? Fill out the form below or give us a call — we respond fast.
+            Call, email, or fill out the form and we'll get back to you fast.
           </p>
         </div>
       </section>
@@ -59,7 +57,7 @@ const Contact = () => {
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Contact Info */}
-            <div>
+            <div className="flex flex-col justify-center">
               <h2 className="text-2xl font-bold text-foreground">Contact Information</h2>
               <div className="mt-6 space-y-5">
                 <a href={`tel:${client.phoneTel}`} className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
@@ -76,86 +74,34 @@ const Contact = () => {
                     <p className="text-sm text-muted-foreground">We reply within 2 hours</p>
                   </div>
                 </a>
-                <div className="flex items-center gap-3 text-foreground">
-                  <MapPin className="h-5 w-5 text-accent" />
-                  <div>
-                    <p className="font-bold">{client.address.street}</p>
-                    <p className="text-sm text-muted-foreground">{client.address.city}, {client.address.state} {client.address.zip}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 text-foreground">
-                  <Clock className="h-5 w-5 text-accent" />
-                  <div>
-                    <p className="font-bold">Mon–Sat: 7am – 6pm</p>
-                    <p className="text-sm text-muted-foreground">Emergency service available 24/7</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Map */}
-              <div className="mt-8 overflow-hidden rounded-sm border border-border">
-                <iframe
-                  title="Office location"
-                  src={client.mapsEmbed}
-                  width="100%"
-                  height="192"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
               </div>
             </div>
 
             {/* Form */}
             <div className="rounded-sm border border-border bg-card p-6 shadow-sm lg:p-8">
-              <h2 className="text-xl font-bold text-card-foreground">Request Your Free Estimate</h2>
-              <p className="mt-1 text-sm text-muted-foreground">No obligation. No pressure. We respect your time.</p>
-
               {submitted ? (
-                <div className="mt-8 flex flex-col items-center py-10 text-center">
+                <div className="flex flex-col items-center py-10 text-center">
                   <CheckCircle className="h-12 w-12 text-accent" />
                   <h3 className="mt-4 text-xl font-bold text-card-foreground">Thank You!</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">We received your request and will be in touch shortly.</p>
+                  <p className="mt-2 text-sm text-muted-foreground">We received your message and will be in touch shortly.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="c-name" className="mb-1.5 block text-sm font-medium text-card-foreground">Full Name *</label>
                     <input id="c-name" name="name" type="text" required className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="John Smith" />
                   </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="c-phone" className="mb-1.5 block text-sm font-medium text-card-foreground">Phone *</label>
-                      <input id="c-phone" name="phone" type="tel" required className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="(602) 555-0123" />
-                    </div>
-                    <div>
-                      <label htmlFor="c-email" className="mb-1.5 block text-sm font-medium text-card-foreground">Email</label>
-                      <input id="c-email" name="email" type="email" className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="john@email.com" />
-                    </div>
-                  </div>
                   <div>
-                    <label htmlFor="c-service" className="mb-1.5 block text-sm font-medium text-card-foreground">Service Needed</label>
-                    <select id="c-service" name="service" className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                      <option value="">Select a service…</option>
-                      <option>Roof Replacement</option>
-                      <option>Roof Repair</option>
-                      <option>Storm Damage Repair</option>
-                      <option>Metal Roofing</option>
-                      <option>Flat Roof Systems</option>
-                      <option>Roof Inspection</option>
-                      <option>Commercial Roofing</option>
-                    </select>
+                    <label htmlFor="c-phone" className="mb-1.5 block text-sm font-medium text-card-foreground">Phone *</label>
+                    <input id="c-phone" name="phone" type="tel" required className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="(602) 555-0123" />
                   </div>
                   <div>
                     <label htmlFor="c-message" className="mb-1.5 block text-sm font-medium text-card-foreground">Message</label>
                     <textarea id="c-message" name="message" rows={4} className="flex w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="Tell us about your project…" />
                   </div>
-                  {error && (
-                    <p className="text-sm text-red-500">{error}</p>
-                  )}
+                  {error && <p className="text-sm text-red-500">{error}</p>}
                   <button type="submit" disabled={loading} className="inline-flex h-11 w-full items-center justify-center rounded-sm bg-accent text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    {loading ? "Submitting…" : "Submit Request"}
+                    {loading ? "Submitting…" : "Send Message"}
                   </button>
                 </form>
               )}

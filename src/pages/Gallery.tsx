@@ -181,10 +181,10 @@ const Gallery = () => {
           </p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
-              to="/contact"
+              to="/quote"
               className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors active:scale-[0.97]"
             >
-              Get Free Estimate
+              Get Free Quote
             </Link>
             <a
               href={`tel:${client.phoneTel}`}

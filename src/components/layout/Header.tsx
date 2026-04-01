@@ -26,9 +26,6 @@ const Header = () => {
             <Link to="/" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
               Home
             </Link>
-            <Link to="/about" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              About
-            </Link>
 
             {/* Services Dropdown */}
             <div className="relative group">
@@ -69,12 +66,6 @@ const Header = () => {
             <Link to="/gallery" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
               Gallery
             </Link>
-            <Link to="/reviews" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              Reviews
-            </Link>
-            <Link to="/specials" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              Specials
-            </Link>
             <Link to="/contact" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
               Contact
             </Link>
@@ -90,10 +81,10 @@ const Header = () => {
               {client.phone}
             </a>
             <Link
-              to="/contact"
+              to="/quote"
               className="inline-flex h-9 items-center rounded-sm bg-accent px-5 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
             >
-              Get Free Estimate
+              Get Free Quote
             </Link>
           </div>
 
@@ -113,9 +104,6 @@ const Header = () => {
             <nav className="flex flex-col px-6 py-6 gap-1">
               <Link to="/" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
                 Home
-              </Link>
-              <Link to="/about" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                About
               </Link>
 
               {/* Mobile Services */}
@@ -165,12 +153,6 @@ const Header = () => {
               <Link to="/gallery" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
                 Gallery
               </Link>
-              <Link to="/reviews" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                Reviews
-              </Link>
-              <Link to="/specials" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                Specials
-              </Link>
               <Link to="/contact" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
                 Contact
               </Link>
@@ -183,11 +165,11 @@ const Header = () => {
                 {client.phone}
               </a>
               <Link
-                to="/contact"
+                to="/quote"
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 flex items-center justify-center rounded-sm border border-accent py-3 text-base font-semibold text-accent"
               >
-                Get Free Estimate
+                Get Free Quote
               </Link>
             </nav>
           </div>
