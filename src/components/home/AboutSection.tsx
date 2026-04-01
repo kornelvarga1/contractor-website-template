@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
-import rooferImage from "@/assets/roofer-working.jpg";
 import { client } from "@/config/client";
+
+const ABOUT_IMAGE = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=960&q=80";
 
 const badges = [
   "100% Local",
@@ -17,7 +18,7 @@ const AboutSection = () => {
           {/* Image */}
           <div className="overflow-hidden rounded-sm">
             <img
-              src={rooferImage}
+              src={ABOUT_IMAGE}
               alt={`${client.companyName} team at work`}
               className="h-full w-full object-cover"
               loading="lazy"

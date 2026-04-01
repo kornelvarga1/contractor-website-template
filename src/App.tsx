@@ -14,20 +14,13 @@ import Contact from "./pages/Contact";
 import WriteReview from "./pages/WriteReview";
 import Quote from "./pages/Quote";
 import Gallery from "./pages/Gallery";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
-
-const BlogComingSoon = () => (
-  <section className="min-h-[60vh] flex items-center justify-center px-4">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold text-foreground">Blog</h1>
-      <p className="mt-4 text-muted-foreground">Coming soon — check back for roofing tips and project updates.</p>
-    </div>
-  </section>
-);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -46,7 +39,8 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/write-a-review" element={<WriteReview />} />
             <Route path="/quote" element={<Quote />} />
-            <Route path="/blog" element={<BlogComingSoon />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

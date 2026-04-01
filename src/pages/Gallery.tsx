@@ -8,37 +8,37 @@ import { client } from "@/config/client";
 const PROJECTS = [
   {
     id: 1,
-    title: "Full Tile Roof Replacement",
-    location: "Scottsdale, AZ",
-    category: "Roof Replacement",
+    title: "Complete System Replacement",
+    location: `${client.address.city}, ${client.address.state}`,
+    category: "Replacement",
     images: [
-      "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=800&q=80",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
       "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
     ],
   },
   {
     id: 2,
-    title: "Storm Damage Emergency Repair",
-    location: "Mesa, AZ",
-    category: "Storm Damage",
+    title: "Emergency Repair",
+    location: `${client.address.city}, ${client.address.state}`,
+    category: "Repair",
     images: [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
     ],
   },
   {
     id: 3,
-    title: "Standing Seam Metal Roof",
-    location: "Phoenix, AZ",
-    category: "Metal Roofing",
+    title: "New Installation",
+    location: `${client.address.city}, ${client.address.state}`,
+    category: "Installation",
     images: [
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
     ],
   },
   {
     id: 4,
-    title: "Commercial Flat Roof Installation",
-    location: "Tempe, AZ",
+    title: "Commercial Project",
+    location: `${client.address.city}, ${client.address.state}`,
     category: "Commercial",
     images: [
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
@@ -46,21 +46,21 @@ const PROJECTS = [
   },
   {
     id: 5,
-    title: "Shingle Roof Repair & Patch",
-    location: "Chandler, AZ",
-    category: "Roof Repair",
+    title: "Repair & Restoration",
+    location: `${client.address.city}, ${client.address.state}`,
+    category: "Repair",
     images: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
     ],
   },
   {
     id: 6,
-    title: "Flat Roof Coating & Seal",
-    location: "Glendale, AZ",
-    category: "Flat Roof",
+    title: "Maintenance Service",
+    location: `${client.address.city}, ${client.address.state}`,
+    category: "Maintenance",
     images: [
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
     ],
   },
 ];
@@ -103,7 +103,7 @@ const Gallery = () => {
             Our <span className="text-accent">Completed</span> Projects
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-primary-foreground/70 md:text-lg" style={{ textWrap: "balance" as any }}>
-            Browse real roofing jobs we've completed across the Phoenix metro area.
+            Browse real jobs we've completed across {client.address.city} and surrounding areas.
             Quality craftsmanship you can see.
           </p>
         </div>
@@ -177,7 +177,7 @@ const Gallery = () => {
             Ready to Start Your Project?
           </h2>
           <p className="mt-3 text-primary-foreground/70">
-            Get a free estimate and see why Phoenix homeowners trust us with their roofs.
+            Get a free estimate and see why {client.address.city} homeowners trust {client.companyName}.
           </p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link

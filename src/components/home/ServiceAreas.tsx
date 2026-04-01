@@ -18,7 +18,7 @@ const ServiceAreas = () => {
               Service Areas
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Licensed roofing services across the Valley — fast response wherever you are.
+              {client.companyName} provides professional {client.tradeNoun} services across the area — fast response wherever you are.
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-3">

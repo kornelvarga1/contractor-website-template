@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Phone, CheckCircle, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-roofing.jpg";
 import { client } from "@/config/client";
+
+const HERO_IMAGE = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -52,7 +53,7 @@ const HeroSection = () => {
       {/* Background image */}
       <div
         className="absolute inset-0 hidden bg-cover bg-center md:block"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${HERO_IMAGE})` }}
         aria-hidden="true"
       />
       {/* Scrim */}

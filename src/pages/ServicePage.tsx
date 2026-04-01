@@ -3,6 +3,12 @@ import { Phone, CheckCircle, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { client } from "@/config/client";
 
+interface SeoBlocks {
+  what: string;
+  why: string;
+  when: string;
+}
+
 interface ServiceData {
   title: string;
   metaTitle: string;
@@ -11,13 +17,17 @@ interface ServiceData {
   benefits: string[];
   process: { step: string; desc: string }[];
   faqs: { q: string; a: string }[];
+  seoBlocks: SeoBlocks;
 }
+
+const { address } = client;
+const cityState = `${address.city}, ${address.state}`;
 
 const serviceData: Record<string, ServiceData> = {
   "roof-replacement": {
     title: "Roof Replacement",
-    metaTitle: "Roof Replacement Phoenix AZ | Phoenix Roofing and Repair",
-    description: "Full roof replacement services in Phoenix, AZ. Licensed, bonded & insured. Free estimates. 12+ years experience.",
+    metaTitle: `Roof Replacement ${cityState} | ${client.companyNameFull}`,
+    description: `Full roof replacement services in ${cityState}. Licensed, bonded & insured. Free estimates. ${client.yearsExperience}+ years experience.`,
     intro: "When repairs are no longer enough, a full roof replacement protects your home for decades. We handle complete tear-offs and re-roofs using premium materials — backed by manufacturer warranties and our own workmanship guarantee.",
     benefits: ["Complete tear-off and disposal included", "Premium shingles, tile, or metal options", "Manufacturer warranties up to 50 years", "Typical completion in 2–4 days", "Clean jobsite guaranteed — we treat your home like ours"],
     process: [
@@ -33,11 +43,16 @@ const serviceData: Record<string, ServiceData> = {
       { q: "Do you handle permits?", a: "Yes. We pull all necessary permits and ensure the work meets local building codes." },
       { q: "Will my homeowner's insurance cover it?", a: "If your roof was damaged by a covered event (storm, hail, etc.), your insurance may cover part or all of the replacement. We can help you navigate the claims process." },
     ],
+    seoBlocks: {
+      what: "A roof replacement involves removing your existing roofing system down to the deck and installing a completely new roof. This includes new underlayment, flashing, and roofing material — whether shingles, tile, or metal. It's the most comprehensive solution for a roof that has reached the end of its useful life.",
+      why: "Your roof is your home's first line of defense against the elements. When a roof fails, water infiltration can damage ceilings, walls, insulation, and structural framing — repairs that often cost far more than the replacement itself. A new roof also increases home value and improves energy efficiency.",
+      when: "If your roof is 20 or more years old, showing widespread shingle deterioration, or has sustained significant damage, replacement is usually the smarter long-term investment. We'll give you an honest assessment — and if repairs can meaningfully extend your roof's life, we'll tell you that instead.",
+    },
   },
   "roof-repair": {
     title: "Roof Repair",
-    metaTitle: "Roof Repair Phoenix AZ | Phoenix Roofing and Repair",
-    description: "Fast, reliable roof repair in Phoenix. Fix leaks, damaged shingles, and more. Licensed contractor. Free estimates.",
+    metaTitle: `Roof Repair ${cityState} | ${client.companyNameFull}`,
+    description: `Fast, reliable roof repair in ${address.city}. Fix leaks, damaged shingles, and more. Licensed contractor. Free estimates.`,
     intro: "A small leak today becomes a big problem tomorrow. Our repair services address leaks, damaged shingles, flashing failures, and vent issues before they escalate — saving you thousands in potential damage.",
     benefits: ["Same-day emergency repairs available", "Fix leaks, cracked tiles, and blown-off shingles", "Honest assessment — we repair what's needed, nothing more", "All repairs backed by workmanship warranty", "Photo documentation of all work performed"],
     process: [
@@ -47,19 +62,24 @@ const serviceData: Record<string, ServiceData> = {
       { step: "Quality Check", desc: "We verify the fix and provide photo documentation." },
     ],
     faqs: [
-      { q: "How quickly can you respond to a roof leak?", a: "We offer same-day service for emergency leaks. Call {client.phone} and we'll prioritize your repair." },
+      { q: "How quickly can you respond to a roof leak?", a: `We offer same-day service for emergency leaks. Call ${client.phone} and we'll prioritize your repair.` },
       { q: "Is it worth repairing an old roof?", a: "It depends on the extent of the damage. We'll give you an honest assessment — if repairs can extend your roof's life by several years, we'll tell you. If replacement makes more sense, we'll explain why." },
       { q: "Do you repair all roof types?", a: "Yes — shingle, tile, metal, and flat roofs. We've seen and fixed it all." },
     ],
+    seoBlocks: {
+      what: "Roof repair targets specific areas of damage — missing or cracked shingles, damaged flashing, leaking vents, and failing sealants. Repairs preserve the existing roof by addressing problem spots before they spread, extending the useful life of the overall system.",
+      why: "A small roof leak left unaddressed can cause mold growth, wood rot, and insulation damage within weeks. Timely repairs protect your home's interior and prevent what might be a $300 fix from turning into a much larger remediation project.",
+      when: "Schedule a repair as soon as you notice a water stain on your ceiling, missing shingles after a storm, or granules accumulating in your gutters. The sooner a problem is addressed, the less damage it causes and the lower the repair cost.",
+    },
   },
   "storm-damage-repair": {
     title: "Storm Damage Repair",
-    metaTitle: "Storm Damage Roof Repair Phoenix | Phoenix Roofing and Repair",
-    description: "Emergency storm damage roof repair in Phoenix. Hail, wind, and monsoon damage. Insurance claim assistance. Free inspection.",
-    intro: "Arizona monsoons and hailstorms can destroy a roof in minutes. We provide emergency tarping, permanent repairs, and full insurance claim assistance — so you can recover fast without the runaround.",
+    metaTitle: `Storm Damage Roof Repair ${address.city} | ${client.companyNameFull}`,
+    description: `Emergency storm damage roof repair in ${address.city}. Hail, wind, and storm damage. Insurance claim assistance. Free inspection.`,
+    intro: "Storms can destroy a roof in minutes. We provide emergency tarping, permanent repairs, and full insurance claim assistance — so you can recover fast without the runaround.",
     benefits: ["Emergency tarping to prevent further damage", "Full insurance claim documentation and assistance", "Hail, wind, and water damage specialists", "Fast turnaround — most repairs in 1–3 days", "We work with all major insurance carriers"],
     process: [
-      { step: "Emergency Call", desc: "Contact us immediately after storm damage — we respond 24/7." },
+      { step: "Emergency Call", desc: "Contact us immediately after storm damage — we respond fast." },
       { step: "Damage Assessment", desc: "We inspect and document all damage with detailed photos." },
       { step: "Insurance Coordination", desc: "We provide your adjuster with everything they need." },
       { step: "Permanent Repair", desc: "Once approved, we complete the repairs quickly and correctly." },
@@ -69,12 +89,17 @@ const serviceData: Record<string, ServiceData> = {
       { q: "How soon can you get to my property after a storm?", a: "We prioritize emergency calls and can typically be on-site within 24 hours of a major storm event." },
       { q: "Do you offer emergency tarping?", a: "Yes. We'll tarp your roof immediately to prevent further water intrusion while permanent repairs are scheduled." },
     ],
+    seoBlocks: {
+      what: "Storm damage repair addresses roofing damage caused by hail, high winds, heavy rain, and debris impact. This includes replacing broken or missing shingles, resealing lifted flashing, patching punctures, and emergency tarping to prevent water intrusion until permanent repairs can be made.",
+      why: "Storm damage often isn't visible from the ground — but small impacts and lifted shingles can allow significant water infiltration during the next rainfall. Acting quickly protects your home and provides the documentation needed to support an insurance claim.",
+      when: "After any significant storm event, have a professional inspection even if you don't see obvious damage. Many insurance claims are denied because damage wasn't reported promptly — don't wait until the next rainfall to find out your roof was compromised.",
+    },
   },
   "metal-roofing": {
     title: "Metal Roofing",
-    metaTitle: "Metal Roofing Phoenix AZ | Phoenix Roofing and Repair",
-    description: "Metal roofing installation in Phoenix. Energy efficient, durable, 40+ year lifespan. Free estimates from licensed contractor.",
-    intro: "Metal roofs are built for the Arizona climate — reflecting heat, resisting wind, and lasting 40–70 years with minimal maintenance. We install standing seam, corrugated, and stone-coated steel systems for homes and businesses.",
+    metaTitle: `Metal Roofing ${cityState} | ${client.companyNameFull}`,
+    description: `Metal roofing installation in ${address.city}. Energy efficient, durable, 40+ year lifespan. Free estimates from licensed contractor.`,
+    intro: "Metal roofs are built for extreme climates — reflecting heat, resisting wind, and lasting 40–70 years with minimal maintenance. We install standing seam, corrugated, and stone-coated steel systems for homes and businesses.",
     benefits: ["40–70 year lifespan — outlasts traditional roofing 2–3x", "Reflects solar heat, reducing cooling costs up to 25%", "Wind resistant up to 140 mph", "Fire-resistant (Class A rated)", "Low maintenance — no cracking, curling, or rotting"],
     process: [
       { step: "Consultation", desc: "We assess your roof and discuss metal roofing options." },
@@ -87,12 +112,17 @@ const serviceData: Record<string, ServiceData> = {
       { q: "Does metal roofing cost more than shingles?", a: "The upfront cost is higher, but metal roofs last 2–3x longer and reduce energy costs — making them more economical over time." },
       { q: "Can you install a metal roof over my existing roof?", a: "In many cases, yes. We'll inspect your current roof to determine if an overlay is appropriate." },
     ],
+    seoBlocks: {
+      what: "Metal roofing refers to roofing systems made from steel, aluminum, or copper — typically installed as standing seam panels, corrugated sheets, or metal shingles. These systems are engineered for exceptional longevity and weather resistance, far outlasting traditional asphalt shingles.",
+      why: "Metal roofs offer a combination of longevity, energy efficiency, and weather resistance that no other roofing material can match. Reflective metal surfaces can reduce cooling costs significantly, and a quality metal roof rarely needs maintenance beyond occasional inspection.",
+      when: "Metal roofing is worth considering if your current roof needs replacement and you plan to stay in the home long-term, if energy costs are a concern, or if you want a low-maintenance solution that won't need attention again for decades.",
+    },
   },
   "flat-roof-systems": {
     title: "Flat Roof Systems",
-    metaTitle: "Flat Roof Repair & Installation Phoenix | Phoenix Roofing and Repair",
-    description: "Flat roof installation and repair in Phoenix. TPO, EPDM, and modified bitumen. Commercial & residential. Free estimates.",
-    intro: "Flat roofs require specialized expertise. We install and repair TPO, EPDM, modified bitumen, and foam roof systems — engineered for Arizona's extreme heat and monsoon rains.",
+    metaTitle: `Flat Roof Repair & Installation ${address.city} | ${client.companyNameFull}`,
+    description: `Flat roof installation and repair in ${address.city}. TPO, EPDM, and modified bitumen. Commercial & residential. Free estimates.`,
+    intro: "Flat roofs require specialized expertise. We install and repair TPO, EPDM, modified bitumen, and foam roof systems — engineered to handle extreme heat and heavy rain.",
     benefits: ["TPO, EPDM, modified bitumen, and foam systems", "Energy-efficient cool-roof options", "Ponding water solutions and proper drainage", "Commercial and residential applications", "Full waterproofing warranties"],
     process: [
       { step: "Roof Assessment", desc: "We evaluate drainage, membrane condition, and structural integrity." },
@@ -101,15 +131,20 @@ const serviceData: Record<string, ServiceData> = {
       { step: "Leak Testing", desc: "We verify watertight integrity before project completion." },
     ],
     faqs: [
-      { q: "Which flat roof system is best for Arizona?", a: "TPO and foam roofs are popular choices for Arizona due to their heat-reflective properties and durability. We'll recommend the best option for your specific situation." },
+      { q: "Which flat roof system is best for hot climates?", a: "TPO and foam roofs are popular choices for hot climates due to their heat-reflective properties and durability. We'll recommend the best option for your specific situation." },
       { q: "How long does a flat roof last?", a: "With proper installation and maintenance, flat roofs typically last 15–25 years depending on the system used." },
       { q: "Can you fix ponding water on my flat roof?", a: "Yes. We address drainage issues by adding tapered insulation, additional drains, or re-sloping as needed." },
     ],
+    seoBlocks: {
+      what: "Flat roof systems use membrane-based materials — such as TPO, EPDM, or modified bitumen — applied across a low-slope surface. Unlike pitched roofing, flat systems rely on proper drainage and seamless waterproofing rather than gravity to manage water runoff.",
+      why: "A failing flat roof membrane can allow water to pool and seep into the building with no visible warning until significant damage has occurred. Regular maintenance and timely repair of flat roof systems is essential to protect the structure below.",
+      when: "If your flat roof is showing signs of membrane cracking, blistering, ponding water, or visible seam separation, it's time for inspection. Most flat roof membranes have a lifespan of 15–25 years — older systems should be assessed before the next rainy season.",
+    },
   },
   "roof-inspection": {
     title: "Roof Inspection",
-    metaTitle: "Free Roof Inspection Phoenix AZ | Phoenix Roofing and Repair",
-    description: "Free, no-obligation roof inspections in Phoenix. Licensed inspector. Photo-documented report. Same-day availability.",
+    metaTitle: `Free Roof Inspection ${cityState} | ${client.companyNameFull}`,
+    description: `Free, no-obligation roof inspections in ${address.city}. Licensed inspector. Photo-documented report. Same-day availability.`,
     intro: "Whether you're buying a home, preparing to sell, or just want peace of mind — our comprehensive roof inspections catch problems early before they become expensive emergencies.",
     benefits: ["100% free, no-obligation inspection", "Detailed photo-documented report", "Same-day availability in most cases", "Honest assessment — no pressure to buy", "Identifies leaks, wear, and structural issues"],
     process: [
@@ -123,11 +158,16 @@ const serviceData: Record<string, ServiceData> = {
       { q: "How long does an inspection take?", a: "Most residential inspections take 30–60 minutes depending on the size and accessibility of your roof." },
       { q: "Should I get an inspection before buying a home?", a: "Absolutely. A roof inspection can reveal costly hidden damage that a general home inspection might miss." },
     ],
+    seoBlocks: {
+      what: "A professional roof inspection is a systematic evaluation of all roof components — shingles or membrane, flashing, gutters, vents, soffits, and fascia. A trained inspector identifies current damage, signs of wear, and potential failure points before they become urgent problems.",
+      why: "Most homeowners don't inspect their roof until there's already a visible problem — by which point damage has often already occurred. A proactive inspection can catch small issues early, extend the life of your roof, and provide documentation that supports insurance claims when storms occur.",
+      when: "We recommend inspections once a year, after any significant storm, before purchasing a home, and when your roof is approaching 10–15 years of age. Catching problems early is almost always cheaper than addressing the damage they cause.",
+    },
   },
   "commercial-roofing": {
     title: "Commercial Roofing",
-    metaTitle: "Commercial Roofing Phoenix AZ | Phoenix Roofing and Repair",
-    description: "Commercial roofing services in Phoenix. Flat roofs, metal roofing, repairs & maintenance. Licensed contractor. Free estimates.",
+    metaTitle: `Commercial Roofing ${cityState} | ${client.companyNameFull}`,
+    description: `Commercial roofing services in ${address.city}. Flat roofs, metal roofing, repairs & maintenance. Licensed contractor. Free estimates.`,
     intro: "Your commercial roof protects your business, inventory, and employees. We deliver professional-grade roofing solutions for offices, warehouses, retail, and multi-unit properties — with minimal disruption to your operations.",
     benefits: ["Flat roof, metal, and built-up roofing systems", "Minimal disruption to your business operations", "Preventive maintenance programs available", "Emergency leak response for commercial properties", "Competitive pricing for property managers and building owners"],
     process: [
@@ -141,6 +181,11 @@ const serviceData: Record<string, ServiceData> = {
       { q: "Do you offer maintenance contracts?", a: "Yes. Our preventive maintenance programs include regular inspections and minor repairs to extend your roof's lifespan and prevent costly emergencies." },
       { q: "What types of commercial roofs do you install?", a: "TPO, EPDM, modified bitumen, metal, and built-up roofing systems. We'll recommend the best system for your building type and budget." },
     ],
+    seoBlocks: {
+      what: "Commercial roofing encompasses the installation, repair, and maintenance of roofing systems on commercial and industrial buildings. This includes flat and low-slope systems such as TPO, EPDM, and modified bitumen, as well as metal roofing for warehouses and large retail structures.",
+      why: "A commercial roof failure can disrupt operations, damage inventory, and create liability issues. Unlike residential roofing, commercial systems cover large areas and often protect critical equipment — making regular maintenance and timely repairs essential to business continuity.",
+      when: "Commercial roof systems should be inspected at least twice per year and after significant weather events. If you're managing a property with a roof older than 10 years, are seeing water intrusion, or are planning a building renovation, it's time for a professional assessment.",
+    },
   },
 };
 
@@ -159,29 +204,101 @@ const FaqItem = ({ q, a }: { q: string; a: string }) => {
 
 const ServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
+
+  // Find the service in client config
+  const clientService = client.services.find((s) => s.slug === slug);
+
+  // If not even in client.services, 404
+  if (!clientService) return <Navigate to="/404" replace />;
+
   const data = slug ? serviceData[slug] : undefined;
 
   useEffect(() => {
-    if (!data) return;
-    document.title = data.metaTitle;
+    if (data) {
+      document.title = data.metaTitle;
+    } else {
+      document.title = `${clientService.name} in ${cityState} | ${client.companyNameFull}`;
+    }
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", data.description);
-  }, [data]);
+    if (meta) {
+      meta.setAttribute(
+        "content",
+        data?.description ??
+          `${client.companyName} provides professional ${clientService.name} services in ${cityState}. Contact us today for a free quote.`
+      );
+    }
+  }, [data, clientService]);
 
-  if (!data) return <Navigate to="/404" replace />;
+  // Generic fallback for services not in serviceData
+  if (!data) {
+    return (
+      <>
+        <section className="bg-primary py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 lg:px-6">
+            <h1 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl">
+              {clientService.name} in {cityState}
+            </h1>
+            <p className="mt-4 max-w-2xl text-lg text-primary-foreground/70">
+              {client.companyName} provides professional {clientService.name} services in {cityState}. Contact us today for a free quote.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link to="/quote" className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
+                Get a Free Quote
+              </Link>
+              <a href={`tel:${client.phoneTel}`} className="inline-flex items-center justify-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+                <Phone className="h-4 w-4" /> {client.phone}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-background py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 lg:px-6">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">Our Process</h2>
+            <ol className="mt-6 space-y-4">
+              {client.processSteps.map((p, i) => (
+                <li key={p.title} className="flex gap-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">{i + 1}</span>
+                  <div>
+                    <p className="font-semibold text-foreground">{p.title}</p>
+                    <p className="text-sm text-muted-foreground">{p.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="bg-primary py-14 text-center">
+          <div className="mx-auto max-w-3xl px-4">
+            <h2 className="text-2xl font-bold text-primary-foreground sm:text-3xl">Ready to Get Started?</h2>
+            <p className="mt-3 text-primary-foreground/70">Free inspection. Transparent pricing. No obligation.</p>
+            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Link to="/quote" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
+                Get a Free Quote
+              </Link>
+              <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
+                <Phone className="h-4 w-4" /> {client.phone}
+              </a>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
 
   return (
     <>
-      {/* Text-first hero */}
+      {/* Hero */}
       <section className="bg-primary py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <h1 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl">
-            {data.title} in Phoenix, AZ
+            {data.title} in {cityState}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-primary-foreground/70">{data.intro}</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link to="/contact" className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
-              Get Your Free Estimate
+            <Link to="/quote" className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
+              Get a Free Quote
             </Link>
             <a href={`tel:${client.phoneTel}`} className="inline-flex items-center justify-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
               <Phone className="h-4 w-4" /> {client.phone}
@@ -190,7 +307,7 @@ const ServicePage = () => {
         </div>
       </section>
 
-      {/* Benefits */}
+      {/* Benefits + Process */}
       <section className="bg-background py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -223,8 +340,28 @@ const ServicePage = () => {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* SEO Text Blocks */}
       <section className="bg-secondary py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl px-4 lg:px-6">
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-xl font-bold text-foreground">What Is {data.title}?</h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.what}</p>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-foreground">Why Is {data.title} Important?</h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.why}</p>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-foreground">When Should You Consider {data.title}?</h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.when}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-background py-16 lg:py-20">
         <div className="mx-auto max-w-3xl px-4 lg:px-6">
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">Frequently Asked Questions</h2>
           <div className="mt-8">
@@ -243,8 +380,8 @@ const ServicePage = () => {
           </h2>
           <p className="mt-3 text-primary-foreground/70">Free inspection. Transparent pricing. No obligation.</p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link to="/contact" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
-              Get Your Free Estimate
+            <Link to="/quote" className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
+              Get a Free Quote
             </Link>
             <a href={`tel:${client.phoneTel}`} className="inline-flex items-center gap-2 text-base font-bold text-primary-foreground hover:text-accent transition-colors">
               <Phone className="h-4 w-4" /> {client.phone}
