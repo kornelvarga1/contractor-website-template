@@ -175,9 +175,9 @@ const ServicePage = () => {
           </h1>
           <p className="mt-4 text-lg text-white/70">{data.intro}</p>
           <div className="mt-6">
-            <Link to="/quote" className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
+            <button onClick={openModal} className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get a Free Quote
-            </Link>
+            </button>
           </div>
         </div>
         <WaveDivider />
