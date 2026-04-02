@@ -108,7 +108,7 @@ const ReviewsSection = () => {
           </a>
           <Link
             to="/write-a-review"
-            className="inline-flex h-10 items-center rounded-sm border border-border px-7 text-sm font-semibold text-foreground hover:border-accent hover:text-accent transition-colors"
+            className="inline-flex h-10 items-center rounded-sm border border-white/60 px-7 text-sm font-semibold text-white hover:border-white hover:text-accent transition-colors"
           >
             Write a Review
           </Link>

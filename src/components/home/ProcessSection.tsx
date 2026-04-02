@@ -12,8 +12,12 @@ const ProcessSection = () => {
 
         <div className="mt-12 grid gap-8 sm:grid-cols-3">
           {client.processSteps.map((step, i) => (
-            <div key={step.title} className="flex flex-col items-center text-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-accent text-xl font-extrabold text-accent-foreground">
+            <div key={step.title} className="relative flex flex-col items-center text-center">
+              {/* Dotted connector line — shown between steps on sm+ */}
+              {i < client.processSteps.length - 1 && (
+                <div className="absolute left-1/2 top-6 hidden w-full border-t-2 border-dashed border-accent/40 sm:block" aria-hidden="true" />
+              )}
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-sm bg-accent text-xl font-extrabold text-accent-foreground z-10">
                 {i + 1}
               </div>
               <h3 className="mt-4 text-base font-bold text-foreground">{step.title}</h3>
