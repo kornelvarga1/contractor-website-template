@@ -7,6 +7,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import ChatWidget from "@/components/ChatWidget";
+import { QuoteModalProvider } from "@/context/QuoteModalContext";
+import QuoteModal from "@/components/shared/QuoteModal";
 import Index from "./pages/Index";
 import ServicePage from "./pages/ServicePage";
 import LocationPage from "./pages/LocationPage";
@@ -28,27 +30,30 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services/:slug" element={<ServicePage />} />
-            <Route path="/areas/:city" element={<LocationPage />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/write-a-review" element={<WriteReview />} />
-            <Route path="/quote" element={<Quote />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-        <ChatWidget />
+        <QuoteModalProvider>
+          <ScrollToTop />
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/services/:slug" element={<ServicePage />} />
+              <Route path="/areas/:city" element={<LocationPage />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/write-a-review" element={<WriteReview />} />
+              <Route path="/quote" element={<Quote />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+          <ChatWidget />
+          <QuoteModal />
+        </QuoteModalProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

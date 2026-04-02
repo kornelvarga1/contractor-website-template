@@ -6,7 +6,7 @@ const ServiceAreas = () => {
   const hasMap = Boolean(client.mapsEmbed && !client.mapsEmbed.startsWith("#"));
 
   return (
-    <section className="bg-background py-16 lg:py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Left: areas list */}

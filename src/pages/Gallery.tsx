@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { X, ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { client } from "@/config/client";
+import PageBottomStack from "@/components/shared/PageBottomStack";
+import { WaveDivider } from "@/components/shared/Dividers";
+import { useQuoteModal } from "@/hooks/useQuoteModal";
 
 // ── Gallery Data ─────────────────────────────────────────────
 // Replace these with real project photos. Each entry = one completed job.
@@ -70,6 +72,7 @@ const CATEGORIES = ["All", ...Array.from(new Set(PROJECTS.map((p) => p.category)
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [lightbox, setLightbox] = useState<{ projectIdx: number; imgIdx: number } | null>(null);
+  const { openModal } = useQuoteModal();
 
   const filtered = activeCategory === "All"
     ? PROJECTS
@@ -97,16 +100,27 @@ const Gallery = () => {
   return (
     <>
       {/* Hero */}
-      <section className="bg-primary py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 text-center lg:px-6">
-          <h1 className="text-3xl font-bold tracking-tight text-primary-foreground md:text-5xl" style={{ lineHeight: 1.1 }}>
+      <section
+        className="relative overflow-hidden min-h-[500px] flex items-center justify-center py-20"
+        style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Our Work</p>
+          <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl" style={{ lineHeight: 1.1 }}>
             Our <span className="text-accent">Completed</span> Projects
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-primary-foreground/70 md:text-lg" style={{ textWrap: "balance" as any }}>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-white/70 md:text-lg">
             Browse real jobs we've completed across {client.address.city} and surrounding areas.
             Quality craftsmanship you can see.
           </p>
+          <div className="mt-6">
+            <button onClick={openModal} className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
+              Get a Free Quote
+            </button>
+          </div>
         </div>
+        <WaveDivider />
       </section>
 
       {/* Filter Bar */}
@@ -129,7 +143,7 @@ const Gallery = () => {
       </section>
 
       {/* Gallery Grid */}
-      <section className="bg-background py-12 md:py-16">
+      <section className="bg-white py-12 md:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project, pIdx) => (
@@ -170,32 +184,7 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary py-14">
-        <div className="mx-auto max-w-3xl px-4 text-center lg:px-6">
-          <h2 className="text-2xl font-bold text-primary-foreground md:text-3xl" style={{ lineHeight: 1.15 }}>
-            Ready to Start Your Project?
-          </h2>
-          <p className="mt-3 text-primary-foreground/70">
-            Get a free estimate and see why {client.address.city} homeowners trust {client.companyName}.
-          </p>
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
-              to="/quote"
-              className="inline-flex h-11 items-center rounded-sm bg-accent px-8 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors active:scale-[0.97]"
-            >
-              Get Free Quote
-            </Link>
-            <a
-              href={`tel:${client.phoneTel}`}
-              className="inline-flex h-11 items-center gap-2 rounded-sm border border-primary-foreground/20 px-6 text-sm font-semibold text-primary-foreground hover:bg-primary-foreground/5 transition-colors active:scale-[0.97]"
-            >
-              <Phone className="h-4 w-4 text-accent" />
-              {client.phone}
-            </a>
-          </div>
-        </div>
-      </section>
+      <PageBottomStack />
 
       {/* Lightbox */}
       {lightbox && (

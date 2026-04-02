@@ -29,7 +29,7 @@ const PREVIEW_IMAGES = [
 
 const GalleryPreview = () => {
   return (
-    <section className="bg-background py-16 lg:py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">

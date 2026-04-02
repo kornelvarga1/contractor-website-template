@@ -1,23 +1,31 @@
 import { Link } from "react-router-dom";
 import { client } from "@/config/client";
+import PageBottomStack from "@/components/shared/PageBottomStack";
+import { WaveDivider } from "@/components/shared/Dividers";
 
 const Blog = () => {
   return (
     <>
       {/* Hero */}
-      <section className="bg-primary py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-6">
-          <h1 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl">
+      <section
+        className="relative overflow-hidden min-h-[500px] flex items-center justify-center py-20"
+        style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Check Out Our Blog</p>
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Our Blog
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-primary-foreground/70">
+          <p className="mt-4 text-lg text-white/70">
             Tips, project updates, and expert advice from {client.companyName}.
           </p>
         </div>
+        <WaveDivider />
       </section>
 
       {/* Posts grid */}
-      <section className="bg-background py-16 lg:py-20">
+      <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {client.blogPosts.map((post) => (
@@ -51,20 +59,7 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary py-16 lg:py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center lg:px-6">
-          <h2 className="text-2xl font-bold text-primary-foreground sm:text-3xl">
-            Have a question? Get a free quote today.
-          </h2>
-          <Link
-            to="/quote"
-            className="mt-6 inline-flex h-11 items-center rounded-sm bg-accent px-10 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors"
-          >
-            Get a Free Quote
-          </Link>
-        </div>
-      </section>
+      <PageBottomStack />
     </>
   );
 };

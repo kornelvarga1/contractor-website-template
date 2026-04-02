@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
+import { useQuoteModal } from "@/hooks/useQuoteModal";
 import { client } from "@/config/client";
 
 const ABOUT_IMAGE = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=960&q=80";
@@ -11,8 +11,9 @@ const badges = [
 ];
 
 const AboutSection = () => {
+  const { openModal } = useQuoteModal();
   return (
-    <section className="bg-secondary py-16 lg:py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Image */}
@@ -51,12 +52,12 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <Link
-              to="/quote"
+            <button
+              onClick={openModal}
               className="mt-8 inline-flex h-10 items-center rounded-sm bg-accent px-7 text-sm font-bold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
             >
               Get a Free Quote
-            </Link>
+            </button>
           </div>
         </div>
       </div>

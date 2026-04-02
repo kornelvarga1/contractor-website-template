@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { client } from "@/config/client";
+import { useQuoteModal } from "@/hooks/useQuoteModal";
 
 const { services, areas } = client;
 
@@ -9,6 +10,7 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [areasOpen, setAreasOpen] = useState(false);
+  const { openModal } = useQuoteModal();
 
   return (
     <>
@@ -83,12 +85,12 @@ const Header = () => {
               <Phone className="h-4 w-4 text-accent" />
               {client.phone}
             </a>
-            <Link
-              to="/quote"
+            <button
+              onClick={openModal}
               className="inline-flex h-9 items-center rounded-sm bg-accent px-5 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
             >
               Get Free Quote
-            </Link>
+            </button>
           </div>
 
           {/* Mobile hamburger */}
@@ -170,13 +172,12 @@ const Header = () => {
                 <Phone className="h-5 w-5" />
                 {client.phone}
               </a>
-              <Link
-                to="/quote"
-                onClick={() => setMobileOpen(false)}
+              <button
+                onClick={() => { setMobileOpen(false); openModal(); }}
                 className="mt-2 flex items-center justify-center rounded-sm border border-accent py-3 text-base font-semibold text-accent"
               >
                 Get Free Quote
-              </Link>
+              </button>
             </nav>
           </div>
         )}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { client } from "@/config/client";
+import { WaveDivider, WaveDividerTop } from "@/components/shared/Dividers";
 
 const MAX_TEXT_LENGTH = 160;
 
@@ -33,12 +34,22 @@ const ReviewsSection = () => {
   const { reviews, averageRating, totalReviews, googleReviewsUrl } = client;
 
   return (
-    <section className="bg-secondary py-16 lg:py-20">
-      <div className="mx-auto max-w-7xl px-4 lg:px-6">
+    <section className="relative overflow-hidden py-16 lg:py-20">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${client.images.hero})` }}
+        aria-hidden="true"
+      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
+      <WaveDividerTop />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-6">
         {/* Header */}
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent">Reviews</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white">Reviews</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             See What Our Customers Say
           </h2>
         </div>
@@ -51,8 +62,8 @@ const ReviewsSection = () => {
               <FilledStar key={i} />
             ))}
           </div>
-          <span className="text-sm font-bold text-foreground">{averageRating.toFixed(1)}</span>
-          <span className="text-sm text-muted-foreground">· {totalReviews} Google Reviews</span>
+          <span className="text-sm font-bold text-white">{averageRating.toFixed(1)}</span>
+          <span className="text-sm text-white/70">· {totalReviews} Google Reviews</span>
         </div>
 
         {/* Review cards */}
@@ -103,6 +114,7 @@ const ReviewsSection = () => {
           </Link>
         </div>
       </div>
+      <WaveDivider />
     </section>
   );
 };

@@ -2,7 +2,7 @@ import { client } from "@/config/client";
 
 const ProcessSection = () => {
   return (
-    <section className="bg-secondary py-16 lg:py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">

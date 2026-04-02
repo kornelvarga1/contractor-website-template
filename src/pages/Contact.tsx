@@ -1,59 +1,29 @@
-import { useState, type FormEvent } from "react";
-import { Phone, Mail, CheckCircle } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { client } from "@/config/client";
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
+import PageBottomStack from "@/components/shared/PageBottomStack";
+import { WaveDivider } from "@/components/shared/Dividers";
+import QuoteForm from "@/components/shared/QuoteForm";
 
 const Contact = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const body = {
-      business_id: BUSINESS_ID,
-      contact_name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
-      contact_phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
-    };
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/form-submission-confirmation`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
-        body: JSON.stringify(body),
-      });
-      if (res.ok) {
-        setSubmitted(true);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <>
-      <section className="bg-primary py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-6">
-          <h1 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl">
-            Get in Touch
+      <section
+        className="relative overflow-hidden min-h-[500px] flex items-center justify-center py-20"
+        style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            CONTACT US
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-primary-foreground/70">
-            Call, email, or fill out the form and we'll get back to you fast.
+          <p className="mt-4 text-lg text-white/70">
+            Get in touch with any questions and we'll be happy to help.
           </p>
         </div>
+        <WaveDivider />
       </section>
 
-      <section className="bg-background py-16 lg:py-20">
+      <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Contact Info */}
@@ -77,38 +47,13 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Form */}
-            <div className="rounded-sm border border-border bg-card p-6 shadow-sm lg:p-8">
-              {submitted ? (
-                <div className="flex flex-col items-center py-10 text-center">
-                  <CheckCircle className="h-12 w-12 text-accent" />
-                  <h3 className="mt-4 text-xl font-bold text-card-foreground">Thank You!</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">We received your message and will be in touch shortly.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="c-name" className="mb-1.5 block text-sm font-medium text-card-foreground">Full Name *</label>
-                    <input id="c-name" name="name" type="text" required className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="John Smith" />
-                  </div>
-                  <div>
-                    <label htmlFor="c-phone" className="mb-1.5 block text-sm font-medium text-card-foreground">Phone *</label>
-                    <input id="c-phone" name="phone" type="tel" required className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="(602) 555-0123" />
-                  </div>
-                  <div>
-                    <label htmlFor="c-message" className="mb-1.5 block text-sm font-medium text-card-foreground">Message</label>
-                    <textarea id="c-message" name="message" rows={4} className="flex w-full rounded-sm border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="Tell us about your project…" />
-                  </div>
-                  {error && <p className="text-sm text-red-500">{error}</p>}
-                  <button type="submit" disabled={loading} className="inline-flex h-11 w-full items-center justify-center rounded-sm bg-accent text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    {loading ? "Submitting…" : "Send Message"}
-                  </button>
-                </form>
-              )}
-            </div>
+            {/* Quote Form */}
+            <QuoteForm variant="widget" />
           </div>
         </div>
       </section>
+
+      <PageBottomStack />
     </>
   );
 };

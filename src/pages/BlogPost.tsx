@@ -1,6 +1,8 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { client } from "@/config/client";
+import { WaveDivider } from "@/components/shared/Dividers";
+import CtaBanner from "@/components/home/CtaBanner";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -17,22 +19,27 @@ const BlogPost = () => {
   return (
     <>
       {/* Hero */}
-      <section className="bg-primary py-16 lg:py-20">
-        <div className="mx-auto max-w-3xl px-4 lg:px-6">
+      <section
+        className="relative overflow-hidden min-h-[500px] flex items-center justify-center py-20"
+        style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <span className="inline-block rounded-sm bg-accent/20 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
             {post.category}
           </span>
-          <h1 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl">
+          <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             {post.title}
           </h1>
-          <p className="mt-4 text-sm text-primary-foreground/60">
+          <p className="mt-4 text-sm text-white/60">
             {post.date} &nbsp;·&nbsp; {post.readTime}
           </p>
         </div>
+        <WaveDivider />
       </section>
 
       {/* Article body */}
-      <section className="bg-background py-16 lg:py-20">
+      <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-3xl px-4 lg:px-6">
           <div className="space-y-5">
             {paragraphs.map((para, i) => (
@@ -45,7 +52,7 @@ const BlogPost = () => {
       </section>
 
       {/* Related Services */}
-      <section className="bg-secondary py-16 lg:py-20">
+      <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <h2 className="text-2xl font-bold text-foreground">Related Services</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -63,21 +70,7 @@ const BlogPost = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary py-14 text-center">
-        <div className="mx-auto max-w-3xl px-4">
-          <h2 className="text-2xl font-bold text-primary-foreground sm:text-3xl">
-            Ready to get started?
-          </h2>
-          <p className="mt-3 text-primary-foreground/70">{client.heroCtaText}</p>
-          <Link
-            to="/quote"
-            className="mt-6 inline-flex h-11 items-center rounded-sm bg-accent px-10 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors"
-          >
-            Get a Free Quote
-          </Link>
-        </div>
-      </section>
+      <CtaBanner />
     </>
   );
 };
