@@ -4,7 +4,7 @@ import QuoteForm from "@/components/shared/QuoteForm";
 
 const HeroSection = () => {
   return (
-    <section className="relative flex min-h-[600px] items-center overflow-hidden bg-primary lg:min-h-[700px]">
+    <section className="relative flex min-h-[600px] items-center overflow-hidden bg-primary lg:min-h-[700px] -mt-20">
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -14,7 +14,7 @@ const HeroSection = () => {
       {/* Scrim */}
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 lg:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-36 pb-16 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center">
           {/* Left: headline + trust */}
           <div>
