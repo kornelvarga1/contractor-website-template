@@ -36,7 +36,7 @@ const ServiceAreas = () => {
           </div>
 
           {/* Right: Google Maps embed */}
-          <div className="min-h-[350px] overflow-hidden rounded-sm border border-border shadow-sm">
+          <div className="hidden lg:block min-h-[350px] overflow-hidden rounded-sm border border-border shadow-sm">
             {hasMap ? (
               <iframe
                 title="Service area map"
