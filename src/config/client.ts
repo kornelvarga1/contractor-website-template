@@ -30,7 +30,7 @@ export const client = {
     hero: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+      "https://images.unsplash.com/photo-1590766940554-4a618a5fd510?w=800&q=80",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
@@ -50,7 +50,7 @@ export const client = {
       slug: "roof-repair",
       description:
         "Fast, reliable repairs for leaks, missing shingles, and weather damage — done right the first time.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1590766940554-4a618a5fd510?w=800&q=80",
     },
     {
       name: "Storm Damage Repair",

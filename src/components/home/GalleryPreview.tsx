@@ -6,7 +6,7 @@ const PREVIEW_IMAGES = [
     alt: "Full tile roof replacement",
   },
   {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+    src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80",
     alt: "Completed roofing project",
   },
   {

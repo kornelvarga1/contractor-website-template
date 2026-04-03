@@ -54,7 +54,7 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
   };
 
   const card = (
-    <div className="rounded-md bg-primary text-primary-foreground shadow-xl p-8">
+    <div className="rounded-md bg-primary text-primary-foreground border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(245,158,11,0.08)] ring-1 ring-accent/20 p-10">
       {submitted ? (
         <div className="flex flex-col items-center py-8 text-center">
           <CheckCircle className="h-12 w-12 text-accent" />

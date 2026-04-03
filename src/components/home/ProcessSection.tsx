@@ -17,7 +17,7 @@ const ProcessSection = () => {
               {i < client.processSteps.length - 1 && (
                 <div className="absolute left-1/2 top-6 hidden w-full border-t-2 border-dashed border-accent/40 sm:block" aria-hidden="true" />
               )}
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-sm bg-accent text-xl font-extrabold text-accent-foreground z-10">
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-accent text-xl font-extrabold text-accent-foreground z-10">
                 {i + 1}
               </div>
               <h3 className="mt-4 text-base font-bold text-foreground">{step.title}</h3>

@@ -1,4 +1,4 @@
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
@@ -44,6 +44,31 @@ const Contact = () => {
                     <p className="text-sm text-muted-foreground">We reply within 2 hours</p>
                   </div>
                 </a>
+              </div>
+
+              <div className="mt-8 flex items-start gap-3">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <div>
+                  <p className="font-bold text-foreground">Hours</p>
+                  <ul className="mt-2 space-y-1">
+                    {client.operatingHours.map(({ day, hours }) => (
+                      <li key={day} className="flex gap-4 text-sm">
+                        <span className="w-24 text-muted-foreground">{day}</span>
+                        <span className="font-semibold text-foreground">{hours}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-start gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <div>
+                  <p className="font-bold text-foreground">Service Areas</p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    {client.areas.join(", ")}
+                  </p>
+                </div>
               </div>
             </div>
 

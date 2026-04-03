@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import { client } from "@/config/client";
 
-const ABOUT_IMAGE = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=960&q=80";
+const ABOUT_IMAGE = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=960&q=80";
 
 const badges = [
   "100% Local",

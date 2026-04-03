@@ -28,16 +28,24 @@ const ServicesOverview = () => {
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              {/* Label at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3">
-                <span className="text-base font-bold uppercase tracking-wide text-white">
-                  {s.name}
-                </span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                  →
-                </span>
+              {/* Base gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+              {/* Hover overlay — darker so description is readable */}
+              <div className="absolute inset-0 bg-black/65 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              {/* Bottom panel */}
+              <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-10">
+                {/* Description — slides up on hover */}
+                <p className="mb-2.5 text-sm leading-relaxed text-white/85 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 line-clamp-3">
+                  {s.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-bold uppercase tracking-wide text-white">
+                    {s.name}
+                  </span>
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                    →
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

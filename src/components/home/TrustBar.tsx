@@ -6,13 +6,13 @@ const TrustBar = () => {
       <div className="mx-auto max-w-7xl px-4 py-4 lg:px-6">
         <p className="text-center text-sm font-semibold tracking-wide text-foreground">
           100% Local
-          <span className="mx-3 text-accent">·</span>
+          <span className="mx-3 inline-block h-1.5 w-1.5 rotate-45 bg-accent align-middle" aria-hidden="true" />
           {client.yearsExperience}+ Years Experience
-          <span className="mx-3 text-accent">·</span>
+          <span className="mx-3 inline-block h-1.5 w-1.5 rotate-45 bg-accent align-middle" aria-hidden="true" />
           Top Notch Service
-          <span className="mx-3 text-accent">·</span>
+          <span className="mx-3 inline-block h-1.5 w-1.5 rotate-45 bg-accent align-middle" aria-hidden="true" />
           Insured
-          <span className="mx-3 text-accent">·</span>
+          <span className="mx-3 inline-block h-1.5 w-1.5 rotate-45 bg-accent align-middle" aria-hidden="true" />
           Fully Licensed
         </p>
       </div>
