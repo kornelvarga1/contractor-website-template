@@ -2,16 +2,12 @@ import { Phone, ShieldCheck, ChevronDown } from "lucide-react";
 import { client } from "@/config/client";
 import QuoteForm from "@/components/shared/QuoteForm";
 import ScrollReveal from "@/components/ScrollReveal";
+import ParallaxBg from "@/components/shared/ParallaxBg";
 
 const HeroSection = () => {
   return (
     <section className="relative flex min-h-[600px] items-center overflow-hidden bg-primary lg:min-h-[700px] -mt-20">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${client.images.hero})` }}
-        aria-hidden="true"
-      />
+      <ParallaxBg imageUrl={client.images.hero} />
       {/* Scrim */}
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
 

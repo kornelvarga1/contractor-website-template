@@ -6,6 +6,7 @@ import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import ParallaxBg from "@/components/shared/ParallaxBg";
 
 interface LocationData {
   metaTitle: string;
@@ -60,10 +61,8 @@ const LocationPage = () => {
   return (
     <>
       {/* Hero */}
-      <section
-        className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20"
-        style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      >
+      <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
+        <ParallaxBg imageUrl={client.images.hero} />
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">

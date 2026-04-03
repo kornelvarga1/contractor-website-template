@@ -5,6 +5,7 @@ import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import ParallaxBg from "@/components/shared/ParallaxBg";
 
 // ── Gallery Data ─────────────────────────────────────────────
 // Replace these with real project photos. Each entry = one completed job.
@@ -101,10 +102,8 @@ const Gallery = () => {
   return (
     <>
       {/* Hero */}
-      <section
-        className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20"
-        style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      >
+      <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
+        <ParallaxBg imageUrl={client.images.hero} />
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Our Work</p>
