@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { client } from "@/config/client";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const ServicesOverview = () => {
   return (
     <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
-        <div className="text-center" data-aos="fade-up">
+        <ScrollReveal>
+        <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent">
             What We Are Best At
           </p>
@@ -13,15 +15,14 @@ const ServicesOverview = () => {
             Our Services
           </h2>
         </div>
+        </ScrollReveal>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {client.services.map((s, i) => (
+            <ScrollReveal key={s.slug} delay={i * 0.08}>
             <Link
-              key={s.slug}
               to={`/services/${s.slug}`}
               className="group relative block overflow-hidden rounded-sm aspect-[4/3]"
-              data-aos="fade-up"
-              data-aos-delay={i * 80}
             >
               {/* Photo */}
               <img
@@ -50,6 +51,7 @@ const ServicesOverview = () => {
                 </div>
               </div>
             </Link>
+            </ScrollReveal>
           ))}
         </div>
       </div>

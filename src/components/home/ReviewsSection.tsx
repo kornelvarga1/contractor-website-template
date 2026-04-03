@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { client } from "@/config/client";
 import { WaveDivider, WaveDividerTop } from "@/components/shared/Dividers";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const MAX_TEXT_LENGTH = 160;
 
@@ -47,12 +48,14 @@ const ReviewsSection = () => {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-6">
         {/* Header */}
-        <div className="text-center" data-aos="fade-up">
+        <ScrollReveal>
+        <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-white">Reviews</p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             See What Our Customers Say
           </h2>
         </div>
+        </ScrollReveal>
 
         {/* Summary bar */}
         <div className="mt-6 flex items-center justify-center gap-3">
@@ -72,7 +75,8 @@ const ReviewsSection = () => {
             const truncated = r.text.length > MAX_TEXT_LENGTH;
             const displayText = truncated ? r.text.slice(0, MAX_TEXT_LENGTH) + "…" : r.text;
             return (
-              <div key={r.author} className="flex flex-col rounded-sm border border-border bg-card p-6 shadow-sm" data-aos="fade-up" data-aos-delay={i * 100}>
+              <ScrollReveal key={r.author} delay={i * 0.1}>
+              <div className="flex flex-col rounded-sm border border-border bg-card p-6 shadow-sm">
                 {/* Top row */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
@@ -92,6 +96,7 @@ const ReviewsSection = () => {
                   {displayText}
                 </p>
               </div>
+              </ScrollReveal>
             );
           })}
         </div>

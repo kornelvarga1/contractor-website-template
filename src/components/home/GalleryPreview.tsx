@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const PREVIEW_IMAGES = [
   {
@@ -45,14 +46,16 @@ const GalleryPreview = () => {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PREVIEW_IMAGES.map((img, i) => (
-            <Link key={img.src} to="/gallery" className="group block overflow-hidden rounded-sm" data-aos="fade-up" data-aos-delay={i * 80}>
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
-              />
-            </Link>
+            <ScrollReveal key={img.src} delay={i * 0.08}>
+              <Link to="/gallery" className="group block overflow-hidden rounded-sm">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
       </div>
