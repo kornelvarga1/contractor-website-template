@@ -4,6 +4,7 @@ import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
+import ScrollReveal from "@/components/ScrollReveal";
 
 // ── Gallery Data ─────────────────────────────────────────────
 // Replace these with real project photos. Each entry = one completed job.
@@ -105,7 +106,7 @@ const Gallery = () => {
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Our Work</p>
           <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl" style={{ lineHeight: 1.1 }}>
             Our <span className="text-accent">Completed</span> Projects
@@ -119,7 +120,7 @@ const Gallery = () => {
               Get a Free Quote
             </button>
           </div>
-        </div>
+        </ScrollReveal>
         <WaveDivider />
       </section>
 
@@ -147,8 +148,8 @@ const Gallery = () => {
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project, pIdx) => (
+              <ScrollReveal key={project.id} delay={pIdx * 0.08}>
               <div
-                key={project.id}
                 className="group cursor-pointer overflow-hidden rounded-sm bg-card shadow-md hover:shadow-xl transition-shadow"
                 onClick={() => openLightbox(pIdx, 0)}
               >
@@ -173,6 +174,7 @@ const Gallery = () => {
                   </span>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
 

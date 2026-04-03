@@ -5,6 +5,7 @@ import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface LocationData {
   metaTitle: string;
@@ -64,7 +65,7 @@ const LocationPage = () => {
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             {data.h1Line1}<br />
             <span className="text-accent">{data.h1Line2}</span>
@@ -78,31 +79,37 @@ const LocationPage = () => {
               <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
-        </div>
+        </ScrollReveal>
         <WaveDivider />
       </section>
 
       {/* SEO Text Blocks */}
       <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-3xl px-4 lg:px-6 space-y-10">
-          <div>
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-              A Need For {client.tradeNoun} In {cityFormatted}
-            </h2>
-            <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.need}</p>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-              Here for all your {client.tradeNoun} Needs
-            </h2>
-            <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.hereFor}</p>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-              Why Choose Us For {client.tradeNoun} In {cityFormatted}
-            </h2>
-            <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.whyChoose}</p>
-          </div>
+          <ScrollReveal delay={0}>
+            <div>
+              <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+                A Need For {client.tradeNoun} In {cityFormatted}
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.need}</p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <div>
+              <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+                Here for all your {client.tradeNoun} Needs
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.hereFor}</p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <div>
+              <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+                Why Choose Us For {client.tradeNoun} In {cityFormatted}
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.whyChoose}</p>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

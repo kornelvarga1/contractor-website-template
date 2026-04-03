@@ -58,6 +58,7 @@ const ReviewsSection = () => {
         </ScrollReveal>
 
         {/* Summary bar */}
+        <ScrollReveal delay={0.1}>
         <div className="mt-6 flex items-center justify-center gap-3">
           <GoogleG />
           <div className="flex items-center gap-1">
@@ -68,6 +69,7 @@ const ReviewsSection = () => {
           <span className="text-sm font-bold text-white">{averageRating.toFixed(1)}</span>
           <span className="text-sm text-white/70">· {totalReviews} Google Reviews</span>
         </div>
+        </ScrollReveal>
 
         {/* Review cards */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -102,6 +104,7 @@ const ReviewsSection = () => {
         </div>
 
         {/* Review CTA card */}
+        <ScrollReveal>
         <div className="mt-12 flex justify-center">
           <Link
             to="/write-a-review"
@@ -124,6 +127,7 @@ const ReviewsSection = () => {
             </div>
           </Link>
         </div>
+        </ScrollReveal>
       </div>
       <WaveDivider />
     </section>

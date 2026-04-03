@@ -13,7 +13,7 @@ const Blog = () => {
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Check Out Our Blog</p>
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Our Blog
@@ -21,7 +21,7 @@ const Blog = () => {
           <p className="mt-4 text-lg text-white/70">
             Tips, project updates, and expert advice from {client.companyName}.
           </p>
-        </div>
+        </ScrollReveal>
         <WaveDivider />
       </section>
 

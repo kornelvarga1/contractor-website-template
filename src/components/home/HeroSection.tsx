@@ -1,6 +1,7 @@
 import { Phone, ShieldCheck, ChevronDown } from "lucide-react";
 import { client } from "@/config/client";
 import QuoteForm from "@/components/shared/QuoteForm";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const HeroSection = () => {
   return (
@@ -17,38 +18,40 @@ const HeroSection = () => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-36 pb-16 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center">
           {/* Left: headline + trust */}
-          <div>
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-primary-foreground sm:text-5xl">
-              {client.heroHeadline}
-            </h1>
-            <p className="mt-4 text-lg text-primary-foreground/80">
-              {client.heroSubheadline}
-            </p>
-            {/* Desktop: trust badges + phone */}
-            <div className="hidden lg:flex mt-8 flex-row items-center gap-3">
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-foreground">
-                <ShieldCheck className="h-5 w-5 text-accent" />
-                Licensed &amp; Insured
+          <ScrollReveal delay={0}>
+            <div>
+              <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-primary-foreground sm:text-5xl">
+                {client.heroHeadline}
+              </h1>
+              <p className="mt-4 text-lg text-primary-foreground/80">
+                {client.heroSubheadline}
+              </p>
+              {/* Desktop: trust badges + phone */}
+              <div className="hidden lg:flex mt-8 flex-row items-center gap-3">
+                <div className="flex items-center gap-2 text-sm font-semibold text-primary-foreground">
+                  <ShieldCheck className="h-5 w-5 text-accent" />
+                  Licensed &amp; Insured
+                </div>
+                <a
+                  href={`tel:${client.phoneTel}`}
+                  className="flex items-center gap-2 text-base font-bold text-accent hover:text-accent/90 transition-colors"
+                >
+                  <Phone className="h-5 w-5" />
+                  {client.phone}
+                </a>
               </div>
-              <a
-                href={`tel:${client.phoneTel}`}
-                className="flex items-center gap-2 text-base font-bold text-accent hover:text-accent/90 transition-colors"
-              >
-                <Phone className="h-5 w-5" />
-                {client.phone}
-              </a>
-            </div>
 
-            {/* Mobile: arrow pointing toward quote form below */}
-            <div className="lg:hidden mt-8 flex justify-center animate-bounce">
-              <ChevronDown className="h-8 w-8 text-accent" />
+              {/* Mobile: arrow pointing toward quote form below */}
+              <div className="lg:hidden mt-8 flex justify-center animate-bounce">
+                <ChevronDown className="h-8 w-8 text-accent" />
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right: quote form */}
-          <div>
+          <ScrollReveal delay={0.15}>
             <QuoteForm variant="widget" />
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

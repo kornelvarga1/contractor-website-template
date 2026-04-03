@@ -4,6 +4,7 @@ import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface SeoBlocks {
   what: string;
@@ -135,7 +136,7 @@ const ServicePage = () => {
           style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
           <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-          <div className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
+          <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
             <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">
               {clientService.name} in {cityState}
             </p>
@@ -150,7 +151,7 @@ const ServicePage = () => {
                 Get a Free Quote
               </button>
             </div>
-          </div>
+          </ScrollReveal>
           <WaveDivider />
         </section>
         <PageBottomStack />
@@ -166,7 +167,7 @@ const ServicePage = () => {
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">
             {data.title} in {cityState}
           </p>
@@ -179,7 +180,7 @@ const ServicePage = () => {
               Get a Free Quote
             </button>
           </div>
-        </div>
+        </ScrollReveal>
         <WaveDivider />
       </section>
 
@@ -187,18 +188,24 @@ const ServicePage = () => {
       <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-4 lg:px-6">
           <div className="space-y-10">
-            <div>
-              <h3 className="text-xl font-bold text-foreground">What Is {data.title}?</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.what}</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-foreground">Why Is {data.title} Important?</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.why}</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-foreground">When Should You Consider {data.title}?</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.when}</p>
-            </div>
+            <ScrollReveal delay={0}>
+              <div>
+                <h3 className="text-xl font-bold text-foreground">What Is {data.title}?</h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.what}</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <div>
+                <h3 className="text-xl font-bold text-foreground">Why Is {data.title} Important?</h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.why}</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <div>
+                <h3 className="text-xl font-bold text-foreground">When Should You Consider {data.title}?</h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{data.seoBlocks.when}</p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>

@@ -32,17 +32,19 @@ const GalleryPreview = () => {
   return (
     <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Our Work
-          </h2>
-          <Link
-            to="/gallery"
-            className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors"
-          >
-            See All Photos →
-          </Link>
-        </div>
+        <ScrollReveal>
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Our Work
+            </h2>
+            <Link
+              to="/gallery"
+              className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors"
+            >
+              See All Photos →
+            </Link>
+          </div>
+        </ScrollReveal>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PREVIEW_IMAGES.map((img, i) => (

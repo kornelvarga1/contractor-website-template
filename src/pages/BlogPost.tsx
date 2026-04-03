@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { client } from "@/config/client";
 import { WaveDivider } from "@/components/shared/Dividers";
 import CtaBanner from "@/components/home/CtaBanner";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -24,7 +25,7 @@ const BlogPost = () => {
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <span className="inline-block rounded-sm bg-accent/20 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
             {post.category}
           </span>
@@ -34,37 +35,42 @@ const BlogPost = () => {
           <p className="mt-4 text-sm text-white/60">
             {post.date} &nbsp;·&nbsp; {post.readTime}
           </p>
-        </div>
+        </ScrollReveal>
         <WaveDivider />
       </section>
 
       {/* Article body */}
       <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-3xl px-4 lg:px-6">
-          <div className="space-y-5">
-            {paragraphs.map((para, i) => (
-              <p key={i} className="text-base leading-relaxed text-foreground/80">
-                {para}
-              </p>
-            ))}
-          </div>
+          <ScrollReveal>
+            <div className="space-y-5">
+              {paragraphs.map((para, i) => (
+                <p key={i} className="text-base leading-relaxed text-foreground/80">
+                  {para}
+                </p>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Related Services */}
       <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
-          <h2 className="text-2xl font-bold text-foreground">Related Services</h2>
+          <ScrollReveal>
+            <h2 className="text-2xl font-bold text-foreground">Related Services</h2>
+          </ScrollReveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {client.services.slice(0, 3).map((s) => (
-              <Link
-                key={s.slug}
-                to={`/services/${s.slug}`}
-                className="group rounded-sm border border-border bg-card p-5 shadow-sm transition-colors hover:border-accent"
-              >
-                <h3 className="font-semibold text-card-foreground group-hover:text-accent transition-colors">{s.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{s.description}</p>
-              </Link>
+            {client.services.slice(0, 3).map((s, i) => (
+              <ScrollReveal key={s.slug} delay={i * 0.1}>
+                <Link
+                  to={`/services/${s.slug}`}
+                  className="group block rounded-sm border border-border bg-card p-5 shadow-sm transition-colors hover:border-accent"
+                >
+                  <h3 className="font-semibold text-card-foreground group-hover:text-accent transition-colors">{s.name}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{s.description}</p>
+                </Link>
+              </ScrollReveal>
             ))}
           </div>
         </div>

@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { client } from "@/config/client";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const FAQ_IMAGE = "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80";
 
@@ -14,18 +15,21 @@ const FaqSection = () => {
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Image */}
-          <div className="overflow-hidden rounded-sm">
-            <img
-              src={FAQ_IMAGE}
-              alt="Roofing project"
-              className="h-full w-full object-cover"
-              loading="lazy"
-              width={800}
-              height={600}
-            />
-          </div>
+          <ScrollReveal delay={0}>
+            <div className="overflow-hidden rounded-sm">
+              <img
+                src={FAQ_IMAGE}
+                alt="Roofing project"
+                className="h-full w-full object-cover"
+                loading="lazy"
+                width={800}
+                height={600}
+              />
+            </div>
+          </ScrollReveal>
 
           {/* Content */}
+          <ScrollReveal delay={0.1}>
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Frequently Asked Questions
@@ -44,6 +48,7 @@ const FaqSection = () => {
               ))}
             </Accordion>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

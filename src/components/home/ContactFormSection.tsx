@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Phone, Shield, Clock, CheckCircle } from "lucide-react";
 import { client } from "@/config/client";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -47,6 +48,7 @@ const ContactFormSection = () => {
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left: Trust signals */}
+          <ScrollReveal delay={0}>
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Request Your Free Estimate
@@ -70,7 +72,11 @@ const ContactFormSection = () => {
             </div>
           </div>
 
+          </div>
+          </ScrollReveal>
+
           {/* Right: Form */}
+          <ScrollReveal delay={0.1}>
           <div className="rounded-sm border border-border bg-card p-6 shadow-sm lg:p-8">
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-10 text-center">
@@ -169,6 +175,7 @@ const ContactFormSection = () => {
               </form>
             )}
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

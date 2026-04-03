@@ -3,6 +3,7 @@ import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
 import { WaveDivider } from "@/components/shared/Dividers";
 import QuoteForm from "@/components/shared/QuoteForm";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const Contact = () => {
   return (
@@ -12,14 +13,14 @@ const Contact = () => {
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             CONTACT US
           </h1>
           <p className="mt-4 text-lg text-white/70">
             Get in touch with any questions and we'll be happy to help.
           </p>
-        </div>
+        </ScrollReveal>
         <WaveDivider />
       </section>
 
@@ -27,6 +28,7 @@ const Contact = () => {
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Contact Info */}
+            <ScrollReveal delay={0}>
             <div className="flex flex-col justify-center">
               <h2 className="text-2xl font-bold text-foreground">Contact Information</h2>
               <div className="mt-6 space-y-5">
@@ -71,9 +73,12 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+            </ScrollReveal>
 
-            {/* Quote Form */}
+          {/* Quote Form */}
+            <ScrollReveal delay={0.1}>
             <QuoteForm variant="widget" />
+            </ScrollReveal>
           </div>
         </div>
       </section>

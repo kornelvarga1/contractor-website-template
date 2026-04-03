@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import { client } from "@/config/client";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const ABOUT_IMAGE = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=960&q=80";
 
@@ -17,18 +18,21 @@ const AboutSection = () => {
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Image */}
-          <div className="overflow-hidden rounded-sm">
-            <img
-              src={ABOUT_IMAGE}
-              alt={`${client.companyName} team at work`}
-              className="h-full w-full object-cover"
-              loading="lazy"
-              width={960}
-              height={1080}
-            />
-          </div>
+          <ScrollReveal delay={0}>
+            <div className="overflow-hidden rounded-sm">
+              <img
+                src={ABOUT_IMAGE}
+                alt={`${client.companyName} team at work`}
+                className="h-full w-full object-cover"
+                loading="lazy"
+                width={960}
+                height={1080}
+              />
+            </div>
+          </ScrollReveal>
 
           {/* Content */}
+          <ScrollReveal delay={0.1}>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-accent">
               About Us
@@ -59,6 +63,7 @@ const AboutSection = () => {
               Get a Free Quote
             </button>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

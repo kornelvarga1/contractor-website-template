@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { client } from "@/config/client";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const ServiceAreas = () => {
   const hasMap = Boolean(client.mapsEmbed && !client.mapsEmbed.startsWith("#"));
@@ -10,6 +11,7 @@ const ServiceAreas = () => {
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Left: areas list */}
+          <ScrollReveal delay={0}>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-accent">
               Proudly Serving These Areas
@@ -34,8 +36,10 @@ const ServiceAreas = () => {
               ))}
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Right: Google Maps embed */}
+          <ScrollReveal delay={0.1}>
           <div className="hidden lg:block min-h-[350px] overflow-hidden rounded-sm border border-border shadow-sm">
             {hasMap ? (
               <iframe
@@ -54,6 +58,7 @@ const ServiceAreas = () => {
               </div>
             )}
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
