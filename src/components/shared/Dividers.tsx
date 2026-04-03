@@ -17,7 +17,7 @@ export const WaveDivider = () => (
 
 // Wave — top of a dark section transitioning from white above.
 export const WaveDividerTop = () => (
-  <div className="absolute top-0 left-0 right-0 h-12 overflow-hidden z-20" aria-hidden="true">
+  <div className="absolute top-0 left-0 right-0 h-12 overflow-hidden z-20 bg-white" aria-hidden="true">
     <svg
       viewBox="0 0 1440 48"
       xmlns="http://www.w3.org/2000/svg"
