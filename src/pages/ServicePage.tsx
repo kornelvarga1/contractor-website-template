@@ -131,7 +131,7 @@ const ServicePage = () => {
     return (
       <>
         <section
-          className="relative overflow-hidden min-h-[500px] flex items-center justify-center py-20"
+          className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20"
           style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
           <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
@@ -162,7 +162,7 @@ const ServicePage = () => {
     <>
       {/* Hero */}
       <section
-        className="relative overflow-hidden min-h-[500px] flex items-center justify-center py-20"
+        className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20"
         style={{ backgroundImage: `url(${client.images.hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
