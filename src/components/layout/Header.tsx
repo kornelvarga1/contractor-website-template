@@ -18,7 +18,6 @@ const Header = () => {
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 lg:px-6">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <Wrench className="h-5 w-5 text-accent lg:hidden" />
             <span className="hidden lg:inline text-lg font-bold tracking-tight text-primary-foreground">
               {client.companyName.split(" & ")[0]} <span className="text-accent">&</span> {client.companyName.split(" & ")[1]}
             </span>
@@ -98,15 +97,15 @@ const Header = () => {
           <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={openModal}
-              className="inline-flex h-10 items-center rounded-sm bg-accent px-4 text-sm font-bold text-accent-foreground"
+              className="inline-flex h-9 items-center whitespace-nowrap rounded-sm bg-accent px-3 text-xs font-bold text-accent-foreground"
             >
               Get Free Quote
             </button>
             <a
               href={`tel:${client.phoneTel}`}
-              className="inline-flex h-10 items-center gap-1.5 rounded-sm border border-primary-foreground/20 px-4 text-sm font-bold text-primary-foreground"
+              className="inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-sm border border-primary-foreground/20 px-3 text-xs font-bold text-primary-foreground"
             >
-              <Phone className="h-4 w-4 text-accent" />
+              <Phone className="h-3.5 w-3.5 shrink-0 text-accent" />
               {client.phone}
             </a>
             <button
