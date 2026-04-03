@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <>
       <header
-        className="sticky top-0 z-50 w-full border-b border-accent/40 transition-colors duration-300"
+        className={`sticky top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "border-b border-accent/40" : ""}`}
         style={{ backgroundColor: scrolled ? "hsl(var(--primary))" : "transparent" }}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
