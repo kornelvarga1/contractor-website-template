@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-primary border-b border-primary/80">
+      <header className="sticky top-0 z-50 w-full bg-primary border-b border-accent/40">
         <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
           {/* Logo — desktop only */}
           <Link to="/" className="hidden lg:flex items-center gap-2 shrink-0">
