@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Menu, X, ChevronDown, Wrench } from "lucide-react";
 import { client } from "@/config/client";
@@ -10,11 +10,21 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [areasOpen, setAreasOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { openModal } = useQuoteModal();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-primary border-b border-accent/40">
+      <header
+        className="sticky top-0 z-50 w-full border-b border-accent/40 transition-colors duration-300"
+        style={{ backgroundColor: scrolled ? "hsl(var(--primary))" : "transparent" }}
+      >
         <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
           {/* Logo — desktop only */}
           <Link to="/" className="hidden lg:flex items-center gap-2 shrink-0">
