@@ -44,8 +44,8 @@ const GalleryPreview = () => {
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PREVIEW_IMAGES.map((img) => (
-            <Link key={img.src} to="/gallery" className="group block overflow-hidden rounded-sm">
+          {PREVIEW_IMAGES.map((img, i) => (
+            <Link key={img.src} to="/gallery" className="group block overflow-hidden rounded-sm" data-aos="fade-up" data-aos-delay={i * 80}>
               <img
                 src={img.src}
                 alt={img.alt}

@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="mx-auto max-w-7xl px-4 py-14 lg:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="0">
             <h3 className="mb-4 text-lg font-bold text-foreground">
               {client.companyName}
             </h3>
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="80">
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Services</h4>
             <ul className="space-y-2">
               {services.map((s) => (
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           {/* Service Areas */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="160">
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Service Areas</h4>
             <ul className="space-y-2">
               {areas.map((area) => (
@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="240">
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-sm text-muted-foreground hover:text-accent transition-colors">Home</Link></li>
@@ -70,7 +70,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* Operating Hours */}
-          <div>
+          <div data-aos="fade-up" data-aos-delay="320">
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Hours</h4>
             <ul className="space-y-2">
               {client.operatingHours.map((h) => (

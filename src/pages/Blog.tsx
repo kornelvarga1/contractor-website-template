@@ -28,8 +28,8 @@ const Blog = () => {
       <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {client.blogPosts.map((post) => (
-              <div key={post.slug} className="flex flex-col rounded-sm border border-border bg-card shadow-sm">
+            {client.blogPosts.map((post, i) => (
+              <div key={post.slug} className="flex flex-col rounded-sm border border-border bg-card shadow-sm" data-aos="fade-up" data-aos-delay={i * 100}>
                 <div className="flex flex-col flex-1 p-6">
                   <span className="inline-block rounded-sm bg-accent/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
                     {post.category}

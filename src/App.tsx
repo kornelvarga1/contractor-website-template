@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -29,6 +32,10 @@ const STANDALONE_ROUTES = ["/write-a-review"];
 const AppShell = () => {
   const { pathname } = useLocation();
   const standalone = STANDALONE_ROUTES.includes(pathname);
+
+  useEffect(() => {
+    AOS.init({ duration: 600, once: true, easing: "ease-out" });
+  }, []);
   return (
     <>
       <ScrollToTop />

@@ -47,7 +47,7 @@ const ReviewsSection = () => {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-6">
         {/* Header */}
-        <div className="text-center">
+        <div className="text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-white">Reviews</p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             See What Our Customers Say
@@ -68,11 +68,11 @@ const ReviewsSection = () => {
 
         {/* Review cards */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((r) => {
+          {reviews.map((r, i) => {
             const truncated = r.text.length > MAX_TEXT_LENGTH;
             const displayText = truncated ? r.text.slice(0, MAX_TEXT_LENGTH) + "…" : r.text;
             return (
-              <div key={r.author} className="flex flex-col rounded-sm border border-border bg-card p-6 shadow-sm">
+              <div key={r.author} className="flex flex-col rounded-sm border border-border bg-card p-6 shadow-sm" data-aos="fade-up" data-aos-delay={i * 100}>
                 {/* Top row */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
