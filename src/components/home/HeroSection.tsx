@@ -1,4 +1,4 @@
-import { Phone, ShieldCheck } from "lucide-react";
+import { Phone, ShieldCheck, ChevronDown } from "lucide-react";
 import { client } from "@/config/client";
 import QuoteForm from "@/components/shared/QuoteForm";
 
@@ -24,7 +24,8 @@ const HeroSection = () => {
             <p className="mt-4 text-lg text-primary-foreground/80">
               {client.heroSubheadline}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            {/* Desktop: trust badges + phone */}
+            <div className="hidden lg:flex mt-8 flex-row items-center gap-3">
               <div className="flex items-center gap-2 text-sm font-semibold text-primary-foreground">
                 <ShieldCheck className="h-5 w-5 text-accent" />
                 Licensed &amp; Insured
@@ -36,6 +37,11 @@ const HeroSection = () => {
                 <Phone className="h-5 w-5" />
                 {client.phone}
               </a>
+            </div>
+
+            {/* Mobile: arrow pointing toward quote form below */}
+            <div className="lg:hidden mt-8 flex justify-center animate-bounce">
+              <ChevronDown className="h-8 w-8 text-accent" />
             </div>
           </div>
 

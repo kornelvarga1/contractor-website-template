@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, Wrench } from "lucide-react";
 import { client } from "@/config/client";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 
@@ -17,8 +17,9 @@ const Header = () => {
       <header className="sticky top-0 z-50 w-full bg-primary border-b border-primary/80">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-lg font-bold tracking-tight text-primary-foreground">
+          <Link to="/" className="flex items-center gap-2 shrink-0">
+            <Wrench className="h-5 w-5 text-accent lg:hidden" />
+            <span className="hidden lg:inline text-lg font-bold tracking-tight text-primary-foreground">
               {client.companyName.split(" & ")[0]} <span className="text-accent">&</span> {client.companyName.split(" & ")[1]}
             </span>
           </Link>
@@ -93,14 +94,29 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden text-primary-foreground"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile: action buttons + hamburger */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              onClick={openModal}
+              className="inline-flex h-8 items-center rounded-sm bg-accent px-3 text-xs font-bold text-accent-foreground"
+            >
+              Free Quote
+            </button>
+            <a
+              href={`tel:${client.phoneTel}`}
+              className="inline-flex h-8 items-center gap-1.5 rounded-sm border border-primary-foreground/20 px-3 text-xs font-bold text-primary-foreground"
+            >
+              <Phone className="h-3.5 w-3.5 text-accent" />
+              {client.phone}
+            </a>
+            <button
+              className="text-primary-foreground"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile overlay nav */}

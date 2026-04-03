@@ -102,7 +102,7 @@ const ChatWidget = () => {
 
       {/* Form modal */}
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-y-auto bg-white border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(245,158,11,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-4 fade-in duration-300">
+        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(245,158,11,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-4 fade-in duration-300">
           {/* Header */}
           <div className="flex items-center justify-between bg-accent px-4 py-3">
             <div className="flex items-center gap-3">
@@ -122,7 +122,7 @@ const ChatWidget = () => {
           </div>
 
           {/* Body */}
-          <div className="bg-white">
+          <div className="bg-white overflow-y-auto max-h-[calc(90vh-48px)]">
             {success ? (
               <div className="px-3 py-8 text-center">
                 <p className="text-sm font-medium text-gray-700">
