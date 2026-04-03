@@ -1,5 +1,5 @@
 import { client } from "@/config/client";
-import { WaveDivider, WaveDividerTop } from "@/components/shared/Dividers";
+import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 
 const CtaBanner = () => {
@@ -14,7 +14,6 @@ const CtaBanner = () => {
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/65" aria-hidden="true" />
-      <WaveDividerTop />
 
       <div className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
         <h2 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
