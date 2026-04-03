@@ -15,10 +15,10 @@ const Header = () => {
   return (
     <>
       <header className="sticky top-0 z-50 w-full bg-primary border-b border-primary/80">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 lg:px-6">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <span className="hidden lg:inline text-lg font-bold tracking-tight text-primary-foreground">
+        <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
+          {/* Logo — desktop only */}
+          <Link to="/" className="hidden lg:flex items-center gap-2 shrink-0">
+            <span className="text-lg font-bold tracking-tight text-primary-foreground">
               {client.companyName.split(" & ")[0]} <span className="text-accent">&</span> {client.companyName.split(" & ")[1]}
             </span>
           </Link>
@@ -94,18 +94,18 @@ const Header = () => {
           </div>
 
           {/* Mobile: action buttons + hamburger */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex flex-1 items-center gap-2 lg:hidden">
             <button
               onClick={openModal}
-              className="inline-flex h-9 items-center whitespace-nowrap rounded-sm bg-accent px-3 text-xs font-bold text-accent-foreground"
+              className="flex flex-1 h-10 items-center justify-center whitespace-nowrap rounded-sm bg-accent text-sm font-bold text-accent-foreground"
             >
               Get Free Quote
             </button>
             <a
               href={`tel:${client.phoneTel}`}
-              className="inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-sm border border-primary-foreground/20 px-3 text-xs font-bold text-primary-foreground"
+              className="flex flex-1 h-10 items-center justify-center gap-1.5 whitespace-nowrap rounded-sm border border-primary-foreground/20 text-sm font-bold text-primary-foreground"
             >
-              <Phone className="h-3.5 w-3.5 shrink-0 text-accent" />
+              <Phone className="h-4 w-4 shrink-0 text-accent" />
               {client.phone}
             </a>
             <button
