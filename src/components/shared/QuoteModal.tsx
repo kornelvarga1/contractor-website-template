@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import QuoteForm from "./QuoteForm";
@@ -20,12 +21,18 @@ const QuoteModal = () => {
   if (!isOpen) return null;
 
   return (
-    <div
+    <motion.div
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
       onClick={closeModal}
     >
-      <div
+      <motion.div
         className="relative w-full max-w-md"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut", delay: 0.05 }}
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -38,8 +45,8 @@ const QuoteModal = () => {
         <div className="max-h-[90vh] overflow-y-auto rounded-md">
           <QuoteForm variant="widget" />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
