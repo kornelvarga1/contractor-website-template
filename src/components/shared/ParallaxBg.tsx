@@ -27,22 +27,17 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     const update = () => {
       if (!el || !parent) return;
 
-      // Mobile: static bg, no extension, no parallax — prevents bg-cover zoom.
-      if (window.innerWidth < 1024) {
-        el.style.top = "0";
-        el.style.bottom = "0";
-        el.style.transform = "none";
-        return;
-      }
+      const mobile = window.innerWidth < 1024;
+      // Mobile: smaller extension + gentler speed to limit zoom while keeping effect.
+      // Desktop: larger extension + stronger speed for a pronounced parallax.
+      const ext   = mobile ? "20%" : "40%";
+      const speed = mobile ? 0.15  : 0.4;
 
-      // Desktop: extend element vertically so there's room to shift.
-      el.style.top = "-40%";
-      el.style.bottom = "-40%";
+      el.style.top    = `-${ext}`;
+      el.style.bottom = `-${ext}`;
 
-      // Clamp the shift to ±40% of the section height so the image never
-      // drifts outside the extended area — no white gaps, no matter the scroll position.
-      const maxShift = parent.offsetHeight * 0.4;
-      const raw = (window.scrollY - sectionTop) * 0.3;
+      const maxShift = parent.offsetHeight * parseFloat(ext) / 100;
+      const raw   = (window.scrollY - sectionTop) * speed;
       const shift = Math.max(-maxShift, Math.min(maxShift, raw));
       el.style.transform = `translateY(${shift}px)`;
     };
