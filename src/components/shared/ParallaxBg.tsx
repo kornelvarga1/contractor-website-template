@@ -19,20 +19,32 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     const parent = el.parentElement;
     let rafId: number;
 
+    // Capture section offset once (stable — section doesn't move in normal flow).
+    const getSectionTop = () =>
+      parent ? parent.getBoundingClientRect().top + window.scrollY : 0;
+    let sectionTop = getSectionTop();
+
     const update = () => {
       if (!el || !parent) return;
-      // Mobile: no parallax, no extension — keeps image at natural bg-cover scale.
-      // Desktop (lg+): extend element and apply viewport-relative parallax shift.
+
+      // Mobile: static bg, no extension, no parallax — prevents bg-cover zoom.
       if (window.innerWidth < 1024) {
         el.style.top = "0";
         el.style.bottom = "0";
         el.style.transform = "none";
         return;
       }
+
+      // Desktop: extend element vertically so there's room to shift.
       el.style.top = "-40%";
       el.style.bottom = "-40%";
-      const rect = parent.getBoundingClientRect();
-      el.style.transform = `translateY(${-rect.top * 0.15}px)`;
+
+      // Clamp the shift to ±40% of the section height so the image never
+      // drifts outside the extended area — no white gaps, no matter the scroll position.
+      const maxShift = parent.offsetHeight * 0.4;
+      const raw = (window.scrollY - sectionTop) * 0.3;
+      const shift = Math.max(-maxShift, Math.min(maxShift, raw));
+      el.style.transform = `translateY(${shift}px)`;
     };
 
     const onScroll = () => {
@@ -40,12 +52,18 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
       rafId = requestAnimationFrame(update);
     };
 
+    // Re-measure sectionTop on resize (layout may reflow).
+    const onResize = () => {
+      sectionTop = getSectionTop();
+      update();
+    };
+
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", update);
+    window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", onResize);
       cancelAnimationFrame(rafId);
     };
   }, []);
