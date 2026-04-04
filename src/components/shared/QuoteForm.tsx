@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import { CheckCircle, Wrench } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import Logo from "@/components/shared/Logo";
 import { Link } from "react-router-dom";
 import { client } from "@/config/client";
 
@@ -66,9 +67,8 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
       ) : (
         <>
           {/* Logo area */}
-          <div className="mb-6 flex flex-col items-center gap-2">
-            <Wrench className="h-8 w-8 text-accent" />
-            <span className="text-lg font-bold text-primary-foreground">{client.companyName}</span>
+          <div className="mb-6 flex justify-center">
+            <Logo variant="light" />
           </div>
 
           {/* Heading */}

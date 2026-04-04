@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Menu, X, ChevronDown, Wrench } from "lucide-react";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { client } from "@/config/client";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
+import Logo from "@/components/shared/Logo";
 
 const { services, areas } = client;
 
@@ -27,10 +28,8 @@ const Header = () => {
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
           {/* Logo — desktop only */}
-          <Link to="/" className="hidden lg:flex items-center gap-2 shrink-0">
-            <span className="text-lg font-bold tracking-tight text-primary-foreground">
-              {client.companyName.split(" & ")[0]} <span className="text-accent">&</span> {client.companyName.split(" & ")[1]}
-            </span>
+          <Link to="/" className="hidden lg:flex items-center shrink-0">
+            <Logo variant="light" />
           </Link>
 
           {/* Desktop Nav */}
@@ -132,6 +131,9 @@ const Header = () => {
         {mobileOpen && (
           <div className="fixed inset-0 top-16 z-40 bg-primary overflow-y-auto lg:hidden">
             <nav className="flex flex-col px-6 py-6 gap-1">
+              <Link to="/" onClick={() => setMobileOpen(false)} className="pb-5 mb-1 border-b border-primary-foreground/10">
+                <Logo variant="light" />
+              </Link>
               <Link to="/" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
                 Home
               </Link>

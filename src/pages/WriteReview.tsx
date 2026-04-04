@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Wrench } from "lucide-react";
+import Logo from "@/components/shared/Logo";
 import { client } from "@/config/client";
 
 const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID;
@@ -85,11 +85,8 @@ const WriteReview = () => {
     <div className="min-h-screen bg-[#111] flex flex-col items-center justify-center px-4 py-12">
 
       {/* Above-container branding */}
-      <div className="mb-6 flex flex-col items-center gap-2">
-        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-accent/10 ring-1 ring-accent/30">
-          <Wrench className="h-5 w-5 text-accent" />
-        </div>
-        <span className="text-base font-bold tracking-wide text-white">{client.companyName}</span>
+      <div className="mb-6">
+        <Logo variant="light" />
       </div>
 
       {/* Funnel container */}
@@ -126,9 +123,8 @@ const WriteReview = () => {
           {phase === "rate" && (
             <div className="animate-in fade-in duration-300">
               {/* Inner logo */}
-              <div className="mb-5 flex flex-col items-center gap-1.5">
-                <Wrench className="h-6 w-6 text-accent" />
-                <span className="text-sm font-semibold text-foreground">{client.companyName}</span>
+              <div className="mb-5 flex justify-center">
+                <Logo variant="dark" />
               </div>
 
               <p className="mb-3 text-sm font-bold text-foreground">

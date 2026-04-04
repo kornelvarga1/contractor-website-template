@@ -27,14 +27,14 @@ export const client = {
   aboutText:
     "Phoenix Roofing and Repair has been protecting Phoenix homes and businesses for over 15 years. We're a locally owned crew that shows up on time, prices honestly, and stands behind every job. No subcontractors, no surprises.",
   images: {
-    hero: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-      "https://images.unsplash.com/photo-1590766940554-4a618a5fd510?w=800&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80",
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
+      "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=800&q=80",
     ],
   },
   services: [
@@ -43,28 +43,28 @@ export const client = {
       slug: "roof-replacement",
       description:
         "Complete tear-off and installation with premium materials and a lifetime workmanship guarantee.",
-      image: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
     },
     {
       name: "Roof Repair",
       slug: "roof-repair",
       description:
         "Fast, reliable repairs for leaks, missing shingles, and weather damage — done right the first time.",
-      image: "https://images.unsplash.com/photo-1590766940554-4a618a5fd510?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
     },
     {
       name: "Storm Damage Repair",
       slug: "storm-damage-repair",
       description:
         "Emergency response for hail, wind, and monsoon damage. We handle insurance claims for you.",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
     },
     {
       name: "Metal Roofing",
       slug: "metal-roofing",
       description:
         "Energy-efficient metal roofing systems built to withstand Arizona's extreme heat and storms.",
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
     },
     {
       name: "Flat Roof Systems",
@@ -78,14 +78,14 @@ export const client = {
       slug: "roof-inspection",
       description:
         "Comprehensive inspections to catch problems early — completely free, no obligation.",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=800&q=80",
     },
     {
       name: "Commercial Roofing",
       slug: "commercial-roofing",
       description:
         "Full-service commercial roofing for offices, warehouses, retail, and multi-unit properties.",
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=800&q=80",
     },
   ],
   areas: ["Phoenix", "Scottsdale", "Tempe", "Mesa", "Chandler", "Glendale", "Peoria"],

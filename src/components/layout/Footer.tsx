@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
+import Logo from "@/components/shared/Logo";
 
 const { services, areas } = client;
 
@@ -13,9 +14,9 @@ const Footer = () => {
           {/* Company Info */}
           <ScrollReveal delay={0}>
             <div>
-              <h3 className="mb-4 text-lg font-bold text-foreground">
-                {client.companyName}
-              </h3>
+              <Link to="/" className="mb-5 inline-block">
+                <Logo variant="dark" />
+              </Link>
               <div className="space-y-3 text-sm text-muted-foreground">
                 <div className="flex items-start gap-2">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />

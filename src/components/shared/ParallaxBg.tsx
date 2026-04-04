@@ -16,18 +16,16 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     const el = ref.current;
     if (!el) return;
 
-    // Compute the section's static offset from the document top once.
-    // Using scrollY + getBoundingClientRect gives the true document offset
-    // regardless of where in the page the section sits.
+    // Viewport-relative approach: offset = -(section top from viewport) * speed.
+    // This keeps the displacement bounded to ~±(viewportHeight * speed) regardless
+    // of where the section sits on the page — no white-gap risk.
     const parent = el.parentElement;
-    const sectionTop = parent
-      ? parent.getBoundingClientRect().top + window.scrollY
-      : 0;
-
     let rafId: number;
 
     const update = () => {
-      if (el) el.style.transform = `translateY(${(window.scrollY - sectionTop) * 0.4}px)`;
+      if (!el || !parent) return;
+      const rect = parent.getBoundingClientRect();
+      el.style.transform = `translateY(${-rect.top * 0.15}px)`;
     };
 
     const onScroll = () => {
@@ -48,7 +46,7 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
       ref={ref}
       aria-hidden="true"
       className="absolute inset-x-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${imageUrl})`, willChange: "transform", top: "-30%", bottom: "-30%" }}
+      style={{ backgroundImage: `url(${imageUrl})`, willChange: "transform", top: "-50%", bottom: "-50%" }}
     />
   );
 };

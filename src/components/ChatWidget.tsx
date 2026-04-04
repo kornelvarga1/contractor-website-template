@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { MessageCircle, X, Send, ChevronDown, Wrench } from "lucide-react";
+import Logo from "@/components/shared/Logo";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -106,11 +107,7 @@ const ChatWidget = () => {
           {/* Header */}
           <div className="flex items-center justify-between bg-accent px-4 py-3">
             <div className="flex items-center gap-3">
-              {/* Logo placeholder */}
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-foreground/20 shrink-0">
-                <Wrench className="h-4 w-4 text-accent-foreground" />
-              </div>
-              <p className="font-bold text-accent-foreground text-sm">Have a question?</p>
+              <Logo variant="dark" />
             </div>
             <button
               onClick={handleClose}
@@ -133,7 +130,12 @@ const ChatWidget = () => {
               <>
                 {/* Message bubble */}
                 <div className="flex items-start gap-2 bg-gray-100 rounded-lg mx-3 mt-3 p-3">
-                  <Wrench className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                  <svg width="16" height="14" viewBox="0 0 38 32" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
+                    <rect x="3" y="17" width="32" height="15" rx="1.5" fill="hsl(0,0%,10%)" fillOpacity="0.15" />
+                    <path d="M0 18.5L19 1L38 18.5H0Z" fill="#f59e0b" />
+                    <rect x="25" y="2.5" width="5" height="10" rx="1" fill="#f59e0b" />
+                    <rect x="13.5" y="22" width="11" height="10" rx="1" fill="#f59e0b" fillOpacity="0.3" />
+                  </svg>
                   <p className="text-sm text-gray-700 leading-snug">
                     This text goes straight to my personal phone. I'll make sure to get back to you the second I'm free!
                   </p>
