@@ -105,8 +105,9 @@ const Gallery = () => {
       <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
         <ParallaxBg imageUrl={client.images.hero} />
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Our Work</p>
+          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent">Our Work</p>
           <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl" style={{ lineHeight: 1.1 }}>
             Our <span className="text-accent">Completed</span> Projects
           </h1>

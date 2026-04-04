@@ -8,7 +8,7 @@ const ServicesOverview = () => {
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <ScrollReveal>
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+          <p className="text-sm font-bold uppercase tracking-widest text-accent">
             What We Are Best At
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">

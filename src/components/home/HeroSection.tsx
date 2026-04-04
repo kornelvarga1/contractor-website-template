@@ -10,6 +10,7 @@ const HeroSection = () => {
       <ParallaxBg imageUrl={client.images.hero} />
       {/* Scrim */}
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+      <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-36 pb-16 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center">

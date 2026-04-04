@@ -155,7 +155,7 @@ const ReviewsSection = () => {
         {/* Header */}
         <ScrollReveal>
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-white">Reviews</p>
+            <p className="text-sm font-bold uppercase tracking-widest text-white">Reviews</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               See What Our Customers Say
             </h2>
