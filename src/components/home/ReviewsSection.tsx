@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { client } from "@/config/client";
 import { WaveDivider, WaveDividerTop } from "@/components/shared/Dividers";
 import ScrollReveal from "@/components/ScrollReveal";
+import ParallaxBg from "@/components/shared/ParallaxBg";
 
 const MAX_TEXT_LENGTH = 160;
 
-// Google "G" logo as a colored SVG mark
 const GoogleG = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
     <path
@@ -31,17 +33,120 @@ const FilledStar = () => (
   <span style={{ color: "#FBBC05", fontSize: "1rem", lineHeight: 1 }}>★</span>
 );
 
+type Review = (typeof client.reviews)[number];
+
+const ReviewCard = ({ r }: { r: Review }) => {
+  const truncated = r.text.length > MAX_TEXT_LENGTH;
+  const displayText = truncated ? r.text.slice(0, MAX_TEXT_LENGTH) + "…" : r.text;
+  return (
+    <div className="flex h-full flex-col rounded-sm border border-border bg-card p-6 shadow-sm">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <GoogleG />
+          <span className="text-sm font-semibold text-card-foreground">{r.author}</span>
+        </div>
+        <span className="shrink-0 text-xs text-muted-foreground">{r.time}</span>
+      </div>
+      <div className="mt-2 flex gap-0.5">
+        {Array.from({ length: r.rating }).map((_, i) => (
+          <FilledStar key={i} />
+        ))}
+      </div>
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-card-foreground/80">
+        {displayText}
+      </p>
+    </div>
+  );
+};
+
 const ReviewsSection = () => {
-  const { reviews, averageRating, totalReviews, googleReviewsUrl } = client;
+  const { reviews, averageRating, totalReviews } = client;
+  const N = reviews.length;
+
+  // Triple the reviews so we always have a middle copy to sit in for infinite loop
+  const extended = useMemo(() => [...reviews, ...reviews, ...reviews], []);
+
+  // perPage: 3 on desktop (lg+), 1 on mobile
+  const [perPage, setPerPage] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth >= 1024 ? 3 : 1
+  );
+
+  // index into the extended array — starts in the middle copy
+  const [index, setIndex] = useState(N);
+  const [animate, setAnimate] = useState(true);
+  const [paused, setPaused] = useState(false);
+
+  // Sync perPage on resize; reset to middle copy without animation
+  useEffect(() => {
+    const handleResize = () => {
+      const next = window.innerWidth >= 1024 ? 3 : 1;
+      setPerPage((prev) => {
+        if (prev !== next) {
+          setAnimate(false);
+          setIndex(N);
+        }
+        return next;
+      });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [N]);
+
+  const goNext = useCallback(() => {
+    setAnimate(true);
+    setIndex((i) => i + 1);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setAnimate(true);
+    setIndex((i) => i - 1);
+  }, []);
+
+  const goToDot = useCallback(
+    (dot: number) => {
+      setAnimate(true);
+      setIndex(N + dot);
+    },
+    [N]
+  );
+
+  // After transition ends, snap back into the middle copy if we've drifted into a clone
+  const handleTransitionEnd = useCallback(() => {
+    setIndex((i) => {
+      if (i < N) {
+        setAnimate(false);
+        return i + N;
+      }
+      if (i >= N * 2) {
+        setAnimate(false);
+        return i - N;
+      }
+      return i;
+    });
+  }, [N]);
+
+  // Auto-advance every 4 s; pause on hover
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(goNext, 4000);
+    return () => clearInterval(timer);
+  }, [paused, goNext]);
+
+  const activeDot = ((index % N) + N) % N;
+
+  // Track is extended.length / perPage cards wide relative to the overflow container.
+  // translateX(-%) is relative to the element itself, so:
+  //   offset = -(index / extended.length * 100)% of track width
+  //          = -(index / perPage) cards × containerWidth ✓
+  const trackStyle: React.CSSProperties = {
+    width: `${(extended.length / perPage) * 100}%`,
+    transform: `translateX(-${(index / extended.length) * 100}%)`,
+    transition: animate ? "transform 500ms ease-in-out" : "none",
+  };
 
   return (
     <section className="relative overflow-hidden py-16 lg:py-20">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${client.images.hero})` }}
-        aria-hidden="true"
-      />
+      <ParallaxBg imageUrl={client.images.hero} />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
       <WaveDividerTop />
@@ -49,84 +154,106 @@ const ReviewsSection = () => {
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-6">
         {/* Header */}
         <ScrollReveal>
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-white">Reviews</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            See What Our Customers Say
-          </h2>
-        </div>
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white">Reviews</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              See What Our Customers Say
+            </h2>
+          </div>
         </ScrollReveal>
 
         {/* Summary bar */}
         <ScrollReveal delay={0.1}>
-        <div className="mt-6 flex items-center justify-center gap-3">
-          <GoogleG />
-          <div className="flex items-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <FilledStar key={i} />
-            ))}
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <GoogleG />
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <FilledStar key={i} />
+              ))}
+            </div>
+            <span className="text-sm font-bold text-white">{averageRating.toFixed(1)}</span>
+            <span className="text-sm text-white/70">· {totalReviews} Google Reviews</span>
           </div>
-          <span className="text-sm font-bold text-white">{averageRating.toFixed(1)}</span>
-          <span className="text-sm text-white/70">· {totalReviews} Google Reviews</span>
-        </div>
         </ScrollReveal>
 
-        {/* Review cards */}
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((r, i) => {
-            const truncated = r.text.length > MAX_TEXT_LENGTH;
-            const displayText = truncated ? r.text.slice(0, MAX_TEXT_LENGTH) + "…" : r.text;
-            return (
-              <ScrollReveal key={r.author} delay={i * 0.1}>
-              <div className="flex flex-col rounded-sm border border-border bg-card p-6 shadow-sm">
-                {/* Top row */}
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <GoogleG />
-                    <span className="text-sm font-semibold text-card-foreground">{r.author}</span>
-                  </div>
-                  <span className="shrink-0 text-xs text-muted-foreground">{r.time}</span>
+        {/* Carousel */}
+        <ScrollReveal delay={0.15}>
+          <div
+            className="mt-10 overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            <div
+              className="flex items-stretch"
+              style={trackStyle}
+              onTransitionEnd={handleTransitionEnd}
+            >
+              {extended.map((r, i) => (
+                <div
+                  key={i}
+                  style={{ width: `${100 / extended.length}%` }}
+                  className="px-3"
+                >
+                  <ReviewCard r={r} />
                 </div>
-                {/* Stars */}
-                <div className="mt-2 flex gap-0.5">
-                  {Array.from({ length: r.rating }).map((_, i) => (
-                    <FilledStar key={i} />
-                  ))}
-                </div>
-                {/* Text */}
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-card-foreground/80">
-                  {displayText}
-                </p>
-              </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Controls: prev · dots · next */}
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <button
+              onClick={goPrev}
+              aria-label="Previous reviews"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            {reviews.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToDot(i)}
+                aria-label={`Go to review ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeDot === i
+                    ? "w-6 bg-accent"
+                    : "w-2 bg-white/40 hover:bg-white/60"
+                }`}
+              />
+            ))}
+
+            <button
+              onClick={goNext}
+              aria-label="Next reviews"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </ScrollReveal>
 
         {/* Review CTA card */}
         <ScrollReveal>
-        <div className="mt-12 flex justify-center">
-          <Link
-            to="/write-a-review"
-            className="group w-full max-w-sm rounded-md border border-white/15 bg-white/5 px-8 py-7 text-center backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-accent/50 hover:bg-white/10 transition-all duration-300"
-          >
-            {/* Top line */}
-            <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
-              <GoogleG />
-              Review Us on Google
-            </p>
-            {/* Stars */}
-            <div className="mt-3 flex justify-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} style={{ color: "#FBBC05", fontSize: "1.5rem", lineHeight: 1 }}>★</span>
-              ))}
-            </div>
-            {/* Button */}
-            <div className="mt-5 inline-flex w-full items-center justify-center rounded-sm bg-accent px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-accent-foreground shadow-sm group-hover:bg-accent/90 transition-colors">
-              Leave Us a Review
-            </div>
-          </Link>
-        </div>
+          <div className="mt-12 flex justify-center">
+            <Link
+              to="/write-a-review"
+              className="group w-full max-w-sm rounded-md border border-white/15 bg-white/5 px-8 py-7 text-center backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-accent/50 hover:bg-white/10 transition-all duration-300"
+            >
+              <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
+                <GoogleG />
+                Review Us on Google
+              </p>
+              <div className="mt-3 flex justify-center gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} style={{ color: "#FBBC05", fontSize: "1.5rem", lineHeight: 1 }}>★</span>
+                ))}
+              </div>
+              <div className="mt-5 inline-flex w-full items-center justify-center rounded-sm bg-accent px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-accent-foreground shadow-sm group-hover:bg-accent/90 transition-colors">
+                Leave Us a Review
+              </div>
+            </Link>
+          </div>
         </ScrollReveal>
       </div>
       <WaveDivider />

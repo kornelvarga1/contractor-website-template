@@ -2,17 +2,13 @@ import { client } from "@/config/client";
 import { WaveDivider, WaveDividerTop } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import ParallaxBg from "@/components/shared/ParallaxBg";
 
 const CtaBanner = () => {
   const { openModal } = useQuoteModal();
   return (
     <section className="relative overflow-hidden py-16 lg:py-20">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${client.images.hero})` }}
-        aria-hidden="true"
-      />
+      <ParallaxBg imageUrl={client.images.hero} />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/65" aria-hidden="true" />
       <WaveDividerTop />

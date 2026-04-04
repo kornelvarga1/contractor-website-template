@@ -16,10 +16,18 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     const el = ref.current;
     if (!el) return;
 
+    // Compute the section's static offset from the document top once.
+    // Using scrollY + getBoundingClientRect gives the true document offset
+    // regardless of where in the page the section sits.
+    const parent = el.parentElement;
+    const sectionTop = parent
+      ? parent.getBoundingClientRect().top + window.scrollY
+      : 0;
+
     let rafId: number;
 
     const update = () => {
-      if (el) el.style.transform = `translateY(${window.scrollY * 0.4}px)`;
+      if (el) el.style.transform = `translateY(${(window.scrollY - sectionTop) * 0.4}px)`;
     };
 
     const onScroll = () => {
@@ -39,8 +47,8 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     <div
       ref={ref}
       aria-hidden="true"
-      className="absolute inset-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${imageUrl})`, willChange: "transform" }}
+      className="absolute inset-x-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${imageUrl})`, willChange: "transform", top: "-30%", bottom: "-30%" }}
     />
   );
 };
