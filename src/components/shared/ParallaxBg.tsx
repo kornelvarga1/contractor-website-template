@@ -16,14 +16,21 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     const el = ref.current;
     if (!el) return;
 
-    // Viewport-relative approach: offset = -(section top from viewport) * speed.
-    // This keeps the displacement bounded to ~±(viewportHeight * speed) regardless
-    // of where the section sits on the page — no white-gap risk.
     const parent = el.parentElement;
     let rafId: number;
 
     const update = () => {
       if (!el || !parent) return;
+      // Mobile: no parallax, no extension — keeps image at natural bg-cover scale.
+      // Desktop (lg+): extend element and apply viewport-relative parallax shift.
+      if (window.innerWidth < 1024) {
+        el.style.top = "0";
+        el.style.bottom = "0";
+        el.style.transform = "none";
+        return;
+      }
+      el.style.top = "-40%";
+      el.style.bottom = "-40%";
       const rect = parent.getBoundingClientRect();
       el.style.transform = `translateY(${-rect.top * 0.15}px)`;
     };
@@ -33,10 +40,12 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
       rafId = requestAnimationFrame(update);
     };
 
-    update(); // set initial position
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", update);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", update);
       cancelAnimationFrame(rafId);
     };
   }, []);
@@ -45,8 +54,8 @@ const ParallaxBg = ({ imageUrl }: ParallaxBgProps) => {
     <div
       ref={ref}
       aria-hidden="true"
-      className="absolute inset-x-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${imageUrl})`, willChange: "transform", top: "-50%", bottom: "-50%" }}
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${imageUrl})`, willChange: "transform" }}
     />
   );
 };
