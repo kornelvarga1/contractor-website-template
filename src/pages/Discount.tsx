@@ -14,6 +14,7 @@ const Discount = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -83,31 +84,66 @@ const Discount = () => {
 
           {/* FORM phase */}
           {phase === "form" && (
-            <div className="animate-in fade-in duration-300 space-y-3">
+            <div className="animate-in fade-in duration-300 space-y-4">
               <div className="mb-5 flex justify-center">
                 <Logo variant="dark" />
               </div>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full Name *"
-                className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              />
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Phone Number *"
-                className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              />
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Tell us about your project (optional)"
-                rows={3}
-                className="w-full resize-none rounded-md border border-input px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              />
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wide">
+                  Full Name <span className="text-accent">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="John Smith"
+                  className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wide">
+                  Phone <span className="text-accent">*</span>
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="(602) 555-0100"
+                  className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wide">
+                  Short summary of the work you need <span className="text-accent">*</span>
+                </label>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Your message goes straight to my phone, I'll get back to you as soon as I am available!"
+                  rows={3}
+                  className="w-full resize-none rounded-md border border-input px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
+
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+                />
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  I agree to the{" "}
+                  <a href="/terms" target="_blank" className="underline text-foreground hover:text-accent">
+                    terms & conditions
+                  </a>{" "}
+                  provided by the company. By providing my phone number, I agree to receive text messages from the business.
+                </span>
+              </label>
+
               {error && (
                 <p className="text-sm text-red-500">{error}</p>
               )}
@@ -133,7 +169,7 @@ const Discount = () => {
           <div className="flex items-center justify-end bg-[#1a1a1a] px-6 py-3 border-t border-white/5">
             <button
               onClick={handleSubmit}
-              disabled={!name.trim() || !phone.trim() || submitting}
+              disabled={!name.trim() || !phone.trim() || !message.trim() || !agreed || submitting}
               className="text-sm font-bold text-white transition-colors hover:text-accent disabled:opacity-30 disabled:cursor-not-allowed"
             >
               {submitting ? "Sending…" : "Claim Discount ▶"}
