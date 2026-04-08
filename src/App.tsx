@@ -14,6 +14,7 @@ import ServicePage from "./pages/ServicePage";
 import LocationPage from "./pages/LocationPage";
 import Contact from "./pages/Contact";
 import WriteReview from "./pages/WriteReview";
+import Discount from "./pages/Discount";
 import Quote from "./pages/Quote";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
@@ -24,7 +25,7 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const STANDALONE_ROUTES = ["/write-a-review"];
+const STANDALONE_ROUTES = ["/write-a-review", "/discount"];
 
 const AppShell = () => {
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ const AppShell = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/write-a-review" element={<WriteReview />} />
+          <Route path="/discount" element={<Discount />} />
           <Route path="/quote" element={<Quote />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
