@@ -60,18 +60,23 @@ const AppShell = () => {
   );
 };
 
-const App = () => (
+/** App shell without BrowserRouter — used by both client and prerender */
+export const AppContent = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <QuoteModalProvider>
-          <AppShell />
-        </QuoteModalProvider>
-      </BrowserRouter>
+      <QuoteModalProvider>
+        <AppShell />
+      </QuoteModalProvider>
     </TooltipProvider>
   </QueryClientProvider>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppContent />
+  </BrowserRouter>
 );
 
 export default App;
