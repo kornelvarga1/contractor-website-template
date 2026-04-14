@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import ChatWidget from "@/components/ChatWidget";
+import SeoHead from "@/components/shared/SeoHead";
 import { QuoteModalProvider } from "@/context/QuoteModalContext";
 import QuoteModal from "@/components/shared/QuoteModal";
 import Index from "./pages/Index";
@@ -33,6 +34,7 @@ const AppShell = () => {
 
   return (
     <>
+      <SeoHead />
       <ScrollToTop />
       {!standalone && <Header />}
       <main>

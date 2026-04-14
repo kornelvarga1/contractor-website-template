@@ -7,7 +7,6 @@ import {
 import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const FAQ_IMAGE = "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80";
 
 const FaqSection = () => {
   return (
@@ -18,8 +17,8 @@ const FaqSection = () => {
           <ScrollReveal delay={0}>
             <div className="overflow-hidden rounded-sm">
               <img
-                src={FAQ_IMAGE}
-                alt="Roofing project"
+                src={client.images.faq}
+                alt={`${client.tradeNoun} project`}
                 className="h-full w-full object-cover"
                 loading="lazy"
                 width={800}

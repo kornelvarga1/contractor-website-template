@@ -1,32 +1,6 @@
 import { Link } from "react-router-dom";
+import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const PREVIEW_IMAGES = [
-  {
-    src: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=600&q=80",
-    alt: "Full tile roof replacement",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80",
-    alt: "Completed roofing project",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
-    alt: "Storm damage repair",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80",
-    alt: "Standing seam metal roof",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
-    alt: "Commercial flat roof",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
-    alt: "Residential roof repair",
-  },
-];
 
 const GalleryPreview = () => {
   return (
@@ -47,7 +21,7 @@ const GalleryPreview = () => {
         </ScrollReveal>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PREVIEW_IMAGES.map((img, i) => (
+          {client.galleryPreview.map((img, i) => (
             <ScrollReveal key={img.src} delay={i * 0.08}>
               <Link to="/gallery" className="group block overflow-hidden rounded-sm">
                 <img

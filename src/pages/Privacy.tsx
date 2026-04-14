@@ -12,7 +12,7 @@ const Privacy = () => (
         <p><strong>Last updated:</strong> March 2026</p>
 
         <h2>1. Information We Collect</h2>
-        <p>When you fill out a form on our website, we may collect your name, phone number, email address, and details about your roofing needs. We do not collect information from visitors who do not submit a form.</p>
+        <p>When you fill out a form on our website, we may collect your name, phone number, email address, and details about your {client.tradeNoun} needs. We do not collect information from visitors who do not submit a form.</p>
 
         <h2>2. How We Use Your Information</h2>
         <p>We use the information you provide solely to respond to your inquiry, provide estimates, schedule services, and communicate with you about your project. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>

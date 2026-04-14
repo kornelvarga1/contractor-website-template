@@ -3,8 +3,6 @@ import { useQuoteModal } from "@/hooks/useQuoteModal";
 import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const ABOUT_IMAGE = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=960&q=80";
-
 const badges = [
   "100% Local",
   `${client.yearsExperience}+ Years Experience`,
@@ -21,7 +19,7 @@ const AboutSection = () => {
           <ScrollReveal delay={0}>
             <div className="overflow-hidden rounded-sm">
               <img
-                src={ABOUT_IMAGE}
+                src={client.images.about}
                 alt={`${client.companyName} team at work`}
                 className="h-full w-full object-cover"
                 loading="lazy"

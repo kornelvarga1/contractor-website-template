@@ -7,67 +7,11 @@ import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
 
-// ── Gallery Data ─────────────────────────────────────────────
-// Replace these with real project photos. Each entry = one completed job.
-const PROJECTS = [
-  {
-    id: 1,
-    title: "Complete System Replacement",
-    location: `${client.address.city}, ${client.address.state}`,
-    category: "Replacement",
-    images: [
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
-    ],
-  },
-  {
-    id: 2,
-    title: "Emergency Repair",
-    location: `${client.address.city}, ${client.address.state}`,
-    category: "Repair",
-    images: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-    ],
-  },
-  {
-    id: 3,
-    title: "New Installation",
-    location: `${client.address.city}, ${client.address.state}`,
-    category: "Installation",
-    images: [
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
-    ],
-  },
-  {
-    id: 4,
-    title: "Commercial Project",
-    location: `${client.address.city}, ${client.address.state}`,
-    category: "Commercial",
-    images: [
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-    ],
-  },
-  {
-    id: 5,
-    title: "Repair & Restoration",
-    location: `${client.address.city}, ${client.address.state}`,
-    category: "Repair",
-    images: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-    ],
-  },
-  {
-    id: 6,
-    title: "Maintenance Service",
-    location: `${client.address.city}, ${client.address.state}`,
-    category: "Maintenance",
-    images: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
-    ],
-  },
-];
+const PROJECTS = client.galleryProjects.map((p, i) => ({
+  id: i + 1,
+  ...p,
+  location: `${client.address.city}, ${client.address.state}`,
+}));
 
 const CATEGORIES = ["All", ...Array.from(new Set(PROJECTS.map((p) => p.category)))];
 

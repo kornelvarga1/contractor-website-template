@@ -15,7 +15,7 @@ const Terms = () => (
         <p>By accessing or using the {client.companyName} website and services, you agree to be bound by these Terms &amp; Conditions.</p>
 
         <h2>2. Services</h2>
-        <p>{client.companyName} provides roofing inspection, repair, replacement, and related services in the Phoenix metropolitan area. All work is performed by licensed, bonded, and insured professionals.</p>
+        <p>{client.companyName} provides {client.tradeNoun} inspection, repair, replacement, and related services in the {client.address.city} metropolitan area. All work is performed by licensed, bonded, and insured professionals.</p>
 
         <h2>3. Estimates &amp; Pricing</h2>
         <p>All estimates are provided free of charge and are non-binding. Final pricing is determined after a thorough inspection and may vary based on materials, scope of work, and site conditions.</p>

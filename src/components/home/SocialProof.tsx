@@ -2,27 +2,6 @@ import { Star } from "lucide-react";
 import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const reviews = [
-  {
-    name: "Sarah M.",
-    location: "Phoenix, AZ",
-    rating: 5,
-    text: "Mike and his crew replaced our entire roof in two days. They were professional, on time, and the price was exactly what they quoted. No surprises. Best roofing experience we've ever had.",
-  },
-  {
-    name: "David R.",
-    location: "Scottsdale, AZ",
-    rating: 5,
-    text: "Had storm damage from a monsoon and they were out the next morning. Filed the insurance claim for us and handled everything. Our roof looks better than it did before the storm.",
-  },
-  {
-    name: "Linda K.",
-    location: "Tempe, AZ",
-    rating: 5,
-    text: `We called three roofers for estimates. ${client.companyName} was the most thorough, the most honest, and the most affordable. They earned a customer for life.`,
-  },
-];
-
 const SocialProof = () => {
   return (
     <section className="bg-background py-16 lg:py-20">
@@ -39,7 +18,7 @@ const SocialProof = () => {
         </ScrollReveal>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((r, i) => (
+          {client.featuredReviews.map((r, i) => (
             <ScrollReveal key={r.name} delay={i * 0.1}>
             <div className="flex flex-col rounded-sm border border-border bg-card p-6">
               <div className="flex gap-0.5">

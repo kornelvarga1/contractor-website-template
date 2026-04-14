@@ -5,9 +5,6 @@ interface LogoProps {
   className?: string;
 }
 
-// Splits "Phoenix Roofing & Repair" → ["Phoenix Roofing", "Repair"]
-const [mainName, subName] = client.companyName.split(" & ");
-
 /**
  * Brand logo — geometric house mark + company name.
  * variant="light"  → white text, for dark backgrounds (header)
@@ -16,6 +13,7 @@ const [mainName, subName] = client.companyName.split(" & ");
 const Logo = ({ variant = "light", className = "" }: LogoProps) => {
   const textColor = variant === "light" ? "#ffffff" : "hsl(0, 0%, 10%)";
   const bodyFill  = variant === "light" ? "rgba(255,255,255,0.12)" : "hsl(0, 0%, 10%)";
+  const accentFill = `hsl(${client.accentHsl})`;
 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
@@ -31,20 +29,20 @@ const Logo = ({ variant = "light", className = "" }: LogoProps) => {
         {/* House body */}
         <rect x="3" y="17" width="32" height="15" rx="1.5" fill={bodyFill} />
 
-        {/* Roof triangle — amber */}
-        <path d="M0 18.5L19 1L38 18.5H0Z" fill="#f59e0b" />
+        {/* Roof triangle — accent */}
+        <path d="M0 18.5L19 1L38 18.5H0Z" fill={accentFill} />
 
-        {/* Chimney — amber */}
-        <rect x="25" y="2.5" width="5" height="10" rx="1" fill="#f59e0b" />
+        {/* Chimney — accent */}
+        <rect x="25" y="2.5" width="5" height="10" rx="1" fill={accentFill} />
 
-        {/* Door — amber tint */}
+        {/* Door — accent tint */}
         <rect
           x="13.5"
           y="22"
           width="11"
           height="10"
           rx="1"
-          fill="#f59e0b"
+          fill={accentFill}
           fillOpacity={variant === "light" ? 0.35 : 0.25}
         />
       </svg>
@@ -55,11 +53,13 @@ const Logo = ({ variant = "light", className = "" }: LogoProps) => {
           className="text-[15px] font-extrabold tracking-tight leading-none"
           style={{ color: textColor }}
         >
-          {mainName}
+          {client.logoMain}
         </span>
-        <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-accent leading-none">
-          &amp; {subName}
-        </span>
+        {client.logoSub && (
+          <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-accent leading-none">
+            &amp; {client.logoSub}
+          </span>
+        )}
       </div>
     </div>
   );
