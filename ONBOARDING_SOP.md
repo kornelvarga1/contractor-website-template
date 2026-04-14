@@ -1,156 +1,128 @@
 # Client Onboarding SOP — Contractor Website
 
 End-to-end process for spinning up a new client website from the template.
-Follow in order. Each section ends with a clean handoff to the next.
+Follow in order.
 
 ---
 
-## Phase 1 — Collect Client Info (from onboarding form)
+## Phase 1 — Wait for the onboarding submission
 
-From `vargaflow-client` form submission, you should already have:
+The client fills out the form at **`vargaflow.com/onboarding-form`**. Photos upload directly to storage.
 
-- [ ] Company name (and full legal name if different)
-- [ ] Owner/operator name
-- [ ] Trade type (roofing, plumbing, HVAC, electrical, etc.)
-- [ ] Phone number
-- [ ] Email address
-- [ ] Street address, city, state, ZIP
-- [ ] Service area cities (5–7)
-- [ ] Years in business
-- [ ] Contractor license number
-- [ ] Services offered (5–7 service names)
-- [ ] Brand color preference
-- [ ] Discount/offer percentage for new customers
-- [ ] Client photos (if provided)
+- [ ] Open **Admin → Submissions** (`/onboarding-submissions`)
+- [ ] Find the client's submission at the top (most recent first)
+- [ ] Skim the fields — if anything critical is blank (email, address, license, services), reach out to the client before proceeding
 
-If any of these are missing, request them before proceeding.
+The form collects: name, email, business name, trade type, license number, tax ID, full address, years in business, current website, Google Business URL, services offered, service areas, differentiators, hours, social links, discount, brand color, photos.
 
 ---
 
-## Phase 2 — External Lookups
+## Phase 2 — External lookups
 
-Do these one by one, save the results alongside the client info.
+These three things the client can't provide — you do them:
 
-### Google Business Profile
-- [ ] Find the client's Google Business listing
-- [ ] Copy the Google Reviews URL (the link that opens their review list)
-- [ ] Note the **average rating** (e.g. 4.9) and **total review count** (e.g. 47)
-- [ ] If no profile exists yet, use `"#"` for URL and put realistic placeholders (4.9 rating, 20–50 reviews) — you can update after they set one up
+### Google Maps embed URL
+- [ ] Search the address on Google Maps
+- [ ] **Share → Embed a map → Copy HTML** → pull just the `src="..."` URL
 
-### Google Maps
-- [ ] Search the client's address on Google Maps
-- [ ] Click **Share → Embed a map → Copy HTML** — extract just the `src="..."` URL and save it as the **Maps Embed URL**
-- [ ] From the Maps URL bar, pull the latitude and longitude (format: `@33.5231793,-112.068709`)
+### Latitude/longitude
+- [ ] From the Google Maps URL bar, grab `@<LAT>,<LNG>` (e.g. `@33.5231793,-112.068709`)
 
-### Website domain
-- [ ] Confirm the client's website URL (usually their existing domain — if they don't have one yet, use the planned domain)
-
-### Brand color → HSL
-- [ ] Convert the client's brand color to HSL format (no `hsl()` wrapper)
-- Common conversions:
-  - Amber/gold: `43 96% 50%`
-  - Blue: `210 100% 45%`
-  - Green: `142 76% 36%`
-  - Red: `0 84% 60%`
-  - Orange: `25 95% 53%`
-- Tool: any hex → HSL converter online
+### Google Reviews URL
+- [ ] If the client gave you their Google Business Profile URL, use it directly
+- [ ] If not and they have a profile, find it on Google and copy the "leave a review" link
+- [ ] If they have no profile yet, use `"#"` and set realistic placeholder rating (4.9) + count (20–50) — update later
 
 ---
 
-## Phase 3 — Supabase Setup
+## Phase 3 — Supabase business setup
 
 - [ ] Log into Supabase project `zfmchywjmgykmlhjihls`
-- [ ] Create a new business profile in the `businesses` table with the client's data
-- [ ] Copy the generated `business_id` (UUID)
-- [ ] Create any client-specific user accounts if needed
-- [ ] Note the `business_id` — you'll paste it into the prompt
+- [ ] Create a new row in the `businesses` table with the client's data
+- [ ] Copy the generated `business_id` (UUID) — you'll paste it as `VITE_BUSINESS_ID`
+- [ ] Create/assign any user accounts the client needs
+- [ ] Ideally, update the matched contact's `business_id` to link everything
 
 ---
 
-## Phase 4 — Client Photos (optional)
+## Phase 4 — Copy the template
 
-If the client provided photos:
-
-- [ ] Upload to your CDN / Supabase storage / image host
-- [ ] Get the URLs for each image category:
-  - Hero (1600w wide landscape)
-  - About (960w, team/job site)
-  - FAQ (800w, completed work)
-  - Why Choose Us (960w, worker on site)
-  - One per service (800w each)
-  - 6 gallery preview images (600w)
-  - Gallery project photos (800w, 1–2 per project type)
-
-If the client has no photos yet, leave all image fields as `"unsplash"` in the prompt — you can swap in real photos later by updating `client.ts`.
+- [ ] Copy `C:\Users\VargaFlow\contractor-website-template` to a new directory (e.g. `C:\Users\VargaFlow\clients\<client-slug>`)
+- [ ] `cd` into it
 
 ---
 
-## Phase 5 — Copy Template & Prepare Prompt
+## Phase 5 — Generate the config (conversational with Claude Code)
 
-- [ ] Copy `C:\Users\VargaFlow\contractor-website-template` to a new directory for the client (e.g. `C:\Users\VargaFlow\clients\[client-slug]`)
-- [ ] Open `MASTER_PROMPT.md` in the new directory
-- [ ] Fill in every `[PLACEHOLDER]` with the info collected in Phases 1–4
-- [ ] Double-check: no placeholder left unfilled
+This is the key step. Don't hand-fill anything.
+
+- [ ] In the admin submissions page, expand the client's submission → **Copy All**
+- [ ] In the new client project directory, run `claude` to start Claude Code
+- [ ] Paste this as your first message:
+
+```
+Read ONBOARDING_SOP.md and MASTER_PROMPT.md in this repo so you know the full workflow and the client.ts structure.
+
+Here's the onboarding submission for this client:
+
+[PASTE ALL]
+
+Here are the manual lookups I already did:
+- BUSINESS_ID: <uuid from Phase 3>
+- Google Maps embed URL: <from Phase 2>
+- Latitude: <>
+- Longitude: <>
+- Google Reviews URL: <or "#" if none>
+
+Generate src/config/client.ts and .env for this client. Fill in what you can from the data, flag anything still missing before you write the files, and ask me for anything unclear. Match the tone and structure of the existing client.ts exactly.
+```
+
+- [ ] Claude will either write the files or ask clarifying questions — answer them
+- [ ] Spot-check the generated `client.ts`:
+  - Services, FAQ, blog posts are trade-specific (not generic)
+  - Company name, phone, address appear correctly
+  - Brand color / accent HSL matches what the client picked
+  - Service areas list matches what they gave you
+
+If something feels off, just tell Claude what to change — don't edit by hand unless it's tiny.
 
 ---
 
-## Phase 6 — Generate Config
+## Phase 6 — Photos
 
-- [ ] Open a terminal in the new client project directory
-- [ ] Run `claude` to start Claude Code
-- [ ] Paste the filled-out prompt from Phase 5
-- [ ] Claude generates `src/config/client.ts` and `.env`
-- [ ] Spot-check the generated files:
-  - [ ] `client.ts` has content for all sections (not empty arrays)
-  - [ ] `.env` has the correct `VITE_BUSINESS_ID`
-  - [ ] Service names, FAQ, and blog posts are trade-specific (not generic)
-  - [ ] Company name, phone, address appear correctly throughout
+- [ ] In admin → Submissions → expand the submission → scroll to the Photos gallery
+- [ ] Click **Download All** → all originals download locally
+- [ ] Review — pick the best photos for each role (hero, about, gallery)
+- [ ] Upload to your CDN / Supabase storage bucket (or keep the URLs already in the submission — they're public and work directly)
+- [ ] Ask Claude to update `client.ts` with the specific URLs per section
+
+For most clients, the URLs already in the submission work as-is — you only need to re-upload if you're editing/cropping photos.
 
 ---
 
-## Phase 7 — Build & Test Locally
+## Phase 7 — Build & test locally
 
 - [ ] `npm install`
-- [ ] `npm run build` — must complete with zero errors
-- [ ] `npm run dev` — starts dev server on port 8080
-- [ ] Open browser to `http://localhost:8080`
-
-### Click through every route:
-- [ ] `/` (home) — hero, about, services, reviews, FAQ all render
-- [ ] `/services/[each-slug]` — every service page loads with correct SEO content
-- [ ] `/areas/[each-city]` — every location page loads
-- [ ] `/gallery` — photos display, lightbox works
-- [ ] `/blog` — blog posts listed
-- [ ] `/blog/[each-slug]` — each blog post opens
-- [ ] `/contact` — address, map, hours, phone all correct
-- [ ] `/quote` — form renders, submission works (check Supabase log)
-- [ ] `/discount` — discount % correct, submission works
-- [ ] `/write-a-review` — submission works
-
-### Visual checks:
-- [ ] Logo shows correct name
-- [ ] Accent color matches client's brand
-- [ ] Phone number appears correctly in header, footer, CTAs
-- [ ] Service areas dropdown in header has all cities
-- [ ] No "Phoenix" or "roofing" text left over anywhere (if different trade/city)
-
-### Form test:
-- [ ] Submit quote form with test data
-- [ ] Verify it hits Supabase `message_queue` and triggers Flow #1 sequence
-- [ ] Verify SMS + email actually send to the test number
+- [ ] `npm run build` — must finish with zero errors
+- [ ] `npm run dev` — opens on port 8080
+- [ ] Click through every route:
+  - `/` — hero, about, services, reviews, FAQ, CTA
+  - `/services/<each>` — every service page loads with right SEO content
+  - `/areas/<each>` — every location page loads
+  - `/gallery` — photos render, lightbox works
+  - `/blog` + each `/blog/<slug>`
+  - `/contact` — address, hours, map, phone correct
+  - `/quote` — form renders, test submission works
+  - `/discount`, `/write-a-review`, `/terms`, `/privacy`
+- [ ] Visual checks: logo text right, brand color matches, phone in header/footer/CTAs
+- [ ] No "Phoenix" or "roofing" leftover (if different city/trade)
+- [ ] Submit test quote → verify it lands in Supabase `message_queue` and triggers Flow #1
 
 ---
 
-## Phase 8 — Fix Issues
+## Phase 8 — Fix issues
 
-If anything's wrong, edit the relevant section of `client.ts` and reload. Common fixes:
-
-- Wrong brand color → update `accentHsl`
-- Tone off on aboutText/FAQ → edit the text directly
-- Wrong Google Maps location → re-fetch embed URL, paste new one
-- Image looks wrong → swap the URL in `images` or per-service `image` field
-
-All edits stay in `client.ts` — never touch individual components.
+All edits go in `client.ts`. If something's wrong, tell Claude what to fix — don't touch components.
 
 ---
 
@@ -158,29 +130,24 @@ All edits stay in `client.ts` — never touch individual components.
 
 - [ ] Final `npm run build` — confirm clean
 - [ ] Deploy to hosting (Vercel / Netlify / Cloudflare Pages)
-- [ ] Connect client's domain
-- [ ] Verify live site loads and submits go through
-- [ ] Add site to Google Search Console
-- [ ] Submit sitemap
+- [ ] Connect the client's domain
+- [ ] Verify live site loads and forms submit end-to-end
+- [ ] Add site to Google Search Console, submit sitemap
 
 ---
 
 ## Phase 10 — Handoff
 
-- [ ] Move client record in CRM from onboarding → active
-- [ ] Send client the go-live message with their new URL
-- [ ] Archive the prompt you used (keep in a clients folder for reference — makes future updates or re-generates trivial)
+- [ ] Move the client in the CRM from onboarding → active
+- [ ] Send go-live message with their URL
+- [ ] Keep the client project folder — handy for future updates or re-generation
 
 ---
 
 ## Time budget
 
-With info collected: **one pass through should take 30–60 minutes total.**
-
+Once the client has submitted the form and you have the lookups done: **30–60 minutes total.**
 - Phase 2 lookups: ~10 min
-- Phase 5 filling prompt: ~10 min
-- Phase 6 generation: ~2 min
+- Phase 5 generation chat: ~10 min
 - Phase 7 testing: ~15–20 min
-- Phase 8 fixes: variable, usually minor
-
-Biggest time sinks are photo handling (if real photos) and form/integration testing.
+- Phase 8 fixes: usually minor
