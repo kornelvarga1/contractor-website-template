@@ -15,21 +15,28 @@ const ServicePage = () => {
   const { openModal } = useQuoteModal();
 
   const service = client.services.find((s) => s.slug === slug);
-  if (!service) return <Navigate to="/404" replace />;
 
-  const seo = service.seoData;
-  const metaTitle = seo
-    ? `${service.name} ${cityState} | ${client.companyNameFull}`
-    : `${service.name} in ${cityState} | ${client.companyNameFull}`;
-  const metaDesc = seo
-    ? `${service.name} services in ${address.city}. ${client.tagline}. Free estimates. ${client.yearsExperience}+ years experience.`
-    : `${client.companyName} provides professional ${service.name} services in ${cityState}. Contact us today for a free quote.`;
+  const seo = service?.seoData;
+  const metaTitle = service
+    ? seo
+      ? `${service.name} ${cityState} | ${client.companyNameFull}`
+      : `${service.name} in ${cityState} | ${client.companyNameFull}`
+    : "";
+  const metaDesc = service
+    ? seo
+      ? `${service.name} services in ${address.city}. ${client.tagline}. Free estimates. ${client.yearsExperience}+ years experience.`
+      : `${client.companyName} provides professional ${service.name} services in ${cityState}. Contact us today for a free quote.`
+    : "";
 
   useEffect(() => {
-    document.title = metaTitle;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", metaDesc);
+    if (metaTitle) {
+      document.title = metaTitle;
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute("content", metaDesc);
+    }
   }, [metaTitle, metaDesc]);
+
+  if (!service) return <Navigate to="/404" replace />;
 
   if (!seo) {
     return (

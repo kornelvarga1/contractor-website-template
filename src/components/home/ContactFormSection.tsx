@@ -71,8 +71,6 @@ const ContactFormSection = () => {
               ))}
             </div>
           </div>
-
-          </div>
           </ScrollReveal>
 
           {/* Right: Form */}

@@ -44,19 +44,21 @@ function generateLocationData(citySlug: string): LocationData {
 
 const LocationPage = () => {
   const { city } = useParams<{ city: string }>();
+  const { openModal } = useQuoteModal();
 
   const validCity = city && client.areas.map((a) => a.toLowerCase()).includes(city);
-  if (!validCity) return <Navigate to="/404" replace />;
-
-  const { openModal } = useQuoteModal();
-  const data = generateLocationData(city!);
-  const cityFormatted = capitalize(city!);
+  const data = validCity ? generateLocationData(city!) : null;
+  const cityFormatted = validCity ? capitalize(city!) : "";
 
   useEffect(() => {
-    document.title = data.metaTitle;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", data.description);
+    if (data) {
+      document.title = data.metaTitle;
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute("content", data.description);
+    }
   }, [data]);
+
+  if (!validCity || !data) return <Navigate to="/404" replace />;
 
   return (
     <>

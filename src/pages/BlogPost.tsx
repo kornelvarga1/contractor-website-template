@@ -10,11 +10,13 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = client.blogPosts.find((p) => p.slug === slug);
 
-  if (!post) return <Navigate to="/blog" replace />;
-
   useEffect(() => {
-    document.title = `${post.title} | ${client.companyName}`;
+    if (post) {
+      document.title = `${post.title} | ${client.companyName}`;
+    }
   }, [post]);
+
+  if (!post) return <Navigate to="/blog" replace />;
 
   const paragraphs = post.content.split("\n\n").filter(Boolean);
 
