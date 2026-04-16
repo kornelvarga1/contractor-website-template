@@ -64,7 +64,7 @@ const WriteReview = () => {
           business_id: BUSINESS_ID,
           contact_id: null,
           contact_first_name: name.trim() || "Anonymous",
-          contact_phone: email.trim() || null,
+          contact_email: email.trim() || null,
           star_rating: rating,
           feedback_text: feedback,
         }),
