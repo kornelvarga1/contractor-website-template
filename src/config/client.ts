@@ -44,10 +44,10 @@ export const client = {
 
   // ── Images ─────────────────────────────────────────────────────
   images: {
-    hero: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80",
-    about: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=960&q=80",
-    faq: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
-    whyChooseUs: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=960&q=80",
+    hero: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80&fm=webp",
+    about: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=960&q=80&fm=webp",
+    faq: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80&fm=webp",
+    whyChooseUs: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=960&q=80&fm=webp",
   },
 
   // ── Home Page Copy ─────────────────────────────────────────────
@@ -90,7 +90,7 @@ export const client = {
       slug: "roof-replacement",
       description:
         "Complete tear-off and installation with premium materials and a lifetime workmanship guarantee.",
-      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&fm=webp",
       seoData: {
         intro: "When repairs are no longer enough, a full roof replacement protects your home for decades. We handle complete tear-offs and re-roofs using premium materials — backed by manufacturer warranties and our own workmanship guarantee.",
         seoBlocks: {
@@ -105,7 +105,7 @@ export const client = {
       slug: "roof-repair",
       description:
         "Fast, reliable repairs for leaks, missing shingles, and weather damage — done right the first time.",
-      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&fm=webp",
       seoData: {
         intro: "A small leak today becomes a big problem tomorrow. Our repair services address leaks, damaged shingles, flashing failures, and vent issues before they escalate — saving you thousands in potential damage.",
         seoBlocks: {
@@ -120,7 +120,7 @@ export const client = {
       slug: "storm-damage-repair",
       description:
         "Emergency response for hail, wind, and monsoon damage. We handle insurance claims for you.",
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fm=webp",
       seoData: {
         intro: "Storms can destroy a roof in minutes. We provide emergency tarping, permanent repairs, and full insurance claim assistance — so you can recover fast without the runaround.",
         seoBlocks: {
@@ -135,7 +135,7 @@ export const client = {
       slug: "metal-roofing",
       description:
         "Energy-efficient metal roofing systems built to withstand Arizona's extreme heat and storms.",
-      image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80&fm=webp",
       seoData: {
         intro: "Metal roofs are built for extreme climates — reflecting heat, resisting wind, and lasting 40–70 years with minimal maintenance. We install standing seam, corrugated, and stone-coated steel systems for homes and businesses.",
         seoBlocks: {
@@ -150,7 +150,7 @@ export const client = {
       slug: "flat-roof-systems",
       description:
         "Expert flat roof installation and repair for commercial and residential properties.",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fm=webp",
       seoData: {
         intro: "Flat roofs require specialized expertise. We install and repair TPO, EPDM, modified bitumen, and foam roof systems — engineered to handle extreme heat and heavy rain.",
         seoBlocks: {
@@ -165,7 +165,7 @@ export const client = {
       slug: "roof-inspection",
       description:
         "Comprehensive inspections to catch problems early — completely free, no obligation.",
-      image: "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=800&q=80&fm=webp",
       seoData: {
         intro: "Whether you're buying a home, preparing to sell, or just want peace of mind — our comprehensive roof inspections catch problems early before they become expensive emergencies.",
         seoBlocks: {
@@ -180,7 +180,7 @@ export const client = {
       slug: "commercial-roofing",
       description:
         "Full-service commercial roofing for offices, warehouses, retail, and multi-unit properties.",
-      image: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=800&q=80&fm=webp",
       seoData: {
         intro: "Your commercial roof protects your business, inventory, and employees. We deliver professional-grade roofing solutions for offices, warehouses, retail, and multi-unit properties — with minimal disruption to your operations.",
         seoBlocks: {
@@ -294,12 +294,12 @@ export const client = {
 
   /** Home page gallery preview — 6 images with alt text. */
   galleryPreview: [
-    { src: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=600&q=80", alt: "Full tile roof replacement" },
-    { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80", alt: "Completed roofing project" },
-    { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", alt: "Storm damage repair" },
-    { src: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80", alt: "Standing seam metal roof" },
-    { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80", alt: "Commercial flat roof" },
-    { src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80", alt: "Residential roof repair" },
+    { src: "https://images.unsplash.com/photo-1632759145351-1d592919f522?w=600&q=80&fm=webp", alt: "Full tile roof replacement" },
+    { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fm=webp", alt: "Completed roofing project" },
+    { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&fm=webp", alt: "Storm damage repair" },
+    { src: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80&fm=webp", alt: "Standing seam metal roof" },
+    { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&fm=webp", alt: "Commercial flat roof" },
+    { src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80&fm=webp", alt: "Residential roof repair" },
   ],
 
   /** Full gallery page — completed projects grouped by category. */
@@ -308,45 +308,45 @@ export const client = {
       title: "Complete System Replacement",
       category: "Replacement",
       images: [
-        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fm=webp",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80&fm=webp",
       ],
     },
     {
       title: "Emergency Repair",
       category: "Repair",
       images: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fm=webp",
       ],
     },
     {
       title: "New Installation",
       category: "Installation",
       images: [
-        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80",
-        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80&fm=webp",
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80&fm=webp",
       ],
     },
     {
       title: "Commercial Project",
       category: "Commercial",
       images: [
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fm=webp",
       ],
     },
     {
       title: "Repair & Restoration",
       category: "Repair",
       images: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fm=webp",
+        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fm=webp",
       ],
     },
     {
       title: "Maintenance Service",
       category: "Maintenance",
       images: [
-        "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80&fm=webp",
       ],
     },
   ],
