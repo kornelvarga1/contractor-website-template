@@ -1,7 +1,6 @@
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
-import { WaveDivider } from "@/components/shared/Dividers";
 import QuoteForm from "@/components/shared/QuoteForm";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
@@ -21,7 +20,6 @@ const Contact = () => {
             Get in touch with any questions and we'll be happy to help.
           </p>
         </ScrollReveal>
-        <WaveDivider />
       </section>
 
       <section className="bg-white py-16 lg:py-20">
@@ -32,24 +30,30 @@ const Contact = () => {
             <div className="flex flex-col justify-center">
               <h2 className="text-2xl font-bold text-foreground">Contact Information</h2>
               <div className="mt-6 space-y-5">
-                <a href={`tel:${client.phoneTel}`} className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
-                  <Phone className="h-5 w-5 text-accent" />
+                <a
+                  href={`tel:${client.phoneTel}`}
+                  className="flex items-center gap-3 rounded-md bg-accent p-4 transition-colors hover:bg-accent/90"
+                >
+                  <Phone className="h-5 w-5 shrink-0 text-accent-foreground" />
                   <div>
-                    <p className="font-bold">{client.phone}</p>
-                    <p className="text-sm text-muted-foreground">Call or text anytime</p>
+                    <p className="font-bold text-accent-foreground">{client.phone}</p>
+                    <p className="text-sm text-accent-foreground/70">Call or text anytime</p>
                   </div>
                 </a>
-                <a href={`mailto:${client.email}`} className="flex items-center gap-3 text-foreground hover:text-accent transition-colors">
-                  <Mail className="h-5 w-5 text-accent" />
+                <a
+                  href={`mailto:${client.email}`}
+                  className="flex items-center gap-3 rounded-md bg-accent p-4 transition-colors hover:bg-accent/90"
+                >
+                  <Mail className="h-5 w-5 shrink-0 text-accent-foreground" />
                   <div>
-                    <p className="font-bold">{client.email}</p>
-                    <p className="text-sm text-muted-foreground">We reply within 2 hours</p>
+                    <p className="font-bold text-accent-foreground">{client.email}</p>
+                    <p className="text-sm text-accent-foreground/70">We reply within 2 hours</p>
                   </div>
                 </a>
               </div>
 
               <div className="mt-8 flex items-start gap-3">
-                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-foreground/60" />
                 <div>
                   <p className="font-bold text-foreground">Hours</p>
                   <ul className="mt-2 space-y-1">
@@ -64,7 +68,7 @@ const Contact = () => {
               </div>
 
               <div className="mt-8 flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-foreground/60" />
                 <div>
                   <p className="font-bold text-foreground">Service Areas</p>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { Phone } from "lucide-react";
 import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
-import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
@@ -70,19 +69,21 @@ const LocationPage = () => {
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             {data.h1Line1}<br />
-            <span className="text-accent">{data.h1Line2}</span>
+            {data.h1Line2}
           </h1>
           <p className="mt-4 text-lg text-white/70">{data.intro}</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <button onClick={openModal} className="inline-flex h-11 items-center justify-center rounded-sm bg-accent px-8 text-base font-bold text-accent-foreground shadow hover:bg-accent/90 transition-colors">
               Get a Free Quote
             </button>
-            <a href={`tel:${client.phoneTel}`} className="inline-flex items-center justify-center gap-2 text-base font-bold text-white hover:text-accent transition-colors">
+            <a
+              href={`tel:${client.phoneTel}`}
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-white px-5 text-base font-bold text-foreground hover:bg-white/90 transition-colors"
+            >
               <Phone className="h-4 w-4" /> {client.phone}
             </a>
           </div>
         </ScrollReveal>
-        <WaveDivider />
       </section>
 
       {/* SEO Text Blocks */}

@@ -19,7 +19,7 @@ const Footer = () => {
               </Link>
               <div className="space-y-3 text-sm text-muted-foreground">
                 <div className="flex items-start gap-2">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
                   <span>{client.address.street}<br />{client.address.city}, {client.address.state} {client.address.zip}</span>
                 </div>
                 <a href={`tel:${client.phoneTel}`} className="flex items-center gap-2 hover:text-accent transition-colors">

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { client } from "@/config/client";
-import { WaveDivider, WaveDividerTop } from "@/components/shared/Dividers";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
 
@@ -149,7 +148,6 @@ const ReviewsSection = () => {
       <ParallaxBg imageUrl={client.images.hero} />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
-      <WaveDividerTop />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-6">
         {/* Header */}
@@ -256,7 +254,6 @@ const ReviewsSection = () => {
           </div>
         </ScrollReveal>
       </div>
-      <WaveDivider />
     </section>
   );
 };

@@ -50,7 +50,7 @@ const Logo = ({ variant = "light", className = "" }: LogoProps) => {
       {/* ── Name ── */}
       <div className="flex flex-col leading-none gap-[3px]">
         <span
-          className="text-[15px] font-extrabold tracking-tight leading-none"
+          className="text-[16px] font-extrabold tracking-tight leading-none"
           style={{ color: textColor }}
         >
           {client.logoMain}

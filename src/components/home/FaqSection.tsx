@@ -34,13 +34,17 @@ const FaqSection = () => {
               Frequently Asked Questions
             </h2>
 
-            <Accordion type="single" collapsible className="mt-10 w-full">
+            <Accordion type="single" collapsible className="mt-10 w-full space-y-3">
               {client.faq.map((item, i) => (
-                <AccordionItem key={i} value={`item-${i}`}>
-                  <AccordionTrigger className="text-left text-sm font-semibold text-foreground">
+                <AccordionItem
+                  key={i}
+                  value={`item-${i}`}
+                  className="rounded-lg border border-border bg-background px-5 data-[state=open]:border-foreground/20"
+                >
+                  <AccordionTrigger className="py-5 text-left text-base font-semibold text-foreground hover:no-underline">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
+                  <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
-import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
@@ -51,9 +50,9 @@ const Gallery = () => {
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
-          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent">Our Work</p>
+          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">Our Work</p>
           <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl" style={{ lineHeight: 1.1 }}>
-            Our <span className="text-accent">Completed</span> Projects
+            Our Completed Projects
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-white/70 md:text-lg">
             Browse real jobs we've completed across {client.address.city} and surrounding areas.
@@ -65,7 +64,6 @@ const Gallery = () => {
             </button>
           </div>
         </ScrollReveal>
-        <WaveDivider />
       </section>
 
       {/* Filter Bar */}

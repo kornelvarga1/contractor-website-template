@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
-import { WaveDivider } from "@/components/shared/Dividers";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
 
@@ -14,7 +13,7 @@ const Blog = () => {
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
-          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent">Check Out Our Blog</p>
+          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">Check Out Our Blog</p>
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Our Blog
           </h1>
@@ -22,7 +21,6 @@ const Blog = () => {
             Tips, project updates, and expert advice from {client.companyName}.
           </p>
         </ScrollReveal>
-        <WaveDivider />
       </section>
 
       {/* Posts grid */}
@@ -33,11 +31,11 @@ const Blog = () => {
               <ScrollReveal key={post.slug} delay={i * 0.1}>
               <div className="flex flex-col rounded-sm border border-border bg-card shadow-sm">
                 <div className="flex flex-col flex-1 p-6">
-                  <span className="inline-block rounded-sm bg-accent/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
+                  <span className="inline-block rounded-sm bg-muted px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {post.category}
                   </span>
                   <h2 className="mt-3 text-base font-bold text-card-foreground leading-snug">
-                    <Link to={`/blog/${post.slug}`} className="hover:text-accent transition-colors">
+                    <Link to={`/blog/${post.slug}`} className="hover:text-foreground/70 transition-colors">
                       {post.title}
                     </Link>
                   </h2>
@@ -50,7 +48,7 @@ const Blog = () => {
                   </div>
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="mt-4 text-sm font-semibold text-accent hover:text-accent/80 transition-colors"
+                    className="mt-4 text-sm font-semibold text-foreground hover:text-foreground/70 transition-colors"
                   >
                     Read More →
                   </Link>

@@ -87,7 +87,7 @@ const ChatWidget = () => {
     <>
       {/* Teaser popup */}
       {teaserVisible && !open && (
-        <div className="fixed bottom-20 right-4 z-50 flex items-start max-w-[220px] rounded-2xl rounded-br-sm bg-card border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.06)] ring-1 ring-accent/20 px-3 py-2.5 sm:px-4 sm:py-3 animate-in slide-in-from-bottom-2 fade-in duration-300">
+        <div className="fixed bottom-20 right-4 z-50 flex items-start max-w-[220px] rounded-2xl rounded-br-sm bg-card border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.06)] ring-1 ring-accent/20 px-3 py-2.5 sm:px-4 sm:py-3 animate-in slide-in-from-bottom-2 fade-in duration-200">
           <p className="text-xs sm:text-sm text-card-foreground leading-snug pr-5">
             Shoot me any questions and I'll get back to you as soon as I'm free! (I promise)
           </p>
@@ -103,7 +103,7 @@ const ChatWidget = () => {
 
       {/* Form modal */}
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(245,158,11,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-4 fade-in duration-300">
+        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(245,158,11,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-2 fade-in duration-200">
           {/* Header */}
           <div className="flex items-center justify-between bg-accent px-4 py-3">
             <div className="flex items-center gap-3">

@@ -1,11 +1,69 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import {
+  Phone,
+  Home,
+  Wrench,
+  CloudRain,
+  Layers,
+  Square,
+  Search,
+  Building2,
+  MapPin,
+  ChevronDown,
+  type LucideIcon,
+} from "lucide-react";
 import { client } from "@/config/client";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
+import { cn } from "@/lib/utils";
 import Logo from "@/components/shared/Logo";
 
 const { services, areas } = client;
+
+// Roofing-specific icon mapping. When repurposing this template for a
+// different trade, swap the slugs/icons to suit the niche. Falls back to
+// Wrench so an unmapped slug still renders an icon column.
+const SERVICE_ICON_BY_SLUG: Record<string, LucideIcon> = {
+  "roof-replacement": Home,
+  "roof-repair": Wrench,
+  "storm-damage-repair": CloudRain,
+  "metal-roofing": Layers,
+  "flat-roof-systems": Square,
+  "roof-inspection": Search,
+  "commercial-roofing": Building2,
+};
+
+const HamburgerIcon = ({ open }: { open: boolean }) => (
+  <div className="relative h-5 w-5" aria-hidden="true">
+    <span
+      className={cn(
+        "absolute left-0 h-0.5 w-full bg-current transition-all duration-300 ease-out",
+        open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-1",
+      )}
+    />
+    <span
+      className={cn(
+        "absolute left-0 h-0.5 w-full bg-current transition-all duration-300 ease-out",
+        open ? "top-1/2 -translate-y-1/2 -rotate-45" : "top-3",
+      )}
+    />
+  </div>
+);
+
+const PlusIcon = ({ open, size = "sm" }: { open: boolean; size?: "sm" | "md" }) => (
+  <div
+    className={cn("relative shrink-0", size === "md" ? "h-4 w-4" : "h-3.5 w-3.5")}
+    aria-hidden="true"
+  >
+    <span className="absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 bg-current" />
+    <span
+      className={cn(
+        "absolute left-1/2 top-0 h-full w-[1.5px] -translate-x-1/2 bg-current transition-transform duration-300 ease-out",
+        open ? "rotate-90" : "rotate-0",
+      )}
+    />
+  </div>
+);
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,195 +79,258 @@ const Header = () => {
   }, []);
 
   return (
-    <>
-      <header
-        className={`sticky top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "border-b border-accent/40" : ""}`}
-        style={{ backgroundColor: scrolled ? "hsl(var(--primary))" : "transparent" }}
-      >
-        <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
-          {/* Logo — desktop only */}
-          <Link to="/" className="hidden lg:flex items-center shrink-0">
-            <Logo variant="light" />
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-colors duration-300",
+        scrolled || mobileOpen ? "border-b border-accent/40 bg-primary" : "bg-transparent",
+      )}
+    >
+      <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
+        {/* Logo — desktop only */}
+        <Link to="/" className="hidden lg:flex items-center shrink-0" onClick={() => setMobileOpen(false)}>
+          <Logo variant="light" />
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden items-center gap-1 lg:flex">
+          <Link to="/" className="px-3 py-2 text-base font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+            Home
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden items-center gap-1 lg:flex">
-            <Link to="/" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              Home
-            </Link>
-
-            {/* Services Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-                Services <ChevronDown className="h-3.5 w-3.5" />
-              </button>
-              <div className="invisible absolute left-0 top-full w-56 rounded-sm bg-primary border border-primary-foreground/10 py-1 shadow-xl opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                {services.map((s) => (
-                  <Link
-                    key={s.slug}
-                    to={`/services/${s.slug}`}
-                    className="block px-4 py-2 text-sm text-primary-foreground/80 hover:bg-accent hover:text-accent-foreground transition-colors"
-                  >
-                    {s.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Areas Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-                Service Areas <ChevronDown className="h-3.5 w-3.5" />
-              </button>
-              <div className="invisible absolute left-0 top-full w-48 rounded-sm bg-primary border border-primary-foreground/10 py-1 shadow-xl opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                {areas.map((area) => (
-                  <Link
-                    key={area}
-                    to={`/areas/${area.toLowerCase()}`}
-                    className="block px-4 py-2 text-sm text-primary-foreground/80 hover:bg-accent hover:text-accent-foreground transition-colors"
-                  >
-                    {area}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <Link to="/gallery" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              Gallery
-            </Link>
-            <Link to="/blog" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              Blog
-            </Link>
-            <Link to="/contact" className="px-3 py-2 text-sm font-medium text-primary-foreground/90 hover:text-accent transition-colors">
-              Contact
-            </Link>
-          </nav>
-
-          {/* Right side: phone + CTA */}
-          <div className="hidden items-center gap-4 lg:flex">
-            <a
-              href={`tel:${client.phoneTel}`}
-              className="flex items-center gap-1.5 text-base font-bold text-primary-foreground tracking-wide"
-            >
-              <Phone className="h-4 w-4 text-accent" />
-              {client.phone}
-            </a>
+          {/* Services Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
             <button
-              onClick={openModal}
-              className="inline-flex h-9 items-center rounded-sm bg-accent px-5 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
+              className="flex items-center gap-1 px-3 py-2 text-base font-medium text-primary-foreground/90 hover:text-accent transition-colors"
             >
-              Get Free Quote
+              Services <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", servicesOpen && "rotate-180")} />
             </button>
-          </div>
-
-          {/* Mobile: action buttons + hamburger */}
-          <div className="flex flex-1 items-center gap-2 lg:hidden">
-            <button
-              onClick={openModal}
-              className="flex flex-1 h-10 items-center justify-center whitespace-nowrap rounded-sm bg-accent text-sm font-bold text-accent-foreground"
-            >
-              Get Free Quote
-            </button>
-            <a
-              href={`tel:${client.phoneTel}`}
-              className="flex flex-1 h-10 items-center justify-center gap-1.5 whitespace-nowrap rounded-sm border border-primary-foreground/20 text-sm font-bold text-primary-foreground"
-            >
-              <Phone className="h-4 w-4 shrink-0 text-accent" />
-              {client.phone}
-            </a>
-            <button
-              className="text-primary-foreground"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile overlay nav */}
-        {mobileOpen && (
-          <div className="fixed inset-0 top-16 z-40 bg-primary overflow-y-auto lg:hidden">
-            <nav className="flex flex-col px-6 py-6 gap-1">
-              <Link to="/" onClick={() => setMobileOpen(false)} className="pb-5 mb-1 border-b border-primary-foreground/10">
-                <Logo variant="light" />
-              </Link>
-              <Link to="/" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                Home
-              </Link>
-
-              {/* Mobile Services */}
-              <button
-                onClick={() => setServicesOpen(!servicesOpen)}
-                className="flex items-center justify-between py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10"
-              >
-                Services <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
-              </button>
-              {servicesOpen && (
-                <div className="pl-4 flex flex-col gap-1">
-                  {services.map((s) => (
-                    <Link
-                      key={s.slug}
-                      to={`/services/${s.slug}`}
-                      onClick={() => setMobileOpen(false)}
-                      className="py-2 text-sm text-primary-foreground/80"
-                    >
-                      {s.name}
-                    </Link>
-                  ))}
+            {servicesOpen && (
+              <div className="absolute -left-4 top-full pt-2">
+                <div className="w-[420px] rounded-lg border border-primary-foreground/10 bg-primary p-3 shadow-2xl">
+                  <p className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-primary-foreground/50">
+                    Choose a Service
+                  </p>
+                  <div className="grid grid-cols-1 gap-0.5">
+                    {services.map((s) => {
+                      const Icon = SERVICE_ICON_BY_SLUG[s.slug] ?? Wrench;
+                      return (
+                        <Link
+                          key={s.slug}
+                          to={`/services/${s.slug}`}
+                          onClick={() => setServicesOpen(false)}
+                          className="group flex items-start gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-primary-foreground/5"
+                        >
+                          <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary-foreground/5 text-primary-foreground/60 transition-colors group-hover:bg-accent/15 group-hover:text-accent">
+                            <Icon className="h-[18px] w-[18px]" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-primary-foreground">
+                              {s.name}
+                            </p>
+                            <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-primary-foreground/55">
+                              {s.description}
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-              )}
+              </div>
+            )}
+          </div>
 
-              {/* Mobile Areas */}
-              <button
-                onClick={() => setAreasOpen(!areasOpen)}
-                className="flex items-center justify-between py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10"
-              >
-                Service Areas <ChevronDown className={`h-4 w-4 transition-transform ${areasOpen ? "rotate-180" : ""}`} />
-              </button>
-              {areasOpen && (
-                <div className="pl-4 flex flex-col gap-1">
+          {/* Areas Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setAreasOpen(true)}
+            onMouseLeave={() => setAreasOpen(false)}
+          >
+            <button
+              className="flex items-center gap-1 px-3 py-2 text-base font-medium text-primary-foreground/90 hover:text-accent transition-colors"
+            >
+              Service Areas <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", areasOpen && "rotate-180")} />
+            </button>
+            {areasOpen && (
+              <div className="absolute -left-4 top-full pt-2">
+                <div className="w-[260px] rounded-lg border border-primary-foreground/10 bg-primary p-3 shadow-2xl">
+                  <p className="mb-2 px-3 text-[11px] font-bold uppercase tracking-widest text-primary-foreground/50">
+                    Service Areas
+                  </p>
                   {areas.map((area) => (
                     <Link
                       key={area}
                       to={`/areas/${area.toLowerCase()}`}
-                      onClick={() => setMobileOpen(false)}
-                      className="py-2 text-sm text-primary-foreground/80"
+                      onClick={() => setAreasOpen(false)}
+                      className="group flex items-center gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-primary-foreground/5"
                     >
-                      {area}
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary-foreground/5 text-primary-foreground/60 transition-colors group-hover:bg-accent/15 group-hover:text-accent">
+                        <MapPin className="h-[18px] w-[18px]" />
+                      </div>
+                      <p className="text-sm font-semibold text-primary-foreground">{area}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Link to="/gallery" className="px-3 py-2 text-base font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+            Gallery
+          </Link>
+          <Link to="/blog" className="px-3 py-2 text-base font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+            Blog
+          </Link>
+          <Link to="/contact" className="px-3 py-2 text-base font-medium text-primary-foreground/90 hover:text-accent transition-colors">
+            Contact
+          </Link>
+        </nav>
+
+        {/* Right side: phone + CTA */}
+        <div className="hidden items-center gap-4 lg:flex">
+          <a
+            href={`tel:${client.phoneTel}`}
+            className="inline-flex h-9 items-center gap-2 rounded-sm bg-white px-4 text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
+          >
+            <Phone className="h-4 w-4" />
+            {client.phone}
+          </a>
+          <button
+            onClick={openModal}
+            className="inline-flex h-9 items-center rounded-sm bg-accent px-5 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
+          >
+            Get Free Quote
+          </button>
+        </div>
+
+        {/* Mobile: action buttons + hamburger */}
+        <div className="flex flex-1 items-center gap-2 lg:hidden">
+          <button
+            onClick={openModal}
+            className="flex flex-1 h-10 items-center justify-center whitespace-nowrap rounded-sm bg-accent text-sm font-bold text-accent-foreground"
+          >
+            Get Free Quote
+          </button>
+          <a
+            href={`tel:${client.phoneTel}`}
+            className="flex flex-1 h-10 items-center justify-center gap-1.5 whitespace-nowrap rounded-sm bg-white text-sm font-bold text-foreground"
+          >
+            <Phone className="h-4 w-4 shrink-0" />
+            {client.phone}
+          </a>
+          <button
+            className="text-primary-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            <HamburgerIcon open={mobileOpen} />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile overlay nav */}
+      {mobileOpen && (
+        <div className="fixed inset-0 top-20 z-40 overflow-y-auto bg-primary lg:hidden">
+          <nav className="flex flex-col px-6 py-2 pb-24">
+            <Link
+              to="/"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "border-b border-primary-foreground/10 py-4 text-xl font-semibold transition-colors",
+                "text-primary-foreground/85 hover:text-primary-foreground",
+              )}
+            >
+              Home
+            </Link>
+
+            {/* Mobile Services */}
+            <div className="border-b border-primary-foreground/10 py-4">
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="flex w-full items-center justify-between text-xl font-semibold text-primary-foreground/85"
+              >
+                Services <PlusIcon open={servicesOpen} size="md" />
+              </button>
+              {servicesOpen && (
+                <div className="mt-3 flex flex-col gap-1 pl-1">
+                  {services.map((s) => {
+                    const Icon = SERVICE_ICON_BY_SLUG[s.slug] ?? Wrench;
+                    return (
+                      <Link
+                        key={s.slug}
+                        to={`/services/${s.slug}`}
+                        onClick={() => {
+                          setMobileOpen(false);
+                          setServicesOpen(false);
+                        }}
+                        className="flex items-center gap-3 rounded-md px-3 py-2.5 text-primary-foreground/65 hover:bg-primary-foreground/5 hover:text-primary-foreground"
+                      >
+                        <Icon className="h-4 w-4 text-accent/80" />
+                        <span className="text-base font-medium">{s.name}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Areas */}
+            <div className="border-b border-primary-foreground/10 py-4">
+              <button
+                onClick={() => setAreasOpen(!areasOpen)}
+                className="flex w-full items-center justify-between text-xl font-semibold text-primary-foreground/85"
+              >
+                Service Areas <PlusIcon open={areasOpen} size="md" />
+              </button>
+              {areasOpen && (
+                <div className="mt-3 flex flex-col gap-1 pl-1">
+                  {areas.map((area) => (
+                    <Link
+                      key={area}
+                      to={`/areas/${area.toLowerCase()}`}
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setAreasOpen(false);
+                      }}
+                      className="flex items-center gap-3 rounded-md px-3 py-2.5 text-primary-foreground/65 hover:bg-primary-foreground/5 hover:text-primary-foreground"
+                    >
+                      <MapPin className="h-4 w-4 text-accent/80" />
+                      <span className="text-base font-medium">{area}</span>
                     </Link>
                   ))}
                 </div>
               )}
+            </div>
 
-              <Link to="/gallery" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                Gallery
-              </Link>
-              <Link to="/blog" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                Blog
-              </Link>
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-primary-foreground border-b border-primary-foreground/10">
-                Contact
-              </Link>
-
-              <a
-                href={`tel:${client.phoneTel}`}
-                className="mt-4 flex items-center justify-center gap-2 rounded-sm bg-accent py-3 text-base font-bold text-accent-foreground"
-              >
-                <Phone className="h-5 w-5" />
-                {client.phone}
-              </a>
-              <button
-                onClick={() => { setMobileOpen(false); openModal(); }}
-                className="mt-2 flex items-center justify-center rounded-sm border border-accent py-3 text-base font-semibold text-accent"
-              >
-                Get Free Quote
-              </button>
-            </nav>
-          </div>
-        )}
-      </header>
-    </>
+            <Link
+              to="/gallery"
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-primary-foreground/10 py-4 text-xl font-semibold text-primary-foreground/85 hover:text-primary-foreground"
+            >
+              Gallery
+            </Link>
+            <Link
+              to="/blog"
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-primary-foreground/10 py-4 text-xl font-semibold text-primary-foreground/85 hover:text-primary-foreground"
+            >
+              Blog
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-primary-foreground/10 py-4 text-xl font-semibold text-primary-foreground/85 hover:text-primary-foreground"
+            >
+              Contact
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 };
 

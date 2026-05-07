@@ -13,7 +13,7 @@ const GalleryPreview = () => {
             </h2>
             <Link
               to="/gallery"
-              className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors"
+              className="text-sm font-semibold text-foreground hover:text-foreground/70 transition-colors"
             >
               See All Photos →
             </Link>

@@ -17,7 +17,7 @@ const HeroSection = () => {
           {/* Left: headline + trust */}
           <ScrollReveal delay={0}>
             <div>
-              <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-primary-foreground sm:text-5xl">
+              <h1 className="text-4xl leading-[1.08] text-primary-foreground sm:text-5xl lg:text-6xl">
                 {client.heroHeadline}
               </h1>
               <p className="mt-4 text-lg text-primary-foreground/80">
@@ -26,12 +26,12 @@ const HeroSection = () => {
               {/* Desktop: trust badges + phone */}
               <div className="hidden lg:flex mt-8 flex-row items-center gap-3">
                 <div className="flex items-center gap-2 text-sm font-semibold text-primary-foreground">
-                  <ShieldCheck className="h-5 w-5 text-accent" />
+                  <ShieldCheck className="h-5 w-5 text-primary-foreground/70" />
                   Licensed &amp; Insured
                 </div>
                 <a
                   href={`tel:${client.phoneTel}`}
-                  className="flex items-center gap-2 text-base font-bold text-accent hover:text-accent/90 transition-colors"
+                  className="inline-flex h-11 items-center gap-2 rounded-sm bg-white px-5 text-base font-bold text-foreground hover:bg-white/90 transition-colors"
                 >
                   <Phone className="h-5 w-5" />
                   {client.phone}

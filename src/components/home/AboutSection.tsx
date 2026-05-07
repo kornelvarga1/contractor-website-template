@@ -32,7 +32,7 @@ const AboutSection = () => {
           {/* Content */}
           <ScrollReveal delay={0.1}>
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-accent">
+            <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
               About Us
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -48,7 +48,7 @@ const AboutSection = () => {
                   key={badge}
                   className="inline-flex items-center gap-1.5 rounded-sm border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground"
                 >
-                  <Check className="h-3.5 w-3.5 text-accent" />
+                  <Check className="h-3.5 w-3.5 text-foreground/60" />
                   {badge}
                 </span>
               ))}

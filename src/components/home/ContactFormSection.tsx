@@ -65,7 +65,7 @@ const ContactFormSection = () => {
                 { icon: Phone, text: `Prefer to call? ${client.phone}` },
               ].map((item) => (
                 <div key={item.text} className="flex items-center gap-3">
-                  <item.icon className="h-5 w-5 shrink-0 text-accent" />
+                  <item.icon className="h-5 w-5 shrink-0 text-foreground/60" />
                   <span className="text-sm text-foreground/80">{item.text}</span>
                 </div>
               ))}

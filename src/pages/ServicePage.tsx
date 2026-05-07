@@ -2,7 +2,6 @@ import { useParams, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { client } from "@/config/client";
 import PageBottomStack from "@/components/shared/PageBottomStack";
-import { WaveDivider } from "@/components/shared/Dividers";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
@@ -46,7 +45,7 @@ const ServicePage = () => {
           <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
           <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
           <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent">
+            <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">
               {service.name} in {cityState}
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
@@ -61,7 +60,6 @@ const ServicePage = () => {
               </button>
             </div>
           </ScrollReveal>
-          <WaveDivider />
         </section>
         <PageBottomStack />
       </>
@@ -76,7 +74,7 @@ const ServicePage = () => {
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
         <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
-          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent">
+          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">
             {service.name} in {cityState}
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
@@ -89,7 +87,6 @@ const ServicePage = () => {
             </button>
           </div>
         </ScrollReveal>
-        <WaveDivider />
       </section>
 
       {/* SEO Text Blocks */}

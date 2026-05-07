@@ -38,8 +38,8 @@ const WhyChooseUs = () => {
                   const Icon = icons[i % icons.length];
                   return (
                     <div key={b.title} className="flex gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent/10">
-                        <Icon className="h-5 w-5 text-accent" />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-muted">
+                        <Icon className="h-5 w-5 text-foreground/70" />
                       </div>
                       <div>
                         <h3 className="text-base font-semibold text-foreground">{b.title}</h3>

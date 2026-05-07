@@ -13,7 +13,7 @@ const ServiceAreas = () => {
           {/* Left: areas list */}
           <ScrollReveal delay={0}>
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-accent">
+            <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
               Proudly Serving These Areas
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -28,9 +28,9 @@ const ServiceAreas = () => {
                 <Link
                   key={area}
                   to={`/areas/${area.toLowerCase()}`}
-                  className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors"
                 >
-                  <MapPin className="h-4 w-4 shrink-0 text-accent" />
+                  <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />
                   {area}
                 </Link>
               ))}

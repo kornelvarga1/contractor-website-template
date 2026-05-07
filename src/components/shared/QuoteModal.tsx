@@ -25,14 +25,14 @@ const QuoteModal = () => {
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.15 }}
       onClick={closeModal}
     >
       <motion.div
         className="relative w-full max-w-md"
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: "easeOut", delay: 0.05 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
         <button
