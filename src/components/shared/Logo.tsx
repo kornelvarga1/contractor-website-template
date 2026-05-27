@@ -17,33 +17,34 @@ const Logo = ({ variant = "light", className = "" }: LogoProps) => {
 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
-      {/* ── House mark ── */}
+      {/* ── Water drop mark ── */}
       <svg
-        width="38"
+        width="28"
         height="32"
-        viewBox="0 0 38 32"
+        viewBox="0 0 28 32"
         fill="none"
         aria-hidden="true"
         className="shrink-0"
       >
-        {/* House body */}
-        <rect x="3" y="17" width="32" height="15" rx="1.5" fill={bodyFill} />
-
-        {/* Roof triangle — accent */}
-        <path d="M0 18.5L19 1L38 18.5H0Z" fill={accentFill} />
-
-        {/* Chimney — accent */}
-        <rect x="25" y="2.5" width="5" height="10" rx="1" fill={accentFill} />
-
-        {/* Door — accent tint */}
-        <rect
-          x="13.5"
-          y="22"
-          width="11"
-          height="10"
-          rx="1"
+        {/* Outer drop */}
+        <path
+          d="M14 1C14 1 2 15 2 22A12 12 0 0 0 26 22C26 15 14 1 14 1Z"
           fill={accentFill}
-          fillOpacity={variant === "light" ? 0.35 : 0.25}
+        />
+        {/* Inner fill — gives depth on dark bg */}
+        <path
+          d="M14 8C14 8 6 18 6 22A8 8 0 0 0 22 22C22 18 14 8 14 8Z"
+          fill={bodyFill}
+        />
+        {/* Highlight shimmer */}
+        <ellipse
+          cx="10"
+          cy="19"
+          rx="2"
+          ry="4"
+          fill="white"
+          fillOpacity={variant === "light" ? 0.2 : 0.1}
+          transform="rotate(-20 10 19)"
         />
       </svg>
 

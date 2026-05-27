@@ -1,153 +1,92 @@
 # Client Onboarding SOP — Contractor Website
 
-End-to-end process for spinning up a new client website from the template.
-Follow in order.
+**Total time: ~10 minutes.**
+Claude handles everything except visual QA and your go/no-go.
 
 ---
 
-## Phase 1 — Wait for the onboarding submission
+## How to trigger
 
-The client fills out the form at **`vargaflow.com/onboarding-form`**. Photos upload directly to storage.
+Say: **"New client — onboard [Name / company]"** and give Claude one of:
+- The Supabase submission ID (UUID from the `onboarding_submissions` table)
+- Or just paste the raw submission data if you have it open
 
-- [ ] Open **Admin → Submissions** (`/onboarding-submissions`)
-- [ ] Find the client's submission at the top (most recent first)
-- [ ] Skim the fields — if anything critical is blank (email, address, license, services), reach out to the client before proceeding
-
-The form collects: name, email, business name, trade type, license number, tax ID, full address, years in business, current website, Google Business URL, services offered, service areas, differentiators, hours, social links, discount, brand color, photos.
+That's it. Claude takes it from there and hands you back a live URL.
 
 ---
 
-## Phase 2 — External lookups
+## What Claude does (in order)
 
-These three things the client can't provide — you do them:
+### 1. Pull the submission
+Query `onboarding_submissions` in Supabase project `zfmchywjmgykmlhjihls` by ID or name.
+Flags anything critical that's blank (phone, address, license) before proceeding.
 
-### Google Maps embed URL
-- [ ] Search the address on Google Maps
-- [ ] **Share → Embed a map → Copy HTML** → pull just the `src="..."` URL
+### 2. External lookups
+- **Google Maps embed URL** — WebFetch the address, extract the embed `src`
+- **Lat / lng** — parse from the Maps URL
+- **Google Reviews URL** — use the GBP URL from the submission, or `"#"` with placeholder rating if none
 
-### Latitude/longitude
-- [ ] From the Google Maps URL bar, grab `@<LAT>,<LNG>` (e.g. `@33.5231793,-112.068709`)
+### 3. Supabase business setup
+- Insert a new row in the `businesses` table with the client's data
+- Capture the generated `business_id` UUID
+- Link the matched contact's `business_id` if the contact exists
 
-### Google Reviews URL
-- [ ] If the client gave you their Google Business Profile URL, use it directly
-- [ ] If not and they have a profile, find it on Google and copy the "leave a review" link
-- [ ] If they have no profile yet, use `"#"` and set realistic placeholder rating (4.9) + count (20–50) — update later
+### 4. Copy and configure the template
+- Copy `C:\Users\VargaFlow\contractor-website-template` → `C:\Users\VargaFlow\clients\<client-slug>\`
+- Select the right trade config (`client.plumber.ts`, `client.roofing.ts`, etc.) in `src/config/client.ts`
+- Generate / update the trade config with all client data:
+  - Company name, phone, address, areas, geo, hours, license, discount
+  - Trade-specific services, FAQ, blog posts, SEO copy — city-swapped throughout
+  - Brand color (`accentHsl`) from the client's submission
+  - Photo URLs from submission storage (or Unsplash placeholders if no photos yet)
+- Write `.env` with `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_BUSINESS_ID`
 
----
-
-## Phase 3 — Supabase business setup
-
-- [ ] Log into Supabase project `zfmchywjmgykmlhjihls`
-- [ ] Create a new row in the `businesses` table with the client's data
-- [ ] Copy the generated `business_id` (UUID) — you'll paste it as `VITE_BUSINESS_ID`
-- [ ] Create/assign any user accounts the client needs
-- [ ] Ideally, update the matched contact's `business_id` to link everything
-
----
-
-## Phase 4 — Copy the template
-
-- [ ] Copy `C:\Users\VargaFlow\contractor-website-template` to a new directory (e.g. `C:\Users\VargaFlow\clients\<client-slug>`)
-- [ ] `cd` into it
-
----
-
-## Phase 5 — Generate the config (conversational with Claude Code)
-
-This is the key step. Don't hand-fill anything.
-
-- [ ] In the admin submissions page, expand the client's submission → **Copy All**
-- [ ] In the new client project directory, run `claude` to start Claude Code
-- [ ] Paste this as your first message:
-
+### 5. Build
 ```
-Read ONBOARDING_SOP.md and MASTER_PROMPT.md in this repo so you know the full workflow and the client.ts structure.
-
-Here's the onboarding submission for this client:
-
-[PASTE ALL]
-
-Here are the manual lookups I already did:
-- BUSINESS_ID: <uuid from Phase 3>
-- Google Maps embed URL: <from Phase 2>
-- Latitude: <>
-- Longitude: <>
-- Google Reviews URL: <or "#" if none>
-
-Generate src/config/client.ts and .env for this client. Fill in what you can from the data, flag anything still missing before you write the files, and ask me for anything unclear. Match the tone and structure of the existing client.ts exactly.
+npm install && npm run build
 ```
+Zero errors required before proceeding.
 
-- [ ] Claude will either write the files or ask clarifying questions — answer them
-- [ ] Spot-check the generated `client.ts`:
-  - Services, FAQ, blog posts are trade-specific (not generic)
-  - Company name, phone, address appear correctly
-  - Brand color / accent HSL matches what the client picked
-  - Service areas list matches what they gave you
-
-If something feels off, just tell Claude what to change — don't edit by hand unless it's tiny.
+### 6. Deploy to Vercel
+- New Vercel project per client: `<client-slug>.vercel.app`
+- Uses the prebuilt output deploy workflow (same as demo deploys)
+- Hands you back the live production URL
 
 ---
 
-## Phase 6 — Photos
+## What you do
 
-- [ ] In admin → Submissions → expand the submission → scroll to the Photos gallery
-- [ ] Click **Download All** → all originals download locally
-- [ ] Review — pick the best photos for each role (hero, about, gallery)
-- [ ] Upload to your CDN / Supabase storage bucket (or keep the URLs already in the submission — they're public and work directly)
-- [ ] Ask Claude to update `client.ts` with the specific URLs per section
+### Visual QA (~2–3 min)
+Click through the live URL and check:
+- [ ] Logo, company name, phone correct everywhere
+- [ ] Brand color looks right
+- [ ] Hero image loads (not broken)
+- [ ] Services pages load with right content
+- [ ] Contact page — address, hours, map correct
+- [ ] No leftover placeholder city/trade ("Springfield", "Citywide", etc.)
+- [ ] Submit a test quote → verify it lands in Supabase
 
-For most clients, the URLs already in the submission work as-is — you only need to re-upload if you're editing/cropping photos.
-
----
-
-## Phase 7 — Build & test locally
-
-- [ ] `npm install`
-- [ ] `npm run build` — must finish with zero errors
-- [ ] `npm run dev` — opens on port 8080
-- [ ] Click through every route:
-  - `/` — hero, about, services, reviews, FAQ, CTA
-  - `/services/<each>` — every service page loads with right SEO content
-  - `/areas/<each>` — every location page loads
-  - `/gallery` — photos render, lightbox works
-  - `/blog` + each `/blog/<slug>`
-  - `/contact` — address, hours, map, phone correct
-  - `/quote` — form renders, test submission works
-  - `/discount`, `/write-a-review`, `/terms`, `/privacy`
-- [ ] Visual checks: logo text right, brand color matches, phone in header/footer/CTAs
-- [ ] No "Phoenix" or "roofing" leftover (if different city/trade)
-- [ ] Submit test quote → verify it lands in Supabase `message_queue` and triggers Flow #1
+### Go / no-go
+- If something's off: tell Claude what's wrong, it fixes and redeploys
+- If it looks good: say **"ship it"**
 
 ---
 
-## Phase 8 — Fix issues
+## After you say ship it
 
-All edits go in `client.ts`. If something's wrong, tell Claude what to fix — don't touch components.
-
----
-
-## Phase 9 — Deploy
-
-- [ ] Final `npm run build` — confirm clean
-- [ ] Deploy to hosting (Vercel / Netlify / Cloudflare Pages)
-- [ ] Connect the client's domain
-- [ ] Verify live site loads and forms submit end-to-end
-- [ ] Add site to Google Search Console, submit sitemap
-
----
-
-## Phase 10 — Handoff
-
-- [ ] Move the client in the CRM from onboarding → active
-- [ ] Send go-live message with their URL
-- [ ] Keep the client project folder — handy for future updates or re-generation
+- [ ] Claude drafts the go-live message to the client
+- [ ] Connect client's domain (Vercel dashboard → Domains)
+- [ ] Move client in CRM from onboarding → active
+- [ ] Add to Google Search Console, submit sitemap
 
 ---
 
 ## Time budget
 
-Once the client has submitted the form and you have the lookups done: **30–60 minutes total.**
-- Phase 2 lookups: ~10 min
-- Phase 5 generation chat: ~10 min
-- Phase 7 testing: ~15–20 min
-- Phase 8 fixes: usually minor
+| Step | Who | Time |
+|---|---|---|
+| Trigger + submission pull | You + Claude | ~1 min |
+| Lookups, config generation, build, deploy | Claude | ~5–7 min |
+| Visual QA | You | ~2–3 min |
+| Fixes if needed | Claude | ~2 min |
+| **Total** | | **~10 min** |

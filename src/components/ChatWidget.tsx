@@ -103,7 +103,7 @@ const ChatWidget = () => {
 
       {/* Form modal */}
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(245,158,11,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-2 fade-in duration-200">
+        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(18,122,226,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-2 fade-in duration-200">
           {/* Header */}
           <div className="flex items-center justify-between bg-accent px-4 py-3">
             <div className="flex items-center gap-3">
@@ -130,11 +130,10 @@ const ChatWidget = () => {
               <>
                 {/* Message bubble */}
                 <div className="flex items-start gap-2 bg-gray-100 rounded-lg mx-3 mt-3 p-3">
-                  <svg width="16" height="14" viewBox="0 0 38 32" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
-                    <rect x="3" y="17" width="32" height="15" rx="1.5" fill="hsl(0,0%,10%)" fillOpacity="0.15" />
-                    <path d="M0 18.5L19 1L38 18.5H0Z" fill="#f59e0b" />
-                    <rect x="25" y="2.5" width="5" height="10" rx="1" fill="#f59e0b" />
-                    <rect x="13.5" y="22" width="11" height="10" rx="1" fill="#f59e0b" fillOpacity="0.3" />
+                  <svg width="14" height="16" viewBox="0 0 28 32" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
+                    <path d="M14 1C14 1 2 15 2 22A12 12 0 0 0 26 22C26 15 14 1 14 1Z" fill="hsl(210,85%,48%)" />
+                    <path d="M14 8C14 8 6 18 6 22A8 8 0 0 0 22 22C22 18 14 8 14 8Z" fill="rgba(0,0,0,0.15)" />
+                    <ellipse cx="10" cy="19" rx="2" ry="4" fill="white" fillOpacity="0.3" transform="rotate(-20 10 19)" />
                   </svg>
                   <p className="text-sm text-gray-700 leading-snug">
                     This text goes straight to my personal phone. I'll make sure to get back to you the second I'm free!
@@ -204,7 +203,7 @@ const ChatWidget = () => {
       {/* Floating button */}
       <button
         onClick={handleButtonClick}
-        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-[0_4px_24px_rgba(245,158,11,0.35),0_2px_8px_rgba(0,0,0,0.4)] hover:bg-accent/90 hover:shadow-[0_4px_32px_rgba(245,158,11,0.5)] active:scale-95 transition-all"
+        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-[0_4px_24px_rgba(18,122,226,0.35),0_2px_8px_rgba(0,0,0,0.4)] hover:bg-accent/90 hover:shadow-[0_4px_32px_rgba(18,122,226,0.5)] active:scale-95 transition-all"
         aria-label={open ? "Close chat" : "Open chat"}
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}

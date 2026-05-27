@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Phone,
-  Home,
   Wrench,
-  CloudRain,
+  Droplets,
+  Flame,
+  Droplet,
+  AlertTriangle,
+  GitBranch,
+  SlidersHorizontal,
   Layers,
-  Square,
-  Search,
-  Building2,
   MapPin,
   ChevronDown,
   type LucideIcon,
@@ -20,17 +21,14 @@ import Logo from "@/components/shared/Logo";
 
 const { services, areas } = client;
 
-// Roofing-specific icon mapping. When repurposing this template for a
-// different trade, swap the slugs/icons to suit the niche. Falls back to
-// Wrench so an unmapped slug still renders an icon column.
 const SERVICE_ICON_BY_SLUG: Record<string, LucideIcon> = {
-  "roof-replacement": Home,
-  "roof-repair": Wrench,
-  "storm-damage-repair": CloudRain,
-  "metal-roofing": Layers,
-  "flat-roof-systems": Square,
-  "roof-inspection": Search,
-  "commercial-roofing": Building2,
+  "drain-cleaning": Droplets,
+  "water-heater-repair-replacement": Flame,
+  "leak-detection-repair": Droplet,
+  "emergency-plumbing": AlertTriangle,
+  "repiping": GitBranch,
+  "fixture-installation": SlidersHorizontal,
+  "sewer-line-services": Layers,
 };
 
 const HamburgerIcon = ({ open }: { open: boolean }) => (
@@ -194,14 +192,14 @@ const Header = () => {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={`tel:${client.phoneTel}`}
-            className="inline-flex h-9 items-center gap-2 rounded-sm bg-white px-4 text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
+            className="inline-flex h-10 items-center gap-2 rounded-sm bg-white px-4 text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
           >
             <Phone className="h-4 w-4" />
             {client.phone}
           </a>
           <button
             onClick={openModal}
-            className="inline-flex h-9 items-center rounded-sm bg-accent px-5 text-sm font-semibold text-accent-foreground shadow-sm hover:bg-accent/90 transition-colors"
+            className="inline-flex h-10 items-center rounded-sm bg-accent px-5 text-sm font-bold text-accent-foreground hover:bg-accent/90 transition-colors"
           >
             Get Free Quote
           </button>

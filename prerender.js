@@ -5,41 +5,24 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, "dist");
 
-const routes = [
-  "/",
-  "/gallery",
-  "/contact",
-  "/write-a-review",
-  "/discount",
-  "/quote",
-  "/blog",
-  "/terms",
-  "/privacy",
-  // Services
-  "/services/roof-replacement",
-  "/services/roof-repair",
-  "/services/storm-damage-repair",
-  "/services/metal-roofing",
-  "/services/flat-roof-systems",
-  "/services/roof-inspection",
-  "/services/commercial-roofing",
-  // Areas
-  "/areas/phoenix",
-  "/areas/scottsdale",
-  "/areas/tempe",
-  "/areas/mesa",
-  "/areas/chandler",
-  "/areas/glendale",
-  "/areas/peoria",
-  // Blog posts
-  "/blog/when-to-replace-your-roof",
-  "/blog/prepare-roof-for-storm-season",
-  "/blog/signs-roof-needs-repair",
-];
-
 async function prerender() {
   const template = fs.readFileSync(path.resolve(distDir, "index.html"), "utf-8");
-  const { render } = await import("./dist/server/entry-server.js");
+  const { render, client } = await import("./dist/server/entry-server.js");
+
+  const routes = [
+    "/",
+    "/gallery",
+    "/contact",
+    "/write-a-review",
+    "/discount",
+    "/quote",
+    "/blog",
+    "/terms",
+    "/privacy",
+    ...client.services.map((s) => `/services/${s.slug}`),
+    ...client.areas.map((a) => `/areas/${a.toLowerCase().replace(/\s+/g, "-")}`),
+    ...client.blogPosts.map((b) => `/blog/${b.slug}`),
+  ];
 
   for (const route of routes) {
     const html = render(route);

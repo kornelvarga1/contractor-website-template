@@ -46,7 +46,7 @@ const Contact = () => {
                 >
                   <Mail className="h-5 w-5 shrink-0 text-accent-foreground" />
                   <div>
-                    <p className="font-bold text-accent-foreground">{client.email}</p>
+                    <p className="font-bold text-accent-foreground break-all">{client.email}</p>
                     <p className="text-sm text-accent-foreground/70">We reply within 2 hours</p>
                   </div>
                 </a>

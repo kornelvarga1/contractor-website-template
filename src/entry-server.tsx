@@ -1,6 +1,7 @@
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { AppContent } from "./App";
+export { client } from "@/config/client";
 
 export function render(url: string): string {
   return renderToString(
