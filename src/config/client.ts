@@ -2,7 +2,7 @@
  * Active client configuration.
  *
  * Re-export whichever config is active. When a prospect replies:
- *   1. Open client.plumber.ts
+ *   1. Open the relevant trade config (client.plumber.ts, client.roofing.ts, etc.)
  *   2. Update companyName, companyNameFull, logoMain, phone/phoneTel, address, areas, geo
  *   3. Save → push → Vercel deploys automatically
  *
@@ -10,4 +10,4 @@
  *   Plumber:  export { client } from "./client.plumber";
  *   Roofing:  export { client } from "./client.roofing";
  */
-export { client } from "./client.plumber";
+export { client } from "./client.roofing";
