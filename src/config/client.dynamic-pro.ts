@@ -245,43 +245,25 @@ export const client = {
 
   reviews: [
     {
-      author: "Jennifer M.",
+      author: "Crystal Moreno Lovato",
       rating: 5,
-      time: "1 month ago",
-      text: "They redid our master bathroom from top to bottom. Tile, shower enclosure, vanity — the whole thing. Showed up every day when they said they would and finished on the timeline they quoted. Very happy with how it turned out.",
+      time: "3 years ago",
+      text: "My home needed significant renovations in the kitchen, master bedroom, and bathroom. I called many contractors that couldn't get the job done within the timeframe I required or were too expensive. Dynamic Pro Services made it happen.",
     },
     {
-      author: "Carlos T.",
+      author: "Emely Garcia",
       rating: 5,
-      time: "3 weeks ago",
-      text: "Had them redo our kitchen backsplash and refinish the floors in the main living area. Clean work, easy to communicate with, and the price matched the quote exactly. Would use again.",
-    },
-    {
-      author: "Angela W.",
-      rating: 5,
-      time: "2 months ago",
-      text: "Hired Dynamic Pro for a full kitchen remodel. They gutted it and rebuilt it in about four weeks. Professional crew, kept the rest of the house livable throughout the job, and the finished kitchen looks incredible.",
+      time: "3 years ago",
+      text: "",
     },
   ],
 
   featuredReviews: [
     {
-      name: "Jennifer M.",
+      name: "Crystal Moreno Lovato",
       location: "Oklahoma City, OK",
       rating: 5,
-      text: "They redid our master bathroom from top to bottom. Tile, shower enclosure, vanity — the whole thing. Showed up every day when they said they would and finished on the timeline they quoted. Very happy with how it turned out.",
-    },
-    {
-      name: "Carlos T.",
-      location: "Mustang, OK",
-      rating: 5,
-      text: "Had them redo our kitchen backsplash and refinish the floors in the main living area. Clean work, easy to communicate with, and the price matched the quote exactly. Would use again.",
-    },
-    {
-      name: "Angela W.",
-      location: "Yukon, OK",
-      rating: 5,
-      text: "Hired Dynamic Pro for a full kitchen remodel. They gutted it and rebuilt it in about four weeks. Professional crew, kept the rest of the house livable throughout the job, and the finished kitchen looks incredible.",
+      text: "My home needed significant renovations in the kitchen, master bedroom, and bathroom. I called many contractors that couldn't get the job done within the timeframe I required or were too expensive. Dynamic Pro Services made it happen.",
     },
   ],
 
