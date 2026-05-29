@@ -192,7 +192,7 @@ const Header = () => {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={`tel:${client.phoneTel}`}
-            className="inline-flex h-10 items-center gap-2 rounded-sm bg-white px-4 text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
+            className="inline-flex h-10 items-center gap-2 rounded-sm bg-white px-5 text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
           >
             <Phone className="h-4 w-4" />
             {client.phone}
