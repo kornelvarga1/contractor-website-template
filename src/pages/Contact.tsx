@@ -40,16 +40,18 @@ const Contact = () => {
                     <p className="text-sm text-accent-foreground/70">Call or text anytime</p>
                   </div>
                 </a>
-                <a
-                  href={`mailto:${client.email}`}
-                  className="flex items-center gap-3 rounded-md bg-accent p-4 transition-colors hover:bg-accent/90"
-                >
-                  <Mail className="h-5 w-5 shrink-0 text-accent-foreground" />
-                  <div>
-                    <p className="font-bold text-accent-foreground break-all">{client.email}</p>
-                    <p className="text-sm text-accent-foreground/70">We reply within 2 hours</p>
-                  </div>
-                </a>
+                {client.email && (
+                  <a
+                    href={`mailto:${client.email}`}
+                    className="flex items-center gap-3 rounded-md bg-accent p-4 transition-colors hover:bg-accent/90"
+                  >
+                    <Mail className="h-5 w-5 shrink-0 text-accent-foreground" />
+                    <div>
+                      <p className="font-bold text-accent-foreground break-all">{client.email}</p>
+                      <p className="text-sm text-accent-foreground/70">We reply within 2 hours</p>
+                    </div>
+                  </a>
+                )}
               </div>
 
               <div className="mt-8 flex items-start gap-3">
