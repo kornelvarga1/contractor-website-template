@@ -215,10 +215,10 @@ const Header = () => {
           </button>
           <a
             href={`tel:${client.phoneTel}`}
-            className="flex flex-1 h-10 items-center justify-center gap-1.5 whitespace-nowrap rounded-sm bg-white text-sm font-bold text-foreground"
+            className="flex flex-1 h-10 items-center justify-center gap-1.5 rounded-sm bg-white text-sm font-bold text-foreground"
           >
             <Phone className="h-4 w-4 shrink-0" />
-            {client.phone}
+            Call Now
           </a>
           <button
             className="text-primary-foreground"
