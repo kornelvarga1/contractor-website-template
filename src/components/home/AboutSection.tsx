@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const badges = [
   "100% Local",
-  `${client.yearsExperience}+ Years Experience`,
+  ...(client.yearsExperience > 0 ? [`${client.yearsExperience}+ Years Experience`] : []),
   "Fully Licensed & Insured",
 ];
 
