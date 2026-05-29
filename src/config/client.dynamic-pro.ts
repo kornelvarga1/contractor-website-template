@@ -128,7 +128,7 @@ export const client = {
       slug: "flooring-installation",
       description:
         "Hardwood, LVP, tile, and laminate flooring installed flat, level, and built to hold up to daily use.",
-      image: "https://images.unsplash.com/photo-1616594019167-e1de7521788f?w=800&q=80&fm=webp",
+      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&fm=webp",
       seoData: {
         intro: "New flooring changes the look and feel of a home instantly. We install hardwood, luxury vinyl plank, tile, and laminate — correctly prepared subfloor, proper transitions, and a level finish that holds up for years.",
         seoBlocks: {
@@ -289,10 +289,10 @@ export const client = {
   galleryPreview: [
     { src: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=600&q=80&fm=webp", alt: "Kitchen remodel completed" },
     { src: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80&fm=webp", alt: "Bathroom renovation" },
-    { src: "https://images.unsplash.com/photo-1616594019167-e1de7521788f?w=600&q=80&fm=webp", alt: "Hardwood floor installation" },
+    { src: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80&fm=webp", alt: "Hardwood floor installation" },
     { src: "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=600&q=80&fm=webp", alt: "Tile backsplash work" },
     { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fm=webp", alt: "Finished basement space" },
-    { src: "https://images.unsplash.com/photo-1556909172-c80e63cf4ba4?w=600&q=80&fm=webp", alt: "Modern kitchen renovation" },
+    { src: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80&fm=webp", alt: "Modern kitchen renovation" },
   ],
 
   galleryProjects: [
@@ -301,7 +301,7 @@ export const client = {
       category: "Kitchen",
       images: [
         "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80&fm=webp",
-        "https://images.unsplash.com/photo-1556909172-c80e63cf4ba4?w=800&q=80&fm=webp",
+        "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80&fm=webp",
       ],
     },
     {
@@ -315,7 +315,7 @@ export const client = {
       title: "Hardwood Floor Installation",
       category: "Flooring",
       images: [
-        "https://images.unsplash.com/photo-1616594019167-e1de7521788f?w=800&q=80&fm=webp",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&fm=webp",
       ],
     },
     {
