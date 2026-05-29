@@ -1,14 +1,23 @@
 /**
  * Active client configuration.
  *
- * Re-export whichever config is active. When a prospect replies:
- *   1. Open the relevant trade config (client.plumber.ts, client.roofing.ts, etc.)
- *   2. Update companyName, companyNameFull, logoMain, phone/phoneTel, address, areas, geo
- *   3. Save → push → Vercel deploys automatically
+ * Each Vercel project sets VITE_CLIENT to its slug (e.g. "bl-plumbing",
+ * "dynamic-pro"). Vite replaces import.meta.env.VITE_CLIENT at build time.
+ * Add new entries to allClients when a new config file is created.
  *
- * To switch trade: change the import below.
- *   Plumber:  export { client } from "./client.plumber";
- *   Roofing:  export { client } from "./client.roofing";
- *   BL Plumbing: export { client } from "./client.bl-plumbing";
+ * Local dev: set VITE_CLIENT in .env.local, e.g.:
+ *   VITE_CLIENT=dynamic-pro
  */
-export { client } from "./client.bl-plumbing";
+import { client as blPlumbing } from "./client.bl-plumbing";
+import { client as dynamicPro } from "./client.dynamic-pro";
+
+const allClients = {
+  "bl-plumbing": blPlumbing,
+  "dynamic-pro": dynamicPro,
+};
+
+type ClientId = keyof typeof allClients;
+
+const clientId = (import.meta.env.VITE_CLIENT || "dynamic-pro") as ClientId;
+
+export const client = allClients[clientId] ?? dynamicPro;
