@@ -11,6 +11,7 @@ export const client = {
   companyNameFull: "Dynamic Pro Services",
   logoMain: "Dynamic Pro Services",
   logoSub: "",
+  logoIcon: "house" as const,
   tradeNoun: "remodeling",
   tradeAdjective: "remodeling",
   schemaType: "GeneralContractor",

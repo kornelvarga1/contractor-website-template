@@ -11,6 +11,7 @@ export const client = {
   companyNameFull: "BL Plumbing LLC",
   logoMain: "BL Plumbing",
   logoSub: "",
+  logoIcon: "drop" as const,
   tradeNoun: "plumbing",
   tradeAdjective: "plumbing",
   schemaType: "Plumber",
