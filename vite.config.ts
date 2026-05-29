@@ -12,7 +12,18 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+    {
+      name: "favicon-per-client",
+      transformIndexHtml(html: string) {
+        const clientId = process.env.VITE_CLIENT || "dynamic-pro";
+        const favicon = clientId === "bl-plumbing" ? "/favicon-drop.svg" : "/favicon-house.svg";
+        return html.replace("/favicon.svg", favicon);
+      },
+    },
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
