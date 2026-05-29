@@ -103,7 +103,7 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
                 required
                 maxLength={20}
                 className="flex h-11 w-full rounded-sm border border-border bg-white px-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                placeholder="Example: (808) 555-1234"
+                placeholder={`Example: ${client.phone.slice(0, 5)} 555-1234`}
               />
             </div>
 
