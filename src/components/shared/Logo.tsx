@@ -17,35 +17,25 @@ const Logo = ({ variant = "light", className = "" }: LogoProps) => {
 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
-      {/* ── Water drop mark ── */}
+      {/* ── House mark ── */}
       <svg
         width="28"
-        height="32"
-        viewBox="0 0 28 32"
+        height="30"
+        viewBox="0 0 28 30"
         fill="none"
         aria-hidden="true"
         className="shrink-0"
       >
-        {/* Outer drop */}
-        <path
-          d="M14 1C14 1 2 15 2 22A12 12 0 0 0 26 22C26 15 14 1 14 1Z"
-          fill={accentFill}
-        />
-        {/* Inner fill — gives depth on dark bg */}
-        <path
-          d="M14 8C14 8 6 18 6 22A8 8 0 0 0 22 22C22 18 14 8 14 8Z"
-          fill={bodyFill}
-        />
-        {/* Highlight shimmer */}
-        <ellipse
-          cx="10"
-          cy="19"
-          rx="2"
-          ry="4"
-          fill="white"
-          fillOpacity={variant === "light" ? 0.2 : 0.1}
-          transform="rotate(-20 10 19)"
-        />
+        {/* Roof */}
+        <path d="M14 1L27 14H1L14 1Z" fill={accentFill} />
+        {/* Body */}
+        <rect x="2" y="14" width="24" height="14" rx="1" fill={bodyFill} />
+        {/* Left window */}
+        <rect x="4" y="16" width="6" height="5" rx="0.5" fill={accentFill} fillOpacity="0.35" />
+        {/* Right window */}
+        <rect x="18" y="16" width="6" height="5" rx="0.5" fill={accentFill} fillOpacity="0.35" />
+        {/* Door */}
+        <rect x="10" y="20" width="8" height="8" rx="0.5" fill={accentFill} fillOpacity="0.6" />
       </svg>
 
       {/* ── Name ── */}

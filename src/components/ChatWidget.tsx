@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { MessageCircle, X, Send, ChevronDown, Wrench } from "lucide-react";
 import Logo from "@/components/shared/Logo";
+import { client } from "@/config/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -130,10 +131,10 @@ const ChatWidget = () => {
               <>
                 {/* Message bubble */}
                 <div className="flex items-start gap-2 bg-gray-100 rounded-lg mx-3 mt-3 p-3">
-                  <svg width="14" height="16" viewBox="0 0 28 32" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
-                    <path d="M14 1C14 1 2 15 2 22A12 12 0 0 0 26 22C26 15 14 1 14 1Z" fill="hsl(210,85%,48%)" />
-                    <path d="M14 8C14 8 6 18 6 22A8 8 0 0 0 22 22C22 18 14 8 14 8Z" fill="rgba(0,0,0,0.15)" />
-                    <ellipse cx="10" cy="19" rx="2" ry="4" fill="white" fillOpacity="0.3" transform="rotate(-20 10 19)" />
+                  <svg width="14" height="15" viewBox="0 0 28 30" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
+                    <path d="M14 1L27 14H1L14 1Z" fill={`hsl(${client.accentHsl})`} />
+                    <rect x="2" y="14" width="24" height="14" rx="1" fill="rgba(0,0,0,0.15)" />
+                    <rect x="10" y="20" width="8" height="8" rx="0.5" fill={`hsl(${client.accentHsl})`} fillOpacity="0.6" />
                   </svg>
                   <p className="text-sm text-gray-700 leading-snug">
                     This text goes straight to my personal phone. I'll make sure to get back to you the second I'm free!

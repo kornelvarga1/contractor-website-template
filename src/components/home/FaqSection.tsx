@@ -15,7 +15,7 @@ const FaqSection = () => {
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Image — hidden on mobile */}
           <ScrollReveal delay={0} className="hidden lg:block">
-            <div className="overflow-hidden rounded-sm">
+            <div className="overflow-hidden rounded-sm aspect-[4/3] max-h-[420px]">
               <img
                 src={client.images.faq}
                 alt={`${client.tradeNoun} project`}
