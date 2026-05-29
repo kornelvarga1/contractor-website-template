@@ -192,14 +192,14 @@ const Header = () => {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={`tel:${client.phoneTel}`}
-            className="inline-flex h-10 items-center gap-2 rounded-sm bg-white px-5 text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
+            className="inline-flex h-10 w-40 items-center justify-center gap-2 rounded-sm bg-white text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-4 w-4 shrink-0" />
             {client.phone}
           </a>
           <button
             onClick={openModal}
-            className="inline-flex h-10 items-center rounded-sm bg-accent px-5 text-sm font-bold text-accent-foreground hover:bg-accent/90 transition-colors"
+            className="inline-flex h-10 w-40 items-center justify-center rounded-sm bg-accent text-sm font-bold text-accent-foreground hover:bg-accent/90 transition-colors"
           >
             Get Free Quote
           </button>
