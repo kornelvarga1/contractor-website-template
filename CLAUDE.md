@@ -1,57 +1,73 @@
-# CLAUDE.md
+# CLAUDE.md — Contractor Website Template
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+**Read `DEPLOY_SOP.md` before doing any client deployment.** It covers the full workflow, config spec, image sourcing, and deploy commands.
+
+---
+
+## Architecture
+
+One codebase, many client sites. Each client is a Vercel project with `VITE_CLIENT=<slug>` set. Vite aliases `@/config/client` directly to `src/config/client.<slug>.ts` at build time — only that file is bundled. No other shared files need editing to add a new client.
+
+```
+src/config/
+  client.ts                   ← type reference only, do not edit
+  client.roofing.ts           ← Phoenix Roofing & Repair (template demo)
+  client.bl-plumbing.ts       ← BL Plumbing LLC
+  client.dynamic-pro.ts       ← Dynamic Pro Services (remodeling)
+  client.maxsons-technical.ts ← Maxson's Technical Services (handyman)
+  client.<slug>.ts            ← new clients go here
+```
 
 ## Commands
 
 ```bash
-npm run dev        # Start dev server (Vite, port 8080)
-npm run build      # Production build
-npm run lint       # ESLint
-npm run test       # Run tests once (Vitest)
-npm run test:watch # Run tests in watch mode
-npm run preview    # Preview production build
+npm run dev     # Dev server port 8080 — set VITE_CLIENT in .env.local first
+npm run build   # Production build (reads VITE_CLIENT from env)
+npm run lint
+npm run test
 ```
 
-## Architecture
+## Dev setup for a specific client
 
-**Stack:** React 18 + TypeScript, Vite, React Router v6, Tailwind CSS, shadcn/ui (Radix UI primitives), React Query, React Hook Form + Zod, Vitest + Playwright.
+```bash
+echo "VITE_CLIENT=maxsons-technical" > .env.local
+npm run dev
+```
 
-**Path alias:** `@/` maps to `src/`.
+## Adding a new client
 
-### Page Routing
+1. Create `src/config/client.<slug>.ts` (see spec in DEPLOY_SOP.md)
+2. Run `.\scripts\deploy-client.ps1 -Slug "<slug>"`
 
-Routes are defined in `src/App.tsx`. Key patterns:
-- `/services/:slug` — dynamic service pages (roof-replacement, roof-repair, storm-damage-repair, metal-roofing, flat-roof-systems, roof-inspection, commercial-roofing)
-- `/areas/:city` — dynamic area pages (Phoenix, Scottsdale, Tempe, Mesa, Chandler, Glendale, Peoria)
-- All other routes map to named pages in `src/pages/`
+That's it. No changes to `vite.config.ts`, `client.ts`, or any shared file.
 
-### Component Organization
+## Component architecture
 
 ```
 src/
-├── pages/           # One file per route
-├── components/
-│   ├── layout/      # Header, Footer, MobileActionBar, ScrollToTop
-│   ├── home/        # Home page sections (Hero, Services, Reviews, etc.)
-│   └── ui/          # shadcn/ui components — do not modify these manually; use shadcn CLI
-├── hooks/           # use-mobile, use-toast
-└── lib/             # cn() utility for class merging
+  pages/           # One file per route (Index, Gallery, Contact, etc.)
+  components/
+    layout/        # Header, Footer, MobileActionBar, ScrollToTop
+    home/          # Home page sections — all read from @/config/client
+    shared/        # QuoteModal, QuoteForm, Logo, SeoHead, ParallaxBg
+    ui/            # shadcn/ui — do not modify manually
+  config/          # Client configs (see above)
+  hooks/           # use-mobile, useQuoteModal
+  context/         # QuoteModalContext
 ```
 
-### Business Context
+## Styling
 
-This is a contractor website for **Phoenix Roofing and Repair**. Content (phone numbers, addresses, service names, area names) is hardcoded throughout components — especially in `src/components/layout/Header.tsx` which contains the services and areas arrays used for navigation dropdowns.
+- Tailwind utility classes throughout
+- Accent color injected as CSS variable from `client.accentHsl`
+- Dark primary (`hsl(0, 0%, 10%)`) with configurable accent
+- `cn()` from `@/lib/utils` for conditional class merging
+- Animations: short durations (0.2s modals, 0.4s scroll), expo-out curve, no atmospheric effects
 
-### State & Data
+## Key rules
 
-- No backend currently wired up — form submissions are placeholders with comments indicating future Supabase integration
-- A Supabase edge function script tag exists in `index.html`
-- Component-level `useState` for UI state; React Query is configured but minimally used
-- SEO structured data (JSON-LD RoofingContractor schema) lives in `index.html`
-
-### Styling Conventions
-
-- Tailwind utility classes throughout; dark primary (`#1a1a1a`) with amber accent (`#f59e0b`)
-- CSS variables defined in `src/index.css` for theming (dark mode supported via `class` strategy)
-- Use `cn()` from `@/lib/utils` to merge conditional class names
+- Brand accent color on CTAs and functional UI only — not on eyebrows or decorative text
+- Mobile demo/mockup images must not fill the viewport — leave room for heading + description
+- `ReviewsSection` handles `reviews: []` gracefully (shows "Be the first" CTA)
+- `LogoIcon` is `"house"` for all trades except plumbing (`"drop"`)
+- Do not hand-edit `src/integrations/supabase/types.ts`

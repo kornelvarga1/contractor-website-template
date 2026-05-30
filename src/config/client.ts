@@ -1,23 +1,13 @@
 /**
- * Active client configuration.
+ * @/config/client — type reference only.
  *
- * Each Vercel project sets VITE_CLIENT to its slug (e.g. "bl-plumbing",
- * "dynamic-pro"). Vite replaces import.meta.env.VITE_CLIENT at build time.
- * Add new entries to allClients when a new config file is created.
+ * At build time, Vite aliases this import directly to the active client's
+ * config file (src/config/client.{VITE_CLIENT}.ts), so only that one file
+ * is ever bundled. This file is what TypeScript resolves for types.
  *
- * Local dev: set VITE_CLIENT in .env.local, e.g.:
- *   VITE_CLIENT=dynamic-pro
+ * Adding a new client requires NO changes here.
+ * Just create src/config/client.{slug}.ts and run scripts/deploy-client.ps1.
+ *
+ * For local dev: add VITE_CLIENT=your-slug to .env.local
  */
-import { client as blPlumbing } from "./client.bl-plumbing";
-import { client as dynamicPro } from "./client.dynamic-pro";
-
-const allClients = {
-  "bl-plumbing": blPlumbing,
-  "dynamic-pro": dynamicPro,
-};
-
-type ClientId = keyof typeof allClients;
-
-const clientId = (import.meta.env.VITE_CLIENT || "dynamic-pro") as ClientId;
-
-export const client = allClients[clientId] ?? dynamicPro;
+export { client } from "./client.roofing";

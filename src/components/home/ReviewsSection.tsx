@@ -143,6 +143,49 @@ const ReviewsSection = () => {
     transition: animate ? "transform 500ms ease-in-out" : "none",
   };
 
+  if (N === 0) {
+    return (
+      <section className="relative overflow-hidden py-16 lg:py-20">
+        <ParallaxBg imageUrl={client.images.hero} />
+        <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-6">
+          <ScrollReveal>
+            <div className="text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-white">Reviews</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Be the First to Leave a Review
+              </h2>
+              <p className="mt-3 text-white/70">
+                We're new to Google — help us get started with an honest review of your experience.
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <div className="mt-10 flex justify-center">
+              <Link
+                to="/write-a-review"
+                className="group w-full max-w-sm rounded-md border border-white/15 bg-white/5 px-8 py-7 text-center backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-accent/50 hover:bg-white/10 transition-all duration-300"
+              >
+                <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
+                  <GoogleG />
+                  Review Us on Google
+                </p>
+                <div className="mt-3 flex justify-center gap-1">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i} style={{ color: "#FBBC05", fontSize: "1.5rem", lineHeight: 1 }}>★</span>
+                  ))}
+                </div>
+                <div className="mt-5 inline-flex w-full items-center justify-center rounded-sm bg-accent px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-accent-foreground shadow-sm group-hover:bg-accent/90 transition-colors">
+                  Leave Us a Review
+                </div>
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="relative overflow-hidden py-16 lg:py-20">
       <ParallaxBg imageUrl={client.images.hero} />

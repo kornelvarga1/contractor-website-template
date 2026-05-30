@@ -12,6 +12,7 @@ export const client = {
   companyNameFull: "Phoenix Roofing and Repair",
   logoMain: "Phoenix Roofing",
   logoSub: "Repair",
+  logoIcon: "house" as const,
   tradeNoun: "roofing",
   tradeAdjective: "roofing",
   schemaType: "RoofingContractor",
