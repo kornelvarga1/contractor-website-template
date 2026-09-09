@@ -6,6 +6,7 @@ import PageBottomStack from "@/components/shared/PageBottomStack";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
+import { citySlug, citySlugToDisplay, capitalize } from "@/lib/seoMeta";
 
 interface LocationData {
   metaTitle: string;
@@ -20,12 +21,8 @@ interface LocationData {
   };
 }
 
-function capitalize(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-function generateLocationData(citySlug: string): LocationData {
-  const city = capitalize(citySlug);
+function generateLocationData(slug: string): LocationData {
+  const city = citySlugToDisplay(slug);
   const { address, companyName, companyNameFull, tagline, yearsExperience, tradeNoun, tradeAdjective } = client;
   return {
     metaTitle: `${capitalize(tradeAdjective)} Contractor ${city}, ${address.state} | ${companyNameFull}`,
@@ -45,9 +42,9 @@ const LocationPage = () => {
   const { city } = useParams<{ city: string }>();
   const { openModal } = useQuoteModal();
 
-  const validCity = city && client.areas.map((a) => a.toLowerCase()).includes(city);
+  const validCity = city && client.areas.some((a) => citySlug(a) === city);
   const data = validCity ? generateLocationData(city!) : null;
-  const cityFormatted = validCity ? capitalize(city!) : "";
+  const cityFormatted = validCity ? citySlugToDisplay(city!) : "";
 
   useEffect(() => {
     if (data) {
@@ -64,8 +61,8 @@ const LocationPage = () => {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
         <ParallaxBg imageUrl={client.images.hero} />
-        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             {data.h1Line1}<br />
@@ -78,7 +75,7 @@ const LocationPage = () => {
             </button>
             <a
               href={`tel:${client.phoneTel}`}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-white px-5 text-base font-bold text-foreground hover:bg-white/90 transition-colors"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-white px-5 text-base font-bold text-[#1a1a1a] hover:bg-white/90 transition-colors"
             >
               <Phone className="h-4 w-4" /> {client.phone}
             </a>
@@ -87,7 +84,7 @@ const LocationPage = () => {
       </section>
 
       {/* SEO Text Blocks */}
-      <section className="bg-white py-16 lg:py-20">
+      <section className="bg-background py-16 lg:py-20">
         <div className="mx-auto max-w-3xl px-4 lg:px-6 space-y-10">
           <ScrollReveal delay={0}>
             <div>

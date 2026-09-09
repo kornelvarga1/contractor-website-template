@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from "react";
-import { MessageCircle, X, Send, ChevronDown, Wrench } from "lucide-react";
+import { MessageCircle, X, Send, ChevronDown, CircleUserRound } from "lucide-react";
 import Logo from "@/components/shared/Logo";
 import { client } from "@/config/client";
 
@@ -104,11 +104,12 @@ const ChatWidget = () => {
 
       {/* Form modal */}
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 w-80 rounded-lg max-h-[90vh] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(18,122,226,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-2 fade-in duration-200">
-          {/* Header */}
-          <div className="flex items-center justify-between bg-accent px-4 py-3">
-            <div className="flex items-center gap-3">
-              <Logo variant="dark" />
+        <div className="fixed bottom-20 right-4 z-50 flex w-80 flex-col rounded-lg max-h-[calc(100vh-6.5rem)] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(18,122,226,0.08)] ring-1 ring-accent/20 animate-in slide-in-from-bottom-2 fade-in duration-200">
+          {/* Header — fixed, never scrolls away */}
+          <div className="flex shrink-0 items-center justify-between bg-accent px-4 py-3">
+            <div className="flex items-center gap-2.5">
+              <Logo variant="dark" className="h-10" />
+              <span className="text-sm font-semibold text-accent-foreground">Have a question?</span>
             </div>
             <button
               onClick={handleClose}
@@ -119,8 +120,8 @@ const ChatWidget = () => {
             </button>
           </div>
 
-          {/* Body */}
-          <div className="bg-white overflow-y-auto max-h-[calc(90vh-48px)]">
+          {/* Body — the only part that scrolls, so header/footer always stay visible */}
+          <div className="min-h-0 flex-1 overflow-y-auto bg-white">
             {success ? (
               <div className="px-3 py-8 text-center">
                 <p className="text-sm font-medium text-gray-700">
@@ -131,19 +132,11 @@ const ChatWidget = () => {
               <>
                 {/* Message bubble */}
                 <div className="flex items-start gap-2 bg-gray-100 rounded-lg mx-3 mt-3 p-3">
-                  {client.logoIcon === "house" ? (
-                    <svg width="14" height="15" viewBox="0 0 28 30" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
-                      <path d="M14 1L27 14H1L14 1Z" fill={`hsl(${client.accentHsl})`} />
-                      <rect x="2" y="14" width="24" height="14" rx="1" fill="rgba(0,0,0,0.15)" />
-                      <rect x="10" y="20" width="8" height="8" rx="0.5" fill={`hsl(${client.accentHsl})`} fillOpacity="0.6" />
-                    </svg>
-                  ) : (
-                    <svg width="14" height="16" viewBox="0 0 28 32" fill="none" aria-hidden="true" className="shrink-0 mt-0.5">
-                      <path d="M14 1C14 1 2 15 2 22A12 12 0 0 0 26 22C26 15 14 1 14 1Z" fill={`hsl(${client.accentHsl})`} />
-                      <path d="M14 8C14 8 6 18 6 22A8 8 0 0 0 22 22C22 18 14 8 14 8Z" fill="rgba(0,0,0,0.15)" />
-                      <ellipse cx="10" cy="19" rx="2" ry="4" fill="white" fillOpacity="0.3" transform="rotate(-20 10 19)" />
-                    </svg>
-                  )}
+                  <CircleUserRound
+                    className="h-5 w-5 shrink-0"
+                    style={{ color: `hsl(${client.accentHsl})` }}
+                    aria-hidden="true"
+                  />
                   <p className="text-sm text-gray-700 leading-snug">
                     This text goes straight to my personal phone. I'll make sure to get back to you the second I'm free!
                   </p>
@@ -198,14 +191,14 @@ const ChatWidget = () => {
                     )}
                   </button>
                 </form>
-
-                {/* Footer */}
-                <p className="py-2 text-center text-xs text-gray-400">
-                  Powered by <a href="https://vargaflow.com" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">VargaFlow</a>
-                </p>
               </>
             )}
           </div>
+
+          {/* Footer — fixed, outside the scrollable body, so it can't get clipped on short viewports */}
+          <p className="shrink-0 border-t border-gray-100 bg-white py-2 text-center text-xs text-gray-400">
+            Powered by <a href="https://vargaflow.com" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">VargaFlow</a>
+          </p>
         </div>
       )}
 

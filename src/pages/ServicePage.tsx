@@ -42,8 +42,8 @@ const ServicePage = () => {
       <>
         <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
           <ParallaxBg imageUrl={client.images.hero} />
-          <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-          <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
+          <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" aria-hidden="true" />
           <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
             <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">
               {service.name} in {cityState}
@@ -71,8 +71,8 @@ const ServicePage = () => {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
         <ParallaxBg imageUrl={client.images.hero} />
-        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 lg:px-6 text-center">
           <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">
             {service.name} in {cityState}
@@ -90,7 +90,7 @@ const ServicePage = () => {
       </section>
 
       {/* SEO Text Blocks */}
-      <section className="bg-white py-16">
+      <section className="bg-background py-16">
         <div className="mx-auto max-w-3xl px-4 lg:px-6">
           <div className="space-y-10">
             <ScrollReveal delay={0}>

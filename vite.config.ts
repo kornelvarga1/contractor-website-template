@@ -23,6 +23,18 @@ export default defineConfig(({ mode }) => {
       {
         name: "favicon-per-client",
         transformIndexHtml(html: string) {
+          // Clients with a real uploaded logo use it as the favicon directly
+          // (needs its own MIME type, not the default SVG one). Everyone else
+          // gets the generic drawn house/drop mark.
+          const realLogoFavicons: Record<string, string> = {
+            "vantashine-exteriors": "/images/vantashine-exteriors-logo.png",
+          };
+          if (realLogoFavicons[clientSlug]) {
+            return html.replace(
+              'type="image/svg+xml" href="/favicon.svg"',
+              `type="image/png" href="${realLogoFavicons[clientSlug]}"`
+            );
+          }
           const favicon = clientSlug === "bl-plumbing" ? "/favicon-drop.svg" : "/favicon-house.svg";
           return html.replace("/favicon.svg", favicon);
         },

@@ -3,19 +3,23 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
 import Logo from "@/components/shared/Logo";
+import { citySlug } from "@/lib/seoMeta";
 
 const { services, areas } = client;
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-foreground">
+    <footer className="bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-4 py-14 lg:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
           <ScrollReveal delay={0}>
             <div>
               <Link to="/" className="mb-5 inline-block">
-                <Logo variant="dark" />
+                {/* Footer bg is theme-aware (bg-background) — on a dark-theme
+                    client it's dark, so the logo needs the light (white-text)
+                    variant there, not the "dark" variant built for a white footer. */}
+                <Logo variant={client.theme === "dark" ? "light" : "dark"} className={client.logoImageUrl ? "h-16" : ""} />
               </Link>
               <div className="space-y-3 text-sm text-muted-foreground">
                 <div className="flex items-start gap-2">
@@ -57,7 +61,7 @@ const Footer = () => {
               <ul className="space-y-2">
                 {areas.map((area) => (
                   <li key={area}>
-                    <Link to={`/areas/${area.toLowerCase()}`} className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                    <Link to={`/areas/${citySlug(area)}`} className="text-sm text-muted-foreground hover:text-accent transition-colors">
                       {area}
                     </Link>
                   </li>

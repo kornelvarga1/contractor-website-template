@@ -90,7 +90,7 @@ const Discount = () => {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-foreground uppercase tracking-wide">
+                <label className="text-xs font-bold text-[#1a1a1a] uppercase tracking-wide">
                   Full Name <span className="text-accent">*</span>
                 </label>
                 <input
@@ -98,12 +98,12 @@ const Discount = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Smith"
-                  className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="h-11 w-full rounded-md border border-input px-3 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-foreground uppercase tracking-wide">
+                <label className="text-xs font-bold text-[#1a1a1a] uppercase tracking-wide">
                   Phone <span className="text-accent">*</span>
                 </label>
                 <input
@@ -111,12 +111,12 @@ const Discount = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="(602) 555-0100"
-                  className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="h-11 w-full rounded-md border border-input px-3 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-foreground uppercase tracking-wide">
+                <label className="text-xs font-bold text-[#1a1a1a] uppercase tracking-wide">
                   Short summary of the work you need <span className="text-accent">*</span>
                 </label>
                 <textarea
@@ -124,7 +124,7 @@ const Discount = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Your message goes straight to my phone, I'll get back to you as soon as I am available!"
                   rows={3}
-                  className="w-full resize-none rounded-md border border-input px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-full resize-none rounded-md border border-input px-3 py-2.5 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                 />
               </div>
 
@@ -137,7 +137,7 @@ const Discount = () => {
                 />
                 <span className="text-xs text-muted-foreground leading-relaxed">
                   I agree to the{" "}
-                  <a href="/terms" target="_blank" className="underline text-foreground hover:text-accent">
+                  <a href="/terms" target="_blank" className="underline text-[#1a1a1a] hover:text-accent">
                     terms & conditions
                   </a>{" "}
                   provided by the company. By providing my phone number, I agree to receive text messages from the business.
@@ -154,7 +154,7 @@ const Discount = () => {
           {phase === "submitted" && (
             <div className="animate-in fade-in duration-300 flex flex-col items-center py-8 text-center gap-3">
               <span className="text-4xl">🎉</span>
-              <p className="font-bold text-foreground">
+              <p className="font-bold text-[#1a1a1a]">
                 Your {client.discountPercent}% discount is reserved.
               </p>
               <p className="text-sm text-muted-foreground">

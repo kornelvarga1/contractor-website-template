@@ -15,6 +15,21 @@ const Logo = ({ variant = "light", className = "" }: LogoProps) => {
   const bodyFill  = variant === "light" ? "rgba(255,255,255,0.12)" : "hsl(0, 0%, 10%)";
   const accentFill = `hsl(${client.accentHsl})`;
 
+  // Real client logo image (transparent PNG) is used everywhere it's set,
+  // regardless of variant — pass an explicit height via className per call
+  // site (e.g. "h-16") since the right size varies a lot by placement
+  // (compact chat widget header vs. full-width site header); defaults to
+  // h-10 if the caller doesn't specify one.
+  if (client.logoImageUrl) {
+    return (
+      <img
+        src={client.logoImageUrl}
+        alt={client.companyNameFull}
+        className={`w-auto object-contain ${className || "h-10"}`}
+      />
+    );
+  }
+
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       {/* ── Icon mark — drop (plumbing) or house (remodeling) ── */}

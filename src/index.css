@@ -45,23 +45,29 @@
   }
 
   .dark {
-    --background: 0 0% 7%;
+    /* Softer charcoal, not near-black — 7%/10% read as too harsh/heavy
+       across a whole page of stacked sections. */
+    --background: 0 0% 13%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
+    --card: 0 0% 17%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 10%;
+    --popover: 0 0% 17%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 10%;
+    /* Primary intentionally does NOT invert here. Header/Footer/QuoteModal/
+       MobileActionBar all use bg-primary as a fixed "dark bar, white text"
+       chrome color regardless of overall theme — inverting it would flip
+       those to a white bar with black text, which reads as broken, not dark. */
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
+    --secondary: 0 0% 21%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 21%;
+    --muted-foreground: 0 0% 68%;
 
     --accent: 210 85% 48%;
     --accent-foreground: 0 0% 100%;
@@ -69,11 +75,11 @@
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
+    --border: 0 0% 24%;
+    --input: 0 0% 24%;
     --ring: 210 85% 48%;
 
-    --sidebar-background: 0 0% 7%;
+    --sidebar-background: 0 0% 13%;
     --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 210 85% 48%;
     --sidebar-primary-foreground: 0 0% 100%;

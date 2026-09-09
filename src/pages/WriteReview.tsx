@@ -127,7 +127,7 @@ const WriteReview = () => {
                 <Logo variant="dark" />
               </div>
 
-              <p className="mb-3 text-sm font-bold text-foreground">
+              <p className="mb-3 text-sm font-bold text-[#1a1a1a]">
                 Please Rate Us <span className="text-accent">*</span>
               </p>
 
@@ -151,7 +151,7 @@ const WriteReview = () => {
                       className="h-4 w-4 shrink-0 accent-accent pointer-events-none"
                     />
                     <span className="text-base leading-none">{opt.stars}</span>
-                    <span className="text-sm font-bold text-foreground">({opt.label})</span>
+                    <span className="text-sm font-bold text-[#1a1a1a]">({opt.label})</span>
                   </label>
                 ))}
               </div>
@@ -171,21 +171,21 @@ const WriteReview = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Name (optional)"
-                className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                className="h-11 w-full rounded-md border border-input px-3 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
               />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email (optional)"
-                className="h-11 w-full rounded-md border border-input px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                className="h-11 w-full rounded-md border border-input px-3 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
               />
               <textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="Your Feedback (Please let us know what we can do to improve?)"
                 rows={4}
-                className="w-full resize-none rounded-md border border-input px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full resize-none rounded-md border border-input px-3 py-2.5 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                 required
               />
               {feedbackError && (
@@ -198,7 +198,7 @@ const WriteReview = () => {
           {phase === "submitted" && (
             <div className="animate-in fade-in duration-300 flex flex-col items-center py-8 text-center gap-3">
               <span className="text-4xl">🙏</span>
-              <p className="font-bold text-foreground">Thank you for letting us know.</p>
+              <p className="font-bold text-[#1a1a1a]">Thank you for letting us know.</p>
               <p className="text-sm text-muted-foreground">We will be in touch shortly.</p>
             </div>
           )}

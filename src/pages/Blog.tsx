@@ -10,8 +10,8 @@ const Blog = () => {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center justify-center pb-20 pt-40 -mt-20">
         <ParallaxBg imageUrl={client.images.hero} />
-        <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" aria-hidden="true" />
         <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-4 text-center lg:px-6">
           <p className="mb-3 text-sm font-bold uppercase tracking-widest text-white/70">Check Out Our Blog</p>
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
@@ -24,7 +24,7 @@ const Blog = () => {
       </section>
 
       {/* Posts grid */}
-      <section className="bg-white py-16 lg:py-20">
+      <section className="bg-background py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {client.blogPosts.map((post, i) => (

@@ -10,7 +10,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const FaqSection = () => {
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-background py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Image — hidden on mobile */}

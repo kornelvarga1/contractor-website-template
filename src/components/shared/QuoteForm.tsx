@@ -55,7 +55,7 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
   };
 
   const card = (
-    <div className="rounded-md bg-primary text-primary-foreground border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] p-6 sm:p-10">
+    <div className="rounded-md bg-primary text-primary-foreground border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] p-5 sm:p-6">
       {submitted ? (
         <div className="flex flex-col items-center py-8 text-center">
           <CheckCircle className="h-12 w-12 text-accent" />
@@ -67,8 +67,11 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
       ) : (
         <>
           {/* Logo area */}
-          <div className="mb-6 flex justify-center">
-            <Logo variant="light" />
+          <div className="mb-4 flex justify-center">
+            {/* Sizing only applies meaningfully with a real logo image — the
+                drawn SVG+text fallback has fixed pixel dimensions, so a
+                bigger wrapper just adds empty space around a still-tiny mark. */}
+            <Logo variant="light" className={client.logoImageUrl ? "h-28" : ""} />
           </div>
 
           {/* Heading */}
@@ -87,7 +90,7 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
                 type="text"
                 required
                 maxLength={100}
-                className="flex h-11 w-full rounded-sm border border-border bg-white px-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="flex h-11 w-full rounded-sm border border-border bg-white px-3 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 placeholder="John Smith"
               />
             </div>
@@ -102,7 +105,7 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
                 type="tel"
                 required
                 maxLength={20}
-                className="flex h-11 w-full rounded-sm border border-border bg-white px-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="flex h-11 w-full rounded-sm border border-border bg-white px-3 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 placeholder={`Example: ${client.phone.slice(0, 5)} 555-1234`}
               />
             </div>
@@ -117,7 +120,7 @@ const QuoteForm = ({ variant = "page" }: QuoteFormProps) => {
                 required
                 rows={3}
                 maxLength={1000}
-                className="flex w-full rounded-sm border border-border bg-white px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="flex w-full rounded-sm border border-border bg-white px-3 py-2 text-sm text-[#1a1a1a] placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 placeholder="**Your message goes straight to my phone, I'll get back to you as soon as I'm available**"
               />
             </div>

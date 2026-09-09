@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
+import { citySlug } from "@/lib/seoMeta";
 
 const ServiceAreas = () => {
   const hasMap = Boolean(client.mapsEmbed && !client.mapsEmbed.startsWith("#"));
 
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-background py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Left: areas list */}
@@ -27,7 +28,7 @@ const ServiceAreas = () => {
               {client.areas.map((area) => (
                 <Link
                   key={area}
-                  to={`/areas/${area.toLowerCase()}`}
+                  to={`/areas/${citySlug(area)}`}
                   className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors"
                 >
                   <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />

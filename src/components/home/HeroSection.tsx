@@ -9,8 +9,8 @@ const HeroSection = () => {
     <section className="relative flex min-h-[600px] items-center overflow-hidden bg-primary lg:min-h-[700px] -mt-20">
       <ParallaxBg imageUrl={client.images.hero} />
       {/* Scrim */}
-      <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-      <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+      <div className="absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-36 pb-16 lg:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center">
@@ -31,7 +31,7 @@ const HeroSection = () => {
                 </div>
                 <a
                   href={`tel:${client.phoneTel}`}
-                  className="inline-flex h-11 items-center gap-2 rounded-sm bg-white px-5 text-base font-bold text-foreground hover:bg-white/90 transition-colors"
+                  className="inline-flex h-11 items-center gap-2 rounded-sm bg-white px-5 text-base font-bold text-[#1a1a1a] hover:bg-white/90 transition-colors"
                 >
                   <Phone className="h-5 w-5" />
                   {client.phone}

@@ -3,7 +3,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const ProcessSection = () => {
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-background py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         <ScrollReveal>
           <div className="text-center">

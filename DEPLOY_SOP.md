@@ -210,6 +210,23 @@ After the config file is written and images are sourced:
 .\scripts\deploy-client.ps1 -Slug "<slug>"
 ```
 
+If the script fails, deploy manually (use **Bash tool** for the env add step — PowerShell adds a BOM that corrupts the slug):
+
+```powershell
+# PowerShell:
+vercel project add <slug> --scope kornelvarga1s-projects
+vercel link --project <slug> --scope kornelvarga1s-projects --yes
+```
+```bash
+# Bash tool (avoids BOM):
+printf '<slug>' | vercel env add VITE_CLIENT production
+```
+```powershell
+# PowerShell:
+vercel deploy --prod --yes --force
+Remove-Item .vercel\project.json -Force
+```
+
 To redeploy after edits (no need to create project again):
 
 ```powershell
@@ -265,3 +282,4 @@ When a trade comes in that has no existing base config (e.g. HVAC, electrical):
 | bl-plumbing.vercel.app | bl-plumbing | Plumbing |
 | dynamic-pro.vercel.app | dynamic-pro | Remodeling |
 | maxsons-technical.vercel.app | maxsons-technical | Handyman |
+| dont-sweat-it.vercel.app | dont-sweat-it | HVAC (Amarillo TX mockup) |

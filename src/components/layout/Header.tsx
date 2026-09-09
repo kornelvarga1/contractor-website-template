@@ -17,6 +17,7 @@ import {
 import { client } from "@/config/client";
 import { useQuoteModal } from "@/hooks/useQuoteModal";
 import { cn } from "@/lib/utils";
+import { citySlug } from "@/lib/seoMeta";
 import Logo from "@/components/shared/Logo";
 
 const { services, areas } = client;
@@ -86,7 +87,7 @@ const Header = () => {
       <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:justify-between lg:px-6">
         {/* Logo — desktop only */}
         <Link to="/" className="hidden lg:flex items-center shrink-0" onClick={() => setMobileOpen(false)}>
-          <Logo variant="light" />
+          <Logo variant="light" className={client.logoImageUrl ? "h-16" : ""} />
         </Link>
 
         {/* Desktop Nav */}
@@ -162,7 +163,7 @@ const Header = () => {
                   {areas.map((area) => (
                     <Link
                       key={area}
-                      to={`/areas/${area.toLowerCase()}`}
+                      to={`/areas/${citySlug(area)}`}
                       onClick={() => setAreasOpen(false)}
                       className="group flex items-center gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-primary-foreground/5"
                     >
@@ -192,7 +193,7 @@ const Header = () => {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={`tel:${client.phoneTel}`}
-            className="inline-flex h-10 w-40 items-center justify-center gap-2 rounded-sm bg-white text-sm font-bold text-foreground hover:bg-white/90 transition-colors"
+            className="inline-flex h-10 w-40 items-center justify-center gap-2 rounded-sm bg-white text-sm font-bold text-[#1a1a1a] hover:bg-white/90 transition-colors"
           >
             <Phone className="h-4 w-4 shrink-0" />
             {client.phone}
@@ -215,7 +216,7 @@ const Header = () => {
           </button>
           <a
             href={`tel:${client.phoneTel}`}
-            className="flex flex-1 h-10 items-center justify-center gap-1.5 rounded-sm bg-white text-sm font-bold text-foreground"
+            className="flex flex-1 h-10 items-center justify-center gap-1.5 rounded-sm bg-white text-sm font-bold text-[#1a1a1a]"
           >
             <Phone className="h-4 w-4 shrink-0" />
             Call Now
@@ -289,7 +290,7 @@ const Header = () => {
                   {areas.map((area) => (
                     <Link
                       key={area}
-                      to={`/areas/${area.toLowerCase()}`}
+                      to={`/areas/${citySlug(area)}`}
                       onClick={() => {
                         setMobileOpen(false);
                         setAreasOpen(false);

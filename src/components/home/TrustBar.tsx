@@ -2,7 +2,7 @@ import { client } from "@/config/client";
 
 const TrustBar = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-background">
       <div className="mx-auto max-w-7xl px-4 py-5 lg:px-6">
         <p className="text-center text-base font-bold tracking-wide text-foreground">
           100% Local

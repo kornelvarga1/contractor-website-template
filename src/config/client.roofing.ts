@@ -13,6 +13,10 @@ export const client = {
   logoMain: "Phoenix Roofing",
   logoSub: "Repair",
   logoIcon: "house" as const,
+  // Optional real logo image — when set, Logo.tsx uses it instead of the
+  // drawn icon+text mark, but only on dark backgrounds (its own background
+  // isn't transparent). Omit to keep the drawn mark everywhere.
+  logoImageUrl: "" as string,
   tradeNoun: "roofing",
   tradeAdjective: "roofing",
   schemaType: "RoofingContractor",
@@ -42,6 +46,9 @@ export const client = {
   // ── Theme ──────────────────────────────────────────────────────
   // HSL values (without "hsl()" wrapper) — injected as CSS custom properties.
   accentHsl: "43 96% 50%",
+  // "dark" flips body/card backgrounds to near-black (see src/index.css .dark
+  // block) — optional, omit or set "light" for the default white-canvas look.
+  theme: "light" as "light" | "dark",
 
   // ── Images ─────────────────────────────────────────────────────
   images: {

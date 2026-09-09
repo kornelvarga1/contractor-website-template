@@ -5,8 +5,6 @@ import { client } from "@/config/client";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBg from "@/components/shared/ParallaxBg";
 
-const MAX_TEXT_LENGTH = 160;
-
 const GoogleG = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
     <path
@@ -35,8 +33,6 @@ const FilledStar = () => (
 type Review = (typeof client.reviews)[number];
 
 const ReviewCard = ({ r }: { r: Review }) => {
-  const truncated = r.text.length > MAX_TEXT_LENGTH;
-  const displayText = truncated ? r.text.slice(0, MAX_TEXT_LENGTH) + "…" : r.text;
   return (
     <div className="flex h-full flex-col rounded-sm border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between gap-2">
@@ -52,7 +48,7 @@ const ReviewCard = ({ r }: { r: Review }) => {
         ))}
       </div>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-card-foreground/80">
-        {displayText}
+        {r.text}
       </p>
     </div>
   );

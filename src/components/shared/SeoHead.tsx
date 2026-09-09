@@ -1,19 +1,25 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { client } from "@/config/client";
+import { getDefaultMeta, getJsonLd, getCanonicalUrl } from "@/lib/seoMeta";
 
 /**
  * Injects default SEO meta tags, OG tags, and JSON-LD structured data
- * from client config into the document head. Runs once on mount.
+ * from client config into the document head. Also runs the equivalent
+ * server-side at prerender time (see entry-server.tsx / prerender.js) so
+ * crawlers and link-preview bots that don't execute JS still see real
+ * values instead of the "Loading…" placeholder from index.html.
  *
  * Individual pages can still override document.title and the description
  * meta tag via their own useEffect (those run after this component mounts).
+ * Re-runs on route change so canonical/JSON-LD don't stay stuck on
+ * whichever page first mounted this component during client-side nav.
  */
 const SeoHead = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    const { address, companyNameFull, phone, email, websiteUrl, schemaType } = client;
-    const cityState = `${address.city}, ${address.state}`;
-    const defaultTitle = `${companyNameFull} | Licensed ${client.tradeAdjective.charAt(0).toUpperCase() + client.tradeAdjective.slice(1)} Contractor ${cityState}`;
-    const defaultDesc = `${address.city}'s most trusted ${client.tradeNoun} contractor. ${client.tagline}. ${client.services.map((s) => s.name).join(", ")}. Call ${phone} for a free estimate.`;
+    const { title: defaultTitle, description: defaultDesc } = getDefaultMeta(client);
 
     // Title
     document.title = defaultTitle;
@@ -30,24 +36,25 @@ const SeoHead = () => {
     };
 
     setMeta("name", "description", defaultDesc);
-    setMeta("name", "author", companyNameFull);
+    setMeta("name", "author", client.companyNameFull);
     setMeta("property", "og:type", "website");
     setMeta("property", "og:title", defaultTitle);
     setMeta("property", "og:description", defaultDesc);
     setMeta("property", "og:image", client.images.hero);
+    setMeta("property", "og:url", getCanonicalUrl(client, location.pathname));
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", defaultTitle);
     setMeta("name", "twitter:description", defaultDesc);
     setMeta("name", "twitter:image", client.images.hero);
 
-    // Canonical
+    // Canonical — must point at the current route, not always the homepage
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonical) {
       canonical = document.createElement("link");
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = websiteUrl;
+    canonical.href = getCanonicalUrl(client, location.pathname);
 
     // Theme color
     setMeta("name", "theme-color", `hsl(${client.accentHsl})`);
@@ -56,53 +63,15 @@ const SeoHead = () => {
     const existingLd = document.querySelector('script[type="application/ld+json"]');
     if (existingLd) existingLd.remove();
 
-    const ldJson = {
-      "@context": "https://schema.org",
-      "@type": schemaType,
-      name: companyNameFull,
-      image: client.images.hero,
-      url: websiteUrl,
-      telephone: phone,
-      email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: address.street,
-        addressLocality: address.city,
-        addressRegion: address.state,
-        postalCode: address.zip,
-        addressCountry: "US",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: client.geo.latitude,
-        longitude: client.geo.longitude,
-      },
-      areaServed: [...client.areas],
-      priceRange: "$$",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: String(client.averageRating),
-        reviewCount: String(client.totalReviews),
-      },
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: `${client.tradeAdjective.charAt(0).toUpperCase() + client.tradeAdjective.slice(1)} Services`,
-        itemListElement: client.services.map((s) => ({
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: s.name },
-        })),
-      },
-    };
-
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.textContent = JSON.stringify(ldJson);
+    script.textContent = JSON.stringify(getJsonLd(client));
     document.head.appendChild(script);
 
     return () => {
       script.remove();
     };
-  }, []);
+  }, [location.pathname]);
 
   return null;
 };
