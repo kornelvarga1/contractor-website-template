@@ -191,6 +191,15 @@ const WriteReview = () => {
               {feedbackError && (
                 <p className="text-sm text-red-500">{feedbackError}</p>
               )}
+              {/* Every customer gets the public review link, whatever they rated.
+                  Sending only happy customers to Google is review gating, which
+                  Google's review policy and the FTC's 2024 review rule prohibit. */}
+              <p className="pt-1 text-center text-sm text-muted-foreground">
+                Prefer to post publicly?{" "}
+                <a href={REVIEW_URL} className="font-semibold text-[#1a1a1a] underline underline-offset-2 hover:text-accent">
+                  Leave a review on Google
+                </a>
+              </p>
             </div>
           )}
 
@@ -200,6 +209,9 @@ const WriteReview = () => {
               <span className="text-4xl">🙏</span>
               <p className="font-bold text-[#1a1a1a]">Thank you for letting us know.</p>
               <p className="text-sm text-muted-foreground">We will be in touch shortly.</p>
+              <a href={REVIEW_URL} className="mt-2 text-sm text-muted-foreground underline underline-offset-2 hover:text-accent">
+                You can also leave a public review on Google
+              </a>
             </div>
           )}
         </div>
